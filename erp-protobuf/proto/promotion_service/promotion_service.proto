@@ -1,0 +1,267 @@
+syntax = "proto3";
+
+option go_package = "git.edenfarm.id/project-version3/erp-services/erp-protobuf/gen/proto/promotion_service";
+option objc_class_prefix = "EOP";
+
+package proto.promotion_service;
+
+import "google/protobuf/timestamp.proto";
+
+service PromotionService {
+    rpc GetVoucherMobileList(GetVoucherMobileListRequest) returns(GetVoucherMobileListResponse){}
+    rpc GetVoucherMobileDetail(GetVoucherMobileDetailRequest) returns (GetVoucherMobileDetailResponse){}
+    rpc GetVoucherItemList(GetVoucherItemListRequest) returns (GetVoucherItemListResponse){}
+    rpc CreateVoucher(CreateVoucherRequest) returns (CreateVoucherResponse){}
+    rpc UpdateVoucher(UpdateVoucherRequest) returns (UpdateVoucherResponse){}
+
+    // Voucher Log
+    rpc CreateVoucherLog(CreateVoucherLogRequest) returns (CreateVoucherLogResponse){}
+    rpc GetVoucherLogList(GetVoucherLogListRequest) returns (GetVoucherLogListResponse){}
+    rpc CancelVoucherLog(CancelVoucherLogRequest) returns (CancelVoucherLogResponse){}
+
+    // Price Tiering Log
+    rpc CreatePriceTieringLog(CreatePriceTieringLogRequest) returns (CreatePriceTieringLogResponse){}
+    rpc GetPriceTieringLogList(GetPriceTieringLogListRequest) returns (GetPriceTieringLogListResponse){}
+    rpc CancelPriceTieringLog(CancelPriceTieringLogRequest) returns (CancelPriceTieringLogResponse){}
+}
+
+message Voucher{
+    int64 id = 1;
+    string region_id = 2;
+    int64 customer_id = 3;
+    string archetype_id = 4;
+    int64 membership_level_id = 5;
+    int64 membership_checkpoint_id = 6;
+    int64 division_id = 7;
+    string code = 8;
+    string redeem_code = 9;
+    string name = 10;
+    int32 type = 11;
+    google.protobuf.Timestamp start_time = 12;
+    google.protobuf.Timestamp end_time = 13;
+    int64 overall_quota = 14;
+    int64 user_quota = 15;
+    int64 rem_overall_quota = 16;
+    double min_order = 17;
+    double disc_amount = 18;
+    string term_conditions = 19;
+    string image_url = 20;
+    int32 void_reason = 21;
+    string note = 22;
+    int32 status = 23;
+    int32 voucher_item = 24;
+    google.protobuf.Timestamp created_at = 25;
+    int64 rem_user_quota = 26;
+    string customer_type_id = 27;
+}
+
+message GetVoucherMobileListRequest{
+    string region_id = 1;
+    string customer_type_id = 2;
+    int64 customer_id = 3;
+    string archetype_id = 4;
+    int32 customer_level_id = 5;
+    int32 membership_level_id = 6;
+    int32 membership_checkpoint_id = 7;
+    bool is_membership_only = 8;
+    int64 offset = 9;
+    int64 limit = 10;
+    int32 category = 11;
+}
+
+message GetVoucherMobileListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated Voucher data = 3;
+}
+
+message GetVoucherMobileDetailRequest{
+    string redeem_code = 1;
+    int64 customer_id = 2;
+    int32 status = 3;
+    string code = 4;
+}
+
+message GetVoucherMobileDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    Voucher data = 3;
+}
+
+message VoucherItem {
+    int64 id = 1;
+    int64 voucher_id = 2;
+    int64 item_id = 3;
+    double min_qty_disc = 4;
+    google.protobuf.Timestamp created_at = 5;
+}
+
+message GetVoucherItemListRequest{
+    int64 voucher_id = 1;
+}
+
+message GetVoucherItemListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated VoucherItem data = 3;
+}
+
+message CreateVoucherRequest {
+    string region_id = 2;
+    int64 customer_id = 3;
+    string archetype_id = 4;
+    int64 membership_level_id = 5;
+    int64 membership_checkpoint_id = 6;
+    int64 division_id = 7;
+    string code = 8;
+    string redeem_code = 9;
+    string name = 10;
+    int32 type = 11;
+    google.protobuf.Timestamp start_time = 12;
+    google.protobuf.Timestamp end_time = 13;
+    int64 overall_quota = 14;
+    int64 user_quota = 15;
+    int64 rem_overall_quota = 16;
+    double min_order = 17;
+    double disc_amount = 18;
+    string term_conditions = 19;
+    string image_url = 20;
+    int32 void_reason = 21;
+    string note = 22;
+    int32 status = 23;
+    int32 voucher_item = 24;
+    google.protobuf.Timestamp created_at = 25;
+    int64 rem_user_quota = 26;
+}
+
+message CreateVoucherResponse {
+    int32 code = 1;
+    string message = 2;
+}
+
+message VoucherLog {
+    int64 id = 1;
+    int64 voucher_id = 2;
+    int64 customer_id = 3;
+    string address_id_gp = 4;
+    string sales_order_id_gp = 5;
+    double voucher_discount_amount = 6;
+    int32 status = 7;
+    google.protobuf.Timestamp created_at = 8;     
+}
+
+message GetVoucherLogListRequest {
+    string search = 1;
+    int64 customer_id = 2;
+    string sales_order_id_gp = 3;
+    string address_id_gp = 4;
+    int32 status = 5;
+    int64 voucher_id = 6;
+    string order_by = 7;
+    int64 offset = 8;
+    int64 limit = 9;
+}
+
+message GetVoucherLogListResponse {
+    int32 code = 1;
+    string message = 2;
+    repeated VoucherLog data = 3;
+    int64 total_records = 4;
+}
+
+message CreateVoucherLogRequest {
+    int64 voucher_id = 1;
+    int64 customer_id = 2;
+    string address_id_gp = 3;
+    string sales_order_id_gp = 4;
+    double voucher_discount_amount = 5;
+}
+
+message CreateVoucherLogResponse {
+    int32 code = 1;
+    string message = 2;
+}
+
+message CancelVoucherLogRequest {
+    int64 voucher_id = 1;
+    int64 customer_id = 2;
+    string address_id_gp = 3;
+    string sales_order_id_gp = 4;
+    string code = 5;
+}
+
+message CancelVoucherLogResponse {
+    int32 code = 1;
+    string message = 2;
+}
+
+message UpdateVoucherRequest {
+    int64 voucher_id = 1;
+    int64 rem_overall_quota = 2;
+}
+
+message UpdateVoucherResponse {
+    int32 code = 1;
+    string message = 2;
+}
+
+message PriceTieringLog {
+    int64 id = 1;
+    string price_tiering_id_gp = 2;
+    int64 customer_id = 3;
+    string address_id_gp = 4;
+    string sales_order_id_gp = 5;
+    int64 item_id = 6;
+    double discount_qty = 7;
+    double discount_amount = 8;
+    google.protobuf.Timestamp created_at = 9;
+    int32 status = 10;
+}
+  
+message CreatePriceTieringLogRequest {
+    string price_tiering_id_gp = 1;
+    int64 customer_id = 2;
+    string address_id_gp = 3;
+    string sales_order_id_gp = 4;
+    int64 item_id = 5;
+    double discount_qty = 6;
+    double discount_amount = 7;
+}
+
+message CreatePriceTieringLogResponse {
+    int32 code = 1;
+    string message = 2;
+}
+  
+message GetPriceTieringLogListRequest {
+    string search = 1;
+    string price_tiering_id_gp = 2;
+    int64 customer_id = 3;
+    string address_id_gp = 4;
+    string sales_order_id_gp = 5;
+    int64 item_id = 6;
+    string order_by = 7;
+    int64 offset = 8;
+    int64 limit = 9;
+    int32 status = 10;
+}
+
+message GetPriceTieringLogListResponse {
+    int32 code = 1;
+    string message = 2;
+    repeated PriceTieringLog data = 3;
+    int64 total_qty = 4;
+}
+
+message CancelPriceTieringLogRequest {
+    string price_tiering_id_gp = 1;
+    int64 customer_id = 2;
+    string address_id_gp = 3;
+    string sales_order_id_gp = 4;
+    int64 item_id = 5;
+}
+  
+message CancelPriceTieringLogResponse {
+    int32 code = 1;
+    string message = 2;
+}

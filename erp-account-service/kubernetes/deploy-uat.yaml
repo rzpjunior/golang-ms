@@ -1,0 +1,161 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: svc-account
+  labels:
+    app: svc-account
+  namespace: svc-account
+  annotations:
+    configmap.reloader.stakater.com/reload: "env-svc-account"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: svc-account
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: svc-account
+    spec:
+      imagePullSecrets:
+      - name: registry
+      containers:
+      - name: svc-account-http
+        image: git.edenfarm.id:5050/project-version3/erp-services/erp-account-service/uat:<VERSION>
+        command: ["/app/service"]
+        args: ["api"]
+        ports:
+          - name: http-port
+            containerPort: 8001
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: 50Mi
+            cpu: 15m
+          limits:
+            memory: 350Mi
+            cpu: 200m
+        volumeMounts:
+        - name: tz-config
+          mountPath: /etc/localtime
+        - name: env-value
+          mountPath: /app/env.toml
+          subPath: env-svc-account.toml
+          readOnly: true
+      - name: svc-account-grpc
+        image: git.edenfarm.id:5050/project-version3/erp-services/erp-account-service/uat:<VERSION>
+        command: ["/app/service"]
+        args: ["grpc"]
+        ports:
+          - name: grpc-port
+            containerPort: 5001
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: 50Mi
+            cpu: 15m
+          limits:
+            memory: 350Mi
+            cpu: 200m
+        volumeMounts:
+        - name: tz-config
+          mountPath: /etc/localtime
+        - name: env-value
+          mountPath: /app/env.toml
+          subPath: env-svc-account.toml
+          readOnly: true
+      volumes:
+        - name: tz-config
+          hostPath:
+            path: /usr/share/zoneinfo/Asia/Jakarta
+            type: File
+        - name: env-value
+          configMap:
+            name: env-svc-account
+      tolerations:
+      - key: instance_type
+        value: service
+        effect: NoSchedule
+        operator: Equal
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: role
+                operator: In
+                values:
+                - devops
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - svc-account
+            topologyKey: kubernetes.io/hostname
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-svc-account-http
+  namespace: svc-account
+  labels:
+    app: svc-account-http
+spec:
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: http-port
+  selector:
+    app: svc-account
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-svc-account-grpc
+  namespace: svc-account
+  labels:
+    app: svc-account-grpc
+spec:
+  ports:
+  - name: grpc
+    protocol: TCP
+    port: 5001
+    targetPort: grpc-port
+  selector:
+    app: svc-account
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: hpa-svc-account
+  namespace: svc-account
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: svc-account
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 75
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 75

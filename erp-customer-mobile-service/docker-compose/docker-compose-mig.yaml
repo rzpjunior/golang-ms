@@ -1,0 +1,104 @@
+version: "3"
+
+# NOTE:
+# $USER : your username
+# $TOKEN : your token
+# EXAMPLE
+# $USER : lingg, $TOKEN : week-week
+# -source=gitlab://linggo:week-week@git.edenfarm.id/322/migrations#dev
+
+services:
+  migrate-account:
+    image: git.edenfarm.id:5050/image/migration/master:latest
+    container_name: account-migrate
+    command: ["-source=gitlab://linggo:zBJZMYqN5TU8VzG78hoa@git.edenfarm.id/322/migrations#dev","-database=mysql://edenfarm:secret@tcp(mysql:3306)/account", "up"]
+    external_links: 
+      - mysql
+    networks:
+      - network-bridge
+
+  migrate-configuration:
+    image: git.edenfarm.id:5050/image/migration/master:latest
+    container_name: configuration-migrate
+    command: ["-source=gitlab://linggo:zBJZMYqN5TU8VzG78hoa@git.edenfarm.id/324/migrations#dev","-database=mysql://edenfarm:secret@tcp(mysql:3306)/configuration", "up"]
+    external_links: 
+      - mysql
+    networks:
+      - network-bridge
+
+  migrate-dynamic:
+    image: git.edenfarm.id:5050/image/migration/master:latest
+    container_name: dynamic-migrate
+    command: ["-source=gitlab://linggo:zBJZMYqN5TU8VzG78hoa@git.edenfarm.id/327/migrations#dev","-database=mysql://edenfarm:secret@tcp(mysql:3306)/configuration", "up"]
+    external_links: 
+      - mysql
+    networks:
+      - network-bridge
+  
+  migrate-inventory:
+    image: git.edenfarm.id:5050/image/migration/master:latest
+    container_name: inventory-migrate
+    command: ["-source=gitlab://linggo:zBJZMYqN5TU8VzG78hoa@git.edenfarm.id/328/migrations#dev","-database=mysql://edenfarm:secret@tcp(mysql:3306)/configuration", "up"]
+    external_links: 
+      - mysql
+    networks:
+      - network-bridge
+  
+  migrate-campaign:
+    image: git.edenfarm.id:5050/image/migration/master:latest
+    container_name: campaign-migrate
+    command: ["-source=gitlab://linggo:zBJZMYqN5TU8VzG78hoa@git.edenfarm.id/323/migrations#dev","-database=mysql://edenfarm:secret@tcp(mysql:3306)/configuration", "up"]
+    external_links: 
+      - mysql
+    networks:
+      - network-bridge
+  
+  migrate-promotion:
+    image: git.edenfarm.id:5050/image/migration/master:latest
+    container_name: promotion-migrate
+    command: ["-source=gitlab://linggo:zBJZMYqN5TU8VzG78hoa@git.edenfarm.id/374/migrations#dev","-database=mysql://edenfarm:secret@tcp(mysql:3306)/configuration", "up"]
+    external_links: 
+      - mysql
+    networks:
+      - network-bridge
+
+  migrate-sales:
+    image: git.edenfarm.id:5050/image/migration/master:latest
+    container_name: sales-migrate
+    command: ["-source=gitlab://linggo:zBJZMYqN5TU8VzG78hoa@git.edenfarm.id/361/migrations#dev","-database=mysql://edenfarm:secret@tcp(mysql:3306)/configuration", "up"]
+    external_links: 
+      - mysql
+    networks:
+      - network-bridge
+  
+  migrate-crm:
+    image: git.edenfarm.id:5050/image/migration/master:latest
+    container_name: crm-migrate
+    command: ["-source=gitlab://linggo:zBJZMYqN5TU8VzG78hoa@git.edenfarm.id/326/migrations#dev","-database=mysql://edenfarm:secret@tcp(mysql:3306)/configuration", "up"]
+    external_links: 
+      - mysql
+    networks:
+      - network-bridge
+
+  migrate-settlement:
+    image: git.edenfarm.id:5050/image/migration/master:latest
+    container_name: settlement-migrate
+    command: ["-source=gitlab://linggo:zBJZMYqN5TU8VzG78hoa@git.edenfarm.id/355/migrations#dev","-database=mysql://edenfarm:secret@tcp(mysql:3306)/configuration", "up"]
+    external_links: 
+      - mysql
+    networks:
+      - network-bridge
+
+  migrate-notification:
+    image: git.edenfarm.id:5050/image/migration/master:latest
+    container_name: notification-migrate
+    command: ["-source=gitlab://linggo:zBJZMYqN5TU8VzG78hoa@git.edenfarm.id/396/migrations#dev","-database=mysql://edenfarm:secret@tcp(mysql:3306)/configuration", "up"]
+    external_links: 
+      - mysql
+    networks:
+      - network-bridge
+  
+
+networks:
+  network-bridge:
+    driver: bridge

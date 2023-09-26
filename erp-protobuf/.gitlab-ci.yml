@@ -1,0 +1,7 @@
+include:
+  - project: 'project-version3/erp-infra/gitlab-ci'
+    file:
+      - 'build-protobuf.yml'
+
+stages:
+  - build

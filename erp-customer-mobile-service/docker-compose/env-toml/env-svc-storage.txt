@@ -1,0 +1,37 @@
+[app]
+host="0.0.0.0"
+port=8011
+name="erp-storage-service"
+debug=false
+env="development"
+
+[grpc]
+host="0.0.0.0"
+port=5009
+
+[jwt]
+key="Erp#jwt!S3cr3tK3y"
+
+[sentry]
+enabled=true
+dsn="localhost"
+timeout="5s"
+
+[trace]
+enabled=true
+
+  [trace.jaeger]
+  host="jaeger-collector.jaeger"
+  port="14268"
+
+[metric]
+enabled=true
+
+[s3]
+enabled=true
+endpoint="sgp1.digitaloceanspaces.com"
+bucket_name="image-erp-dev-eden"
+access_key_id="MUJZZLTOJ2HG4UPVI7JK"
+secret_access_key="q/xzO/EKAzt8jbddXeS6CuVfSbPLXKRD4r2NBCFPZDk"
+token=""
+use_ssl=true

@@ -1,0 +1,598 @@
+version: '3'
+
+services:
+# Local-as-Pods 
+  local-laptop:
+    restart: on-failure
+    image: git.edenfarm.id:5050/image/golang-18-alpine/master:latest
+    command: sh -c "ssh -L 0.0.0.0:3030:mysql-dev.mysql:3306 tunnel@tunnel.edenfarm.tech -p 22  && unminimize -y"
+    container_name: local-laptop
+    stdin_open: true
+    tty: true
+    links:
+      - grpc-cust-mob
+      - grpc-account
+      - grpc-configuration
+      - grpc-bridge
+      - grpc-campaign
+      - grpc-inventory
+      - grpc-notification
+      - grpc-crm
+      - grpc-sales
+      - grpc-promotion
+      - grpc-settlement
+    volumes:
+      - ~/.ssh:/root/.ssh:ro
+    networks:
+      - network-bridge
+
+  # MYSQL 8.0
+  mysql:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: local
+      MYSQL_USER: edenfarm
+      MYSQL_PASSWORD: secret
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql-init:/docker-entrypoint-initdb.d
+      # - ./mysql-restore:/docker-entrypoint-initdb.d
+      - mysql_data:/var/lib/mysql
+    networks:
+      - network-bridge
+
+  # MongoDB
+  mongodb:
+    image: mongo:latest
+    restart: always
+    hostname: mongodb
+    container_name: mongo
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: secret
+      MONGO_INITDB_DATABASE: audit
+    networks:
+      - network-bridge
+
+  # Redis
+  redis:
+    image: redis:latest
+    restart: always
+    container_name: redis
+    volumes:
+      - redis_data:/data
+    environment:
+      # REDIS_DB_NAME: mydb
+      REDIS_USERNAME: default
+      REDIS_PASSWORD: NuGp4RZN0a
+    # command: redis-server --requirepass ${REDIS_PASSWORD} 
+    command: redis-server --save 20 1 --loglevel warning --requirepass NuGp4RZN0a
+    # --databases ${REDIS_DB_NAME}
+    privileged: true
+    ports:
+      - 6379:6379
+    networks:
+      - network-bridge
+
+  # HTTP Account
+  http-account:
+    restart: on-failure
+    image: git.edenfarm.id:5050/project-version3/erp-services/erp-account-service/dev:latest
+    command: ["/app/service","api"]
+    container_name: http-service-account
+    volumes: 
+      - ./env-toml/env-svc-account.txt:/app/env.toml:rw
+    # env_file:
+    #   - ./env-toml/env-mob-customer.toml
+    #   #- ./env-toml/env-mob-customer.toml:/app/env.toml
+    ports:
+      - 8001:8001
+    depends_on: 
+      - mysql
+      - grpc-configuration
+    links:
+      - grpc-configuration
+    networks:
+      - network-bridge
+  
+  # HTTP Audit
+  http-audit:
+    restart: on-failure
+    image: git.edenfarm.id:5050/project-version3/erp-services/erp-audit-service/dev:latest
+    command: ["/app/service","api"]
+    container_name: http-service-audit
+    volumes: 
+      - ./env-toml/env-svc-audit.txt:/app/env.toml:rw
+    ports:
+      - 8002:8002
+    depends_on: 
+      - mongodb
+      - grpc-audit
+      - grpc-bridge
+      - grpc-configuration 
+    networks:
+      - network-bridge
+  
+  # HTTP Configuration
+  http-configuration:
+    restart: on-failure
+    image: git.edenfarm.id:5050/project-version3/erp-services/erp-configuration-service/dev:latest
+    command: ["/app/service","api"]
+    container_name: http-service-configuration
+    volumes: 
+      - ./env-toml/env-svc-configuration.txt:/app/env.toml:rw
+    ports:
+      - 8003:8003
+    depends_on: 
+      - mysql
+      - grpc-bridge
+      - grpc-audit
+      - grpc-account
+    networks:
+      - network-bridge
+
+  # HTTP Bridge
+  http-bridge:
+    restart: on-failure
+    image: git.edenfarm.id:5050/project-version3/erp-services/erp-bridge-services/dev:latest
+    command: ["/app/service","api"]
+    container_name: http-service-bridge
+    volumes: 
+      - ./env-toml/env-svc-bridge.txt:/app/env.toml:rw
+    ports:
+      - 8004:8004
+    depends_on: 
+      - mysql
+      - grpc-bridge 
+    networks:
+      - network-bridge
+
+  # HTTP Catalog - Inventory
+  http-inventory:
+    restart: on-failure
+    image: git.edenfarm.id:5050/project-version3/erp-services/erp-inventory-service/dev:latest
+    command: ["/app/service","api"]
+    container_name: http-service-inventory
+    volumes: 
+      - ./env-toml/env-svc-inventory.txt:/app/env.toml:rw
+    ports:
+      - 8005:8005
+    depends_on: 
+      - mysql
+      - grpc-inventory
+      - redis
+      - grpc-audit
+    networks:
+      - network-bridge
+
+  # HTTP Campaign
+  http-campaign:
+    restart: on-failure
+    image: git.edenfarm.id:5050/project-version3/erp-services/erp-campaign-service/dev:latest
+    command: ["/app/service","api"]
+    container_name: http-service-campaign
+    volumes: 
+      - ./env-toml/env-svc-campaign.txt:/app/env.toml:rw
+    ports:
+      - 8006:8006
+    depends_on: 
+      - mysql
+      - grpc-campaign
+      - grpc-inventory
+      - grpc-audit 
+      - grpc-cust-mob
+      - grpc-bridge 
+      - grpc-configuration 
+      - grpc-notification
+      - grpc-crm
+    networks:
+      - network-bridge
+
+  # HTTP Promotion
+  http-promotion:
+    restart: on-failure
+    image: git.edenfarm.id:5050/project-version3/erp-services/erp-promotion-service/dev:latest
+    command: ["/app/service","api"]
+    container_name: http-service-promotion
+    volumes: 
+      - ./env-toml/env-svc-promotion.txt:/app/env.toml:rw
+    ports:
+      - 8007:8007
+    depends_on: 
+      - mysql 
+      - grpc-audit
+      - grpc-bridge
+      - grpc-configuration
+      - grpc-campaign
+      - grpc-inventory
+      - grpc-crm 
+      - grpc-account
+    links:
+      - grpc-campaign
+    networks:
+      - network-bridge
+
+  # HTTP Sales
+  http-sales:
+    restart: on-failure
+    image: git.edenfarm.id:5050/project-version3/erp-services/erp-sales-service/dev:latest
+    command: ["/app/service","api"]
+    container_name: http-service-sales
+    volumes: 
+      - ./env-toml/env-svc-sales.txt:/app/env.toml:rw
+    ports:
+      - 8008:8008
+    depends_on: 
+      - mysql
+      - grpc-sales 
+    networks:
+      - network-bridge
+
+  # HTTP Crm
+  http-crm:
+    restart: on-failure
+    image: git.edenfarm.id:5050/project-version3/erp-services/erp-crm-service/dev:latest
+    command: ["/app/service","api"]
+    container_name: http-service-crm
+    volumes: 
+      - ./env-toml/env-svc-crm.txt:/app/env.toml:rw
+    ports:
+      - 8009:8009
+    depends_on: 
+      - mysql
+      - grpc-crm 
+    networks:
+      - network-bridge
+
+  # HTTP Settlement
+  http-settlement:
+    restart: on-failure
+    image: git.edenfarm.id:5050/project-version3/erp-services/erp-settlement-service/dev:latest
+    command: ["/app/service","api"]
+    container_name: http-service-settlement
+    volumes: 
+      - ./env-toml/env-svc-settlement.txt:/app/env.toml:rw
+    ports:
+      - 8010:8010
+    depends_on: 
+      - mysql
+      - grpc-settlement 
+    networks:
+      - network-bridge
+
+  # HTTP Storage
+  http-storage:
+    restart: on-failure
+    image: git.edenfarm.id:5050/project-version3/erp-services/erp-storage-service/dev:latest
+    command: ["/app/service","api"]
+    container_name: http-service-storage
+    volumes: 
+      - ./env-toml/env-svc-storage.txt:/app/env.toml:rw
+    ports:
+      - 8011:8011
+    depends_on: 
+      - mysql
+      - grpc-storage 
+    networks:
+      - network-bridge
+
+  # HTTP Notification
+  http-notification:
+    restart: on-failure
+    image: git.edenfarm.id:5050/project-version3/erp-services/erp-notification-service/dev:latest
+    command: ["/app/service","api"]
+    container_name: http-service-notification
+    volumes: 
+      - ./env-toml/env-svc-notification.txt:/app/env.toml:rw
+    ports:
+      - 8012:8012
+    depends_on: 
+      - mysql
+      - grpc-notification 
+      - mongodb
+    networks:
+      - network-bridge
+
+  # HTTP Notification
+  http-mob-customer:
+    restart: on-failure
+    image: git.edenfarm.id:5050/project-version3/erp-services/erp-customer-mobile-service/dev:latest
+    command: ["/app/service","api"]
+    container_name: http-mob-customer
+    volumes: 
+      - ./env-toml/env-mob-customer.txt:/app/env.toml:rw
+    ports:
+      - 8013:8013
+    depends_on: 
+      - mysql
+      - redis
+      - grpc-audit
+      - grpc-bridge
+      - grpc-configuration
+      - grpc-inventory
+      - grpc-campaign
+      - grpc-promotion
+      - grpc-sales
+      - grpc-crm 
+      - grpc-settlement
+      - grpc-notification
+      - grpc-storage
+    links:
+      - grpc-promotion
+    networks:
+      - network-bridge
+
+  # GRPC Bridge
+  grpc-bridge:
+    restart: on-failure
+    image: git.edenfarm.id:5050/project-version3/erp-services/erp-bridge-services/dev:latest
+    command: ["/app/service","grpc"]
+    hostname: svc-svc-bridge-grpc.svc-bridge
+    container_name: grpc-service-bridge
+    volumes: 
+      - ./env-toml/env-svc-bridge.txt:/app/env.toml:rw
+    ports:
+      - 5001:5001
+    depends_on: 
+      - mysql 
+      - redis
+    links:
+      - mysql
+      - redis
+    networks:
+      - network-bridge
+
+  # GRPC Configuration
+  grpc-configuration:
+    restart: on-failure
+    image: git.edenfarm.id:5050/project-version3/erp-services/erp-configuration-service/dev:latest
+    hostname: svc-svc-configuration-grpc.svc-configuration
+    command: ["/app/service","grpc"]
+    container_name: grpc-service-configuration
+    volumes: 
+      - ./env-toml/env-svc-configuration.txt:/app/env.toml:rw
+    ports:
+      - 5002:5002
+    depends_on: 
+      - mysql
+      - grpc-bridge
+    links:
+      - mysql 
+      - grpc-audit
+      - grpc-bridge
+    networks:
+      - network-bridge
+
+  # GRPC Catalog - Inventory
+  grpc-inventory:
+    restart: on-failure
+    image: git.edenfarm.id:5050/project-version3/erp-services/erp-inventory-service/dev:latest
+    hostname: svc-svc-inventory-grpc.svc-inventory
+    command: ["/app/service","grpc"]
+    container_name: grpc-service-inventory
+    volumes: 
+      - ./env-toml/env-svc-inventory.txt:/app/env.toml:rw
+    ports:
+      - 5003:5003
+    depends_on: 
+      - mysql
+      - redis 
+    links:
+      - mysql
+      - redis
+      - grpc-configuration
+    networks:
+      - network-bridge
+
+  # GRPC Campaign
+  grpc-campaign:
+    restart: on-failure
+    image: git.edenfarm.id:5050/project-version3/erp-services/erp-campaign-service/dev:latest
+    hostname: svc-svc-campaign-grpc.svc-campaign
+    command: ["/app/service","grpc"]
+    container_name: grpc-service-campaign
+    volumes: 
+      - ./env-toml/env-svc-campaign.txt:/app/env.toml:rw
+    ports:
+      - 5004:5004
+    depends_on: 
+      - mysql
+      - grpc-audit
+      - grpc-bridge
+      - grpc-inventory
+      - grpc-configuration
+      - grpc-notification
+      - grpc-cust-mob
+      - grpc-crm
+    links:
+      - mysql
+      - grpc-audit
+      - grpc-bridge
+      - grpc-inventory
+      - grpc-configuration
+      - grpc-notification
+      - grpc-cust-mob
+      - grpc-crm
+    networks:
+      - network-bridge
+
+  # GRPC Promotion
+  grpc-promotion:
+    restart: on-failure
+    image: git.edenfarm.id:5050/project-version3/erp-services/erp-promotion-service/dev:latest
+    hostname: svc-svc-promotion-grpc.svc-promotion
+    command: ["/app/service","grpc"]
+    container_name: grpc-service-promotion
+    volumes: 
+      - ./env-toml/env-svc-promotion.txt:/app/env.toml:rw
+    ports:
+      - 5005:5005
+    depends_on: 
+      - mysql
+      - grpc-campaign
+    links:
+      - mysql 
+      - grpc-campaign
+    networks:
+      - network-bridge
+
+  # GRPC Sales
+  grpc-sales:
+    restart: on-failure
+    image: git.edenfarm.id:5050/project-version3/erp-services/erp-sales-service/dev:latest
+    hostname: svc-svc-sales-grpc.svc-sales
+    command: ["/app/service","grpc"]
+    container_name: grpc-service-sales
+    volumes: 
+      - ./env-toml/env-svc-sales.txt:/app/env.toml:rw
+    ports:
+      - 5006:5006
+    depends_on: 
+      - mysql 
+      - grpc-inventory
+    networks:
+      - network-bridge
+
+  # GRPC Settlement
+  grpc-settlement:
+    restart: on-failure
+    image: git.edenfarm.id:5050/project-version3/erp-services/erp-settlement-service/dev:latest
+    hostname: svc-svc-settlement-grpc.svc-settlement
+    command: ["/app/service","grpc"]
+    container_name: grpc-service-settlement
+    volumes: 
+      - ./env-toml/env-svc-settlement.txt:/app/env.toml:rw
+    ports:
+      - 5007:5007
+    depends_on: 
+      - mysql 
+    links:
+      - mysql
+    networks:
+      - network-bridge
+
+  # GRPC CRM
+  grpc-crm:
+    restart: on-failure
+    image: git.edenfarm.id:5050/project-version3/erp-services/erp-crm-service/dev:latest
+    hostname: svc-svc-crm-grpc.svc-crm
+    command: ["/app/service","grpc"]
+    container_name: grpc-service-crm
+    volumes: 
+      - ./env-toml/env-svc-crm.txt:/app/env.toml:rw
+    ports:
+      - 5008:5008
+    depends_on: 
+      - mysql
+    links:
+      - mysql
+      - grpc-bridge
+      - grpc-account
+      - grpc-configuration
+    networks:
+      - network-bridge
+
+  # GRPC Storage
+  grpc-storage:
+    restart: on-failure
+    image: git.edenfarm.id:5050/project-version3/erp-services/erp-storage-service/dev:latest
+    hostname: svc-svc-storage-grpc.svc-storage
+    command: ["/app/service","grpc"]
+    container_name: grpc-service-storage
+    volumes: 
+      - ./env-toml/env-svc-storage.txt:/app/env.toml:rw
+    ports:
+      - 5009:5009
+    depends_on: 
+      - mysql 
+    networks:
+      - network-bridge
+
+  # GRPC Notification
+  grpc-notification:
+    restart: on-failure
+    image: git.edenfarm.id:5050/project-version3/erp-services/erp-notification-service/dev:latest
+    hostname: svc-svc-notification-grpc.svc-notification
+    command: ["/app/service","grpc"]
+    container_name: grpc-service-notification
+    volumes: 
+      - ./env-toml/env-svc-notification.txt:/app/env.toml:rw
+    ports:
+      - 5010:5010
+    depends_on: 
+      - mysql 
+      - mongodb
+    links:
+      - mysql
+      - mongodb
+    networks:
+      - network-bridge
+  
+  # GRPC Audit
+  grpc-audit:
+    restart: on-failure
+    image: git.edenfarm.id:5050/project-version3/erp-services/erp-audit-service/dev:latest
+    hostname: svc-svc-audit-grpc.svc-audit
+    command: ["/app/service","grpc"]
+    container_name: grpc-service-audit
+    volumes: 
+      - ./env-toml/env-svc-audit.txt:/app/env.toml:rw
+    ports:
+      - 5011:5011
+    depends_on: 
+      - mongodb
+    networks:
+      - network-bridge
+  
+  # GRPC Customer Mobile
+  grpc-cust-mob:
+    restart: on-failure
+    image: git.edenfarm.id:5050/project-version3/erp-services/erp-customer-mobile-service/dev:latest
+    hostname: svc-mob-customer-grpc.mob-customer
+    command: ["/app/service","grpc"]
+    container_name: grpc-customer-mobile
+    volumes: 
+      - ./env-toml/env-mob-customer.txt:/app/env.toml:rw
+    ports:
+      - 5012:5012
+    depends_on: 
+      - redis
+      - mysql
+    networks:
+      - network-bridge
+  
+  # GRPC Account
+  grpc-account:
+    restart: on-failure
+    image: git.edenfarm.id:5050/project-version3/erp-services/erp-account-service/dev:latest
+    hostname: svc-svc-account-grpc.svc-account
+    command: ["/app/service","grpc"]
+    container_name: grpc-service-account
+    volumes: 
+      - ./env-toml/env-svc-account.txt:/app/env.toml:rw
+    ports:
+      - 5013:5013
+    depends_on: 
+      - redis
+      - mysql
+      - grpc-configuration
+    links:
+      - grpc-configuration
+    networks:
+      - network-bridge
+
+volumes:
+  mysql_data:
+  redis_data:
+  mongo_data:
+
+networks:
+  network-bridge:
+    driver: bridge

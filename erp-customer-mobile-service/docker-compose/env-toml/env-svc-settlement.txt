@@ -1,0 +1,54 @@
+[app]
+host="0.0.0.0"
+port=8010
+name="erp-settlement-service"
+debug=false
+env="development"
+
+[grpc]
+host="0.0.0.0"
+port=5007
+
+[jwt]
+key="Erp#jwt!S3cr3tK3y"
+
+[sentry]
+enabled=true
+dsn="localhost"
+timeout="5s"
+
+[trace]
+enabled=true
+
+  [trace.jaeger]
+  host="jaeger-collector.jaeger"
+  port="14268"
+
+[metric]
+enabled=true
+
+[database]
+enabled=true
+connection="mysql"
+name="settlement"
+max_open_conns=280
+max_idle_conns=20
+conn_lifetime_max="1h"
+
+  [database.write]
+  host="local-laptop"
+  port=3030
+  username="dirga.fifty"
+  password="7V3y5h5thPag"
+
+  [database.read]
+  host="local-laptop"
+  port=3030
+  username="dirga.fifty"
+  password="7V3y5h5thPag"
+
+[client]
+enabled=true
+
+  [xendit]
+  key="xnd_development_1DKBEmYRrzZkQvKgBAycLOqZ2nJljryY6mdXkGrgAkLpmUZCPaGqUlyWQaGFcJ"

@@ -1,0 +1,522 @@
+syntax = "proto3";
+
+option go_package = "git.edenfarm.id/project-version3/erp-services/erp-protobuf/gen/proto/sales_service";
+option objc_class_prefix = "EOP";
+
+package proto.sales_service;
+
+import "google/protobuf/timestamp.proto";
+
+service SalesService {
+    rpc GetSalesOrderList(GetSalesOrderListRequest) returns (GetSalesOrderListResponse){}
+    rpc GetSalesOrderListMobile(GetSalesOrderListRequest) returns (GetSalesOrderListResponse){}
+    rpc GetSalesOrderDetail(GetSalesOrderDetailRequest) returns (GetSalesOrderDetailResponse){}
+    rpc GetSalesOrderItemList(GetSalesOrderItemListRequest) returns (GetSalesOrderItemListResponse){}
+    rpc GetSalesOrderItemDetail(GetSalesOrderItemDetailRequest) returns (GetSalesOrderItemDetailResponse){}
+    rpc CreateSalesOrder(CreateSalesOrderRequest) returns (CreateSalesOrderResponse){}  
+    rpc UpdateSalesOrder(UpdateSalesOrderRequest) returns (UpdateSalesOrderResponse){}    
+    rpc GetSalesOrderFeedbackList(GetSalesOrderFeedbackListRequest) returns (GetSalesOrderFeedbackListResponse){}
+    //rpc GetSalesOrderFeedbackDetail(GetSalesOrderFeedbackDetailRequest) returns (GetSalesOrderFeedbackDetailResponse){}
+    rpc CreateSalesOrderFeedback(CreateSalesOrderFeedbackRequest) returns (CreateSalesOrderFeedbackResponse){}
+    // Payment method
+    rpc GetPaymentMethodList(GetPaymentMethodListRequest) returns (GetPaymentMethodListResponse){}
+    // payment channel
+    rpc GetPaymentChannelList(GetPaymentChannelListRequest) returns (GetPaymentChannelListResponse){}
+    // payment group comb
+    rpc GetPaymentGroupCombList(GetPaymentGroupCombListRequest) returns (GetPaymentGroupCombListResponse){}
+
+    rpc GetSalesInvoiceGPMobileList(GetSalesInvoiceGPMobileListRequest) returns(GetSalesInvoiceGPMobileListResponse){}
+    rpc GetSalesOrderListCronJob(GetSalesOrderListCronjobRequest) returns (GetSalesOrderListCronjobResponse){}
+    rpc UpdateSalesOrderRemindPayment(UpdateSalesOrderRemindPaymentRequest) returns (UpdateSalesOrderRemindPaymentResponse){}
+    rpc ExpiredSalesOrder(ExpiredSalesOrderRequest) returns (ExpiredSalesOrderResponse){}
+    rpc CreateSalesOrderPaid(CreateSalesOrderPaidRequest) returns (CreateSalesOrderPaidResponse){}
+    // delta print sales invoice and sales payment
+    rpc GetDeltaPrintSiEdnDetail(GetDeltaPrintSiEdnDetailRequest) returns (GetDeltaPrintSiEdnDetailResponse){}
+    rpc GetDeltaPrintSpEdnDetail(GetDeltaPrintSpEdnDetailRequest) returns (GetDeltaPrintSpEdnDetailResponse){}
+    rpc CreateDeltaPrintSiEdn(CreateDeltaPrintSiEdnRequest) returns (CreateDeltaPrintSiEdnResponse){}
+    rpc UpdateDeltaPrintSiEdn(UpdateDeltaPrintSiEdnRequest) returns (UpdateDeltaPrintSiEdnResponse){}
+    rpc CreateDeltaPrintSpEdn(CreateDeltaPrintSpEdnRequest) returns (CreateDeltaPrintSpEdnResponse){}
+    rpc UpdateDeltaPrintSpEdn(UpdateDeltaPrintSpEdnRequest) returns (UpdateDeltaPrintSpEdnResponse){}
+}
+
+
+message SalesOrder{
+    int64 id = 1;
+    string address_id_gp = 2;
+    string customer_id_gp = 3;
+    string term_payment_sls_id_gp = 4;
+    string sub_district_id_gp = 5;
+    string site_id_gp = 6;
+    string wrt_id_gp = 7;
+    string region_id_gp = 8;
+    string price_level_id_gp = 9;
+    int32 payment_group_sls_id = 10;
+    string archetype_id_gp = 11;
+    string sales_order_number = 12;
+    string integration_code = 13;
+    string sales_order_number_gp = 14;
+    int32 status = 15;
+    google.protobuf.Timestamp recognition_date = 16;
+    google.protobuf.Timestamp requests_ship_date = 17;
+    string billing_address = 18;
+    string shipping_address = 19;
+    string shipping_address_note = 20;
+    double delivery_fee = 21;
+    double vou_disc_amount = 22;
+    int64 customer_point_log_id = 23;
+    int64 eden_point_campaign_id = 24;
+    double total_price = 25;
+    double total_charge = 26;
+    double total_weight = 27;
+    string note = 28;
+    int32 payment_reminder = 29;
+    int32 cancel_type = 30;
+    google.protobuf.Timestamp created_at = 31;
+    int64 created_by = 32;
+    string shipping_method_id_gp = 33;
+    string customer_name_gp = 34;
+
+    repeated SalesOrderItem sales_order_item = 35;
+    repeated SalesOrderVoucher sales_order_voucher = 36;
+    repeated SalesOrderPayment sales_order_payment = 37;
+}
+
+message GetSalesOrderListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    repeated int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    string address_id_gp = 6;
+    string customer_id_gp = 7;
+    string site_id_gp = 9;
+    google.protobuf.Timestamp order_date_from = 10;
+    google.protobuf.Timestamp order_date_to = 11;
+    int64 type = 12;
+    int64 category = 13;
+    int32 payment_reminder = 14;
+    string payment_term_id_gp = 15;
+}
+
+message GetSalesOrderListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated SalesOrder data = 3;
+    int32 pageNumber = 4;
+    int32 pageSize = 5;
+    int32 totalPages = 6;
+    int32 totalRecords = 7;
+    int32 payment_reminder = 8;
+}
+
+message GetSalesOrderDetailRequest{
+    int64  id = 1;
+    string code = 2;
+    int64  customer_id = 3;
+    string customer_id_gp = 4;
+    int32  payment_reminder = 5;
+    string sales_order_number_gp = 6;
+}
+
+message GetSalesOrderDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    SalesOrder data = 3;
+}
+
+message SalesOrderItem{
+    int64 id = 1;
+    int64 sales_order_id = 2;
+    string item_id_gp = 3;
+    string item_name = 4;
+    string price_tiering_id_gp = 5;
+    double order_qty = 6;
+    double unit_price = 7;
+    string uom_id_gp = 8;
+    string uom_name = 9;
+    double subtotal = 10;
+    double weight = 11;
+    string image_url = 12;
+}
+
+message GetSalesOrderItemListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    int64 sales_order_id = 6; 
+    int64 item_id = 7;
+}
+
+message GetSalesOrderItemListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated SalesOrderItem data = 3;
+}
+
+message GetSalesOrderItemDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetSalesOrderItemDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    SalesOrderItem data = 3;
+}
+
+message CreateSalesOrderRequest{
+    SalesOrder data = 1;
+}
+
+message CreateSalesOrderResponse{
+    int32 code = 1;
+    string message = 2;
+    SalesOrder data = 3;
+}
+
+message UpdateSalesOrderRequest{
+    SalesOrder Data = 1;
+    repeated string field_update = 3;
+}
+
+message UpdateSalesOrderResponse{
+    int32 code = 1;
+    string message = 2;
+}
+
+message SalesOrderFeedback{
+    int64 id = 1;
+    string sales_order_code = 2;
+    string delivery_date = 3;
+    int32 rating_score = 4;
+    string tags = 5;
+    string description = 6;
+    int32 to_be_contacted = 7;
+    google.protobuf.Timestamp created_at = 8;
+    double total_charge = 9;
+    int64 sales_order_id = 10;
+    int64 customer_id = 11;
+}
+
+message GetSalesOrderFeedbackListRequest{
+    string sales_order_code = 1;
+    string delivery_date = 2;
+    int64 sales_order_id = 3;
+    int64 customer_id = 4;
+    int64 feedback_type = 5;
+    int64 offset = 6;
+    int64 limit = 7;
+}
+
+message GetSalesOrderFeedbackListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated SalesOrderFeedback data = 3;
+}
+
+message GetSalesOrderFeedbackDetailRequest{
+    string sales_order_code = 1;
+    string delivery_date = 2;
+    int64 sales_order_id = 3;
+    int64 customer_id = 4;
+}
+
+message GetSalesOrderFeedbackDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    SalesOrderFeedback data = 3;
+}
+
+message CreateSalesOrderFeedbackRequest{
+    SalesOrderFeedback data =1;
+}
+message CreateSalesOrderFeedbackResponse{
+    int32 code = 1;
+    string message = 2;
+    SalesOrderFeedback data = 3;
+}
+
+message PaymentMethod {
+    int64 id = 1;
+    string code = 2;
+    string name = 3;
+    string note = 4;
+    int32 status = 5;
+    int32 publish = 6;
+    int32 maintenance = 7;
+  }
+
+message GetPaymentMethodListRequest{
+    int32 status = 1;
+    int32 publish = 2;
+    int32 maintenance = 3;
+    string search = 4;
+    string id = 5;
+}
+
+message GetPaymentMethodListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated PaymentMethod data = 3;
+}
+message PaymentChannel {
+    int64 id = 1;
+    string code = 2;
+    string value = 3;
+    string name = 4;
+    string image_url = 5;
+    string note = 6;
+    int32 status = 7;
+    int32 publish_iva = 8;
+    int32 publish_fva = 9;
+    int64 payment_method_id = 10;
+    string payment_guide_url = 11;
+  }
+  
+message GetPaymentChannelListRequest{
+    int32 status = 1;
+    int32 publish_iva = 2;
+    int32 publish_fva = 3;
+    int64 payment_method_id = 4;
+    string value = 5;
+}
+
+message GetPaymentChannelListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated PaymentChannel data = 3;
+}
+
+message PaymentGroupComb {
+    int64 id = 1;
+    string payment_group_sls = 2;
+    string term_payment_sls = 3;
+  }
+
+message GetPaymentGroupCombListRequest{
+    string payment_group_sls = 1;
+    string term_payment_sls = 2;
+}
+
+message GetPaymentGroupCombListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated PaymentGroupComb data = 3;
+}
+
+message SalesInvoice{
+    string id = 1;
+    string invoice_id = 2;
+    string order_code = 3;
+    string invoice_code = 4;
+    string order_date = 5;
+    string invoice_date = 6;
+    double total_price = 7;
+    double delivery_fee = 8;
+    double voucher_amount = 9;
+    double point_redeem_amount = 10;
+    double adjustment_amount = 11;
+    double total_charge = 12;
+}
+
+message InvoicePayment{
+    string id = 1;
+    string payment_id = 2;
+    string code = 3;
+    string payment_date = 4;
+    string payment_method = 5;
+    string payment_time = 6;
+    string amount = 7;
+    string payment_channel = 8;
+    int32 status = 9;
+}
+
+message InvoiceItem{
+    string item_id = 2;
+    string item_name = 3;
+    double invoice_qty = 4;
+    string uom_name = 5;
+    double unit_price = 6;
+    double subtotal = 7;
+    double item_discount_amount = 8;
+}
+
+message SalesInvoiceMobile{
+    SalesInvoice sales_invoice = 1;
+    repeated InvoicePayment invoice_payment = 2;    
+    repeated InvoiceItem invoice_item = 3;
+}
+
+
+message GetSalesInvoiceGPMobileListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string custnumber = 3;
+    string si_number = 4;
+    string custname = 5;
+    string region = 6;
+    string order_channel = 7;
+    string so_code_apps = 8;
+    string wrt_id = 9;
+    string locncode = 10;
+    string ordertype= 11;
+    string salesperson_id = 12;
+    string status = 13;
+    string so_docdate_from = 14;
+    string so_docdate_to = 15;
+    string docdate_from = 16;
+    string docdate_to = 17;
+    string so_number = 18;
+}
+
+message GetSalesInvoiceGPMobileListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated SalesInvoiceMobile data = 3;
+}
+
+  message GetSalesOrderListCronjobRequest{
+    repeated int32 status = 1;
+    string region_id_gp = 2;
+    string requests_delivery_date = 3;
+    int32 payment_reminder = 4;
+}
+message GetSalesOrderListCronjobResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated SalesOrderCronjob data = 3;
+    int32 totalRecords = 4;
+}
+message SalesOrderCronjob{
+    string sales_order_number = 1;
+    string customer_id_gp = 2;
+    int32 payment_reminder = 3;
+    int64 id = 4;
+}
+
+message UpdateSalesOrderRemindPaymentRequest{
+    repeated int64 sales_order_id = 1;
+}
+message UpdateSalesOrderRemindPaymentResponse{
+    int32 code = 1;
+    string message = 2;
+}
+
+message ExpiredSalesOrderRequest{
+    string sales_order_code = 1;
+}
+message ExpiredSalesOrderResponse{
+    int32 code = 1;
+    string message = 2;
+    string customer_id_gp = 3;
+}
+
+message SalesOrderVoucher {
+    int64 id = 1;
+    int64 sales_order_id = 2;
+    string voucher_id_gp = 3;
+    double disc_amount = 4;
+    google.protobuf.Timestamp created_at = 5;
+    int32 voucher_type = 6;
+}
+
+message CreateSalesOrderPaidRequest{
+    string so_code_paid_xendit =1;
+    double amount = 2;
+}
+
+message CreateSalesOrderPaidResponse{
+    int32 code = 1;
+    string message = 2;
+    string customer_id_gp = 3;
+}
+
+message SalesOrderPayment{
+    int64 id = 1;
+    int64 sales_order_id = 2;
+    string cash_receipt_id_gp = 3;
+    string payment_method = 4;
+    string payment_channel = 5;
+}
+
+message DeltaPrintSiEdn{
+    int64 id = 1;
+    string doc_number = 2;
+    int32 print_count = 3;
+}
+
+message DeltaPrintSpEdn{
+    int64 id = 1;
+    string doc_number = 2;
+    int32 print_count = 3;
+}
+
+message GetDeltaPrintSiEdnDetailRequest{
+    int64  id = 1;
+    string doc_number = 2;
+}
+
+message GetDeltaPrintSiEdnDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    DeltaPrintSiEdn data = 3;
+}
+
+message GetDeltaPrintSpEdnDetailRequest{
+    int64  id = 1;
+    string doc_number = 2;
+}
+
+message GetDeltaPrintSpEdnDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    DeltaPrintSpEdn data = 3;
+}
+
+message CreateDeltaPrintSiEdnRequest{
+    string doc_number = 1;
+    int32 print_count = 2;
+}
+
+message CreateDeltaPrintSiEdnResponse{
+    int32 code = 1;
+    string message = 2;
+    DeltaPrintSiEdn data = 3;
+}
+
+message CreateDeltaPrintSpEdnRequest{
+    string doc_number = 1;
+    int32 print_count = 2;
+}
+
+message CreateDeltaPrintSpEdnResponse{
+    int32 code = 1;
+    string message = 2;
+    DeltaPrintSpEdn data = 3;
+}
+
+message UpdateDeltaPrintSiEdnRequest{
+    int64  id = 1;
+    string doc_number = 2;
+    int32 print_count = 3;
+}
+
+message UpdateDeltaPrintSiEdnResponse{
+    int32 code = 1;
+    string message = 2;
+    DeltaPrintSiEdn data = 3;
+}
+
+message UpdateDeltaPrintSpEdnRequest{
+    int64  id = 1;
+    string doc_number = 2;
+    int32 print_count = 3;
+}
+
+message UpdateDeltaPrintSpEdnResponse{
+    int32 code = 1;
+    string message = 2;
+    DeltaPrintSpEdn data = 3;
+}

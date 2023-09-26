@@ -1,0 +1,222 @@
+syntax = "proto3";
+
+option go_package = "git.edenfarm.id/project-version3/erp-services/erp-protobuf/gen/proto/notification_service";
+option objc_class_prefix = "EOP";
+
+package proto.notification_service;
+
+import "google/protobuf/timestamp.proto";
+
+service NotificationService {
+    rpc SendNotificationTransaction(SendNotificationTransactionRequest) returns (SendNotificationTransactionResponse){}
+    rpc GetNotificationTransactionList(GetNotificationTransactionListRequest) returns (GetNotificationTransactionListResponse){}
+    rpc UpdateReadNotificationTransaction(UpdateReadNotificationTransactionRequest) returns (UpdateReadNotificationTransactionResponse){}
+    rpc CountUnreadNotificationTransaction(CountUnreadNotificationTransactionRequest) returns (CountUnreadNotificationTransactionResponse){}
+    rpc SendNotificationCampaign(SendNotificationCampaignRequest) returns (SendNotificationCampaignResponse){}
+    rpc GetNotificationCampaignList(GetNotificationCampaignListRequest) returns (GetNotificationCampaignListResponse){}
+    rpc UpdateReadNotificationCampaign(UpdateReadNotificationCampaignRequest) returns (UpdateReadNotificationCampaignResponse){}
+    rpc CountUnreadNotificationCampaign(CountUnreadNotificationCampaignRequest) returns (CountUnreadNotificationCampaignResponse){}
+    rpc SendNotificationHelper(SendNotificationHelperRequest) returns (SuccessResponse){}
+    rpc SendNotificationPurchaser(SendNotificationPurchaserRequest) returns (SendNotificationPurchaserResponse){}
+    rpc SendNotificationCancelSalesOrder(SendNotificationCancelSalesOrderRequest) returns (SendNotificationCancelSalesOrderResponse){}
+    rpc SendNotificationPaymentReminder(SendNotificationPaymentReminderRequest) returns (SendNotificationPaymentReminderResponse){}
+}
+
+message NotificationTransaction {
+    string id = 1;
+    string customer_id = 2;
+    string ref_id = 3;
+    string type = 4;
+    string title = 5;
+    string message = 6;
+    int64 read = 7;
+    google.protobuf.Timestamp created_at = 8;
+}
+
+message SendNotificationTransactionRequest {
+    string customer_id = 1;
+    string ref_id = 2;
+    string type = 3;
+    string send_to = 4;
+    string notif_code = 5;
+    string ref_code = 6;
+}
+
+message SendNotificationTransactionResponse {
+    int32 code = 1;
+    string message = 2;
+}
+
+message GetNotificationTransactionListRequest {
+    string customer_id = 1;
+    int64 limit = 2;
+    int64 offset = 3;
+}
+
+message GetNotificationTransactionListResponse {
+    int32 code = 1;
+    string message = 2;
+    repeated NotificationTransaction data = 3;
+}
+
+message UpdateReadNotificationTransactionRequest {
+    string ref_id = 1;
+    string customer_id = 2;
+}
+
+message UpdateReadNotificationTransactionResponse {
+    int32 code = 1;
+    string message = 2;
+}
+
+message CountUnreadNotificationTransactionRequest {
+    string customer_id = 1;
+}
+
+message CountUnreadNotificationTransactionResponse {
+    int32 code = 1;
+    string message = 2;
+    int64 data = 3;
+}
+
+message NotificationCampaign {
+    string id = 1;
+    string notification_campaign_id = 2;
+    string customer_id = 3;
+    string user_customer_id = 4;
+    string firebase_token = 5;
+    int64 redirect_to = 6;
+    string redirect_to_name = 7;
+    string redirect_value = 8;
+    string redirect_value_name = 9;
+    int64 sent = 10;
+    int64 opened = 11;
+    int64 conversion = 12;
+    google.protobuf.Timestamp created_at = 13;
+    google.protobuf.Timestamp updated_at = 14;
+    int32 retry_count = 15;
+    string fcm_result_status = 16;
+}
+
+message SendNotificationCampaignRequest {
+    string notification_campaign_id = 1;
+    string notification_campaign_code = 2;
+    string notification_campaign_name = 3;
+    string title = 4;
+    string message = 5;
+    int64 redirect_to = 6;
+    string redirect_to_name = 7;
+    string redirect_value = 8;
+    string redirect_value_name = 9;
+    repeated UserCustomer user_customers = 10;
+}
+
+message UserCustomer {
+    int64 customer_id = 1;
+    int64 user_customer_id = 2;
+    string firebase_token = 3;
+}
+
+message StatusNotificationCampaign {
+    int64 success_sent = 1;
+    int64 failed_sent = 2;
+}
+
+message SendNotificationCampaignResponse {
+    int32 code = 1;
+    string message = 2;
+    StatusNotificationCampaign data = 3;
+}
+
+message GetNotificationCampaignListRequest {
+    string customer_id = 1;
+    int64 limit = 2;
+    int64 offset = 3;
+}
+
+message GetNotificationCampaignListResponse {
+    int32 code = 1;
+    string message = 2;
+    repeated NotificationCampaign data = 3;
+}
+
+message UpdateReadNotificationCampaignRequest {
+    string notification_campaign_id = 1;
+    string customer_id = 2;
+}
+
+message UpdateReadNotificationCampaignResponse {
+    int32 code = 1;
+    string message = 2;
+}
+
+message CountUnreadNotificationCampaignRequest {
+    string customer_id = 1;
+}
+
+message CountUnreadNotificationCampaignResponse {
+    int32 code = 1;
+    string message = 2;
+    int64 data = 3;
+}
+
+message SendNotificationHelperRequest {
+    string send_to = 1;
+    string notif_code = 2;
+    string type = 3;
+    string ref_id = 4;
+    string staff_id = 5;
+}
+
+message SuccessResponse {
+    int32 code = 1;
+    string message = 2;
+    bool success = 3;
+}
+
+message SendNotificationPurchaserRequest {
+    string send_to = 1;
+    string notif_code = 2;
+    string type = 3;
+    string ref_id = 4;
+    string staff_id = 5;
+}
+
+message SendNotificationPurchaserResponse {
+    int32 code = 1;
+    string message = 2;
+    bool success = 3;
+}
+
+message SendNotificationCancelSalesOrderRequest {
+    string notif_code = 1;
+    string type = 2;
+    repeated SalesOrderCode data = 3;
+}
+
+message SendNotificationCancelSalesOrderResponse {
+    int32 code = 1;
+    string message = 2;
+    bool success = 3;
+}
+
+message SalesOrderCode {
+    string sales_order_code = 1;
+    string ref_id = 2;
+    string customer_id = 3;
+    string send_to = 4;
+}
+
+message SendNotificationPaymentReminderRequest {
+    string notif_code = 1;
+    string type = 2;
+    repeated SalesOrderCode data = 3;
+    string order_time_limit = 4;
+    string timezone_location = 5;
+}
+
+message SendNotificationPaymentReminderResponse {
+    int32 code = 1;
+    string message = 2;
+    bool success = 3;
+}

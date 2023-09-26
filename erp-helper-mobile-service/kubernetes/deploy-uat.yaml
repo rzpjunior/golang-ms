@@ -1,0 +1,123 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mob-helper
+  labels:
+    app: mob-helper
+  namespace: mob-helper
+  annotations:
+    configmap.reloader.stakater.com/reload: "env-mob-helper"  
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mob-helper
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: mob-helper
+    spec:
+      imagePullSecrets:
+      - name: registry
+      containers:
+      - name: mob-helper-http
+        image: git.edenfarm.id:5050/project-version3/erp-services/erp-helper-mobile-service/uat:<VERSION>
+        command: ["/app/service"]
+        args: ["api"]
+        ports:
+          - name: http-port
+            containerPort: 8001
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: 50Mi
+            cpu: 15m
+          limits:
+            memory: 350Mi
+            cpu: 200m
+        volumeMounts:
+        - name: tz-config
+          mountPath: /etc/localtime
+        - name: env-value
+          mountPath: /app/env.toml
+          subPath: env-mob-helper.toml
+          readOnly: true
+      volumes:
+        - name: tz-config
+          hostPath:
+            path: /usr/share/zoneinfo/Asia/Jakarta
+            type: File
+        - name: env-value
+          configMap:
+            name: env-mob-helper
+      tolerations:
+      - key: instance_type
+        value: on-spot
+        effect: NoSchedule
+        operator: Equal
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: role
+                operator: In
+                values:
+                - devops
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - mob-helper
+            topologyKey: kubernetes.io/hostname
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-mob-helper-http
+  namespace: mob-helper
+  labels:
+    app: mob-helper-http
+spec:
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: http-port
+  selector:
+    app: mob-helper
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: hpa-mob-helper
+  namespace: mob-helper
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: mob-helper
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 75
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 75

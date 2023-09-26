@@ -1,0 +1,607 @@
+syntax = "proto3";
+
+option go_package = "git.edenfarm.id/project-version3/erp-services/erp-protobuf/gen/proto/campaign_service";
+option objc_class_prefix = "EOP";
+
+package proto.campaign_service;
+
+import "google/protobuf/timestamp.proto";
+
+service CampaignService {
+    rpc GetBannerList(GetBannerListRequest) returns (GetBannerListResponse){}
+    rpc GetBannerDetail(GetBannerDetailRequest) returns (GetBannerDetailResponse){}
+    rpc GetItemSectionList(GetItemSectionListRequest) returns(GetItemSectionListResponse){}
+    rpc GetItemSectionDetail(GetItemSectionDetailRequest) returns (GetItemSectionDetailResponse){}
+    rpc GetMembershipLevelList(GetMembershipLevelListRequest) returns (GetMembershipLevelListResponse){}
+    rpc GetMembershipLevelDetail(GetMembershipLevelDetailRequest) returns (GetMembershipLevelDetailResponse){}
+    rpc GetMembershipCheckpointList(GetMembershipCheckpointListRequest) returns (GetMembershipCheckpointListResponse){}
+    rpc GetMembershipCheckpointDetail(GetMembershipCheckpointDetailRequest) returns (GetMembershipCheckpointDetailResponse){}
+    rpc GetMembershipAdvantageDetail(GetMembershipAdvantageDetailRequest) returns (GetMembershipAdvantageDetailResponse){}
+    rpc GetMembershipLevelAdvantageList(GetMembershipLevelAdvantageListRequest) returns (GetMembershipLevelAdvantageListResponse){}
+    rpc GetMembershipRewardList(GetMembershipRewardListRequest) returns (GetMembershipRewardListResponse){}
+    rpc GetMembershipRewardDetail(GetMembershipRewardDetailRequest) returns (GetMembershipRewardDetailResponse){}
+    rpc GetCustomerPointLogList(GetCustomerPointLogListRequest) returns (GetCustomerPointLogListResponse){}
+    rpc GetCustomerPointLogDetail(GetCustomerPointLogDetailRequest) returns (GetCustomerPointLogDetailResponse){}
+    rpc GetCustomerPointLogDetailHistoryMobile(GetCustomerPointLogDetailRequest) returns (GetCustomerPointLogDetailResponse){}
+    rpc CreateCustomerPointLog(CreateCustomerPointLogRequest) returns (CreateCustomerPointLogResponse){}
+    rpc UpdateCustomerProfileTalon(UpdateCustomerProfileTalonRequest) returns (UpdateCustomerProfileTalonResponse){}
+    rpc UpdateCustomerSessionTalon(UpdateCustomerSessionTalonRequest) returns (UpdateCustomerSessionTalonResponse){}
+    rpc CreateCustomerPointSummary(CreateCustomerPointSummaryRequest) returns (CreateCustomerPointSummaryResponse){}
+    rpc UpdateCustomerPointSummary(UpdateCustomerPointSummaryRequest) returns (UpdateCustomerPointSummaryResponse){}
+    rpc GetCustomerPointSummaryDetail(GetCustomerPointSummaryRequestDetail) returns (GetCustomerPointSummaryDetailResponse){}
+    rpc GetCustomerMembershipDetail(GetCustomerMembershipDetailRequest)returns(GetCustomerMembershipDetailResponse){}
+    rpc GetPushNotificationList(GetPushNotificationListRequest) returns (GetPushNotificationListResponse){}
+    rpc GetPushNotificationDetail(GetPushNotificationDetailRequest) returns (GetPushNotificationDetailResponse){}
+    rpc GetReferralHistory(GetReferralHistoryRequest) returns (GetReferralHistoryResponse){}
+    rpc UpdatePushNotification(UpdatePushNotificationRequest) returns (UpdatePushNotificationResponse){}
+    rpc GetCustomerPointExpirationDetail(GetCustomerPointExpirationDetailRequest) returns (GetCustomerPointExpirationDetailResponse){}
+    rpc CancelCustomerPointLog(CancelCustomerPointLogRequest) returns (CancelCustomerPointLogResponse){}
+}
+
+message Banner{
+    int64 id = 1; 
+    string code = 2;
+    string name = 3;
+    repeated string regions = 4;
+    repeated string archetypes = 5;
+    int32 queue = 6;
+    int32 redirect_to = 7;
+    string redirect_value = 8;
+    string image_url = 9;
+    google.protobuf.Timestamp start_at = 10;
+    google.protobuf.Timestamp finish_at = 11;
+    string note = 12;
+    int32 status = 13;
+    google.protobuf.Timestamp created_at = 14; 
+    google.protobuf.Timestamp updated_at = 15; 
+}
+
+message ItemSection{
+    int64 id = 1;
+    string code = 2;
+    string name = 3; 
+    repeated string regions = 4;
+    repeated string archetypes = 5;
+    string background_images = 6;
+    repeated int64 items = 7;
+    int32 sequence = 8;
+    google.protobuf.Timestamp start_at = 9;
+    google.protobuf.Timestamp finish_at = 10;
+    string note = 11;
+    int32 status = 12;
+    int32 type = 13;
+    google.protobuf.Timestamp created_at = 14;
+    google.protobuf.Timestamp updated_at = 15;
+}
+
+message GetBannerListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    repeated int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    string region_id = 6;
+    string archetype_id = 7;
+    google.protobuf.Timestamp current_time = 8;
+}
+
+message GetBannerListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated Banner data = 3;
+}
+
+message GetBannerDetailRequest{
+    int64 id = 1;
+}
+
+message GetBannerDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    Banner data = 3;
+}
+
+message GetItemSectionListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    repeated int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    string region_id = 6;
+    string archetype_id = 7;
+    int32 type = 8;
+    google.protobuf.Timestamp current_time = 9;
+    int64 item_section_id = 10;
+}
+
+message GetItemSectionListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated ItemSection data = 3;
+}
+
+message GetItemSectionDetailRequest{
+    int64 id = 1;
+}
+
+message GetItemSectionDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    ItemSection data = 3;
+}
+
+message MembershipLevel{
+    int64 id = 1;
+    string code = 2;
+    int32 level = 3;
+    string name = 4;
+    string image_url = 5;
+    int32 status = 6;
+}
+
+message GetMembershipLevelListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+}
+
+message GetMembershipLevelListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated MembershipLevel data = 3;
+}
+
+message GetMembershipLevelDetailRequest{
+    int64 id = 1;
+    int64 level = 2;
+}
+
+message GetMembershipLevelDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    MembershipLevel data = 3;
+}
+
+message MembershipCheckpoint{
+    int64 id = 1;
+    int32 checkpoint = 2;
+    double target_amount = 3;
+    int32 status = 4;
+    int64 membership_level_id = 5;
+}
+
+message GetMembershipCheckpointListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    int32 level = 4;
+    string order_by = 5;
+    int64 membership_level_id = 6;
+    int64 id = 7;
+}
+
+message GetMembershipCheckpointListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated MembershipCheckpoint data = 3;
+}
+
+message GetMembershipCheckpointDetailRequest{
+    int64 id = 1;
+    int64 checkpoint = 2;
+}
+
+message GetMembershipCheckpointDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    MembershipCheckpoint data = 3;
+}
+
+message CustomerPointLog{
+    int64 id = 1;
+    int64 customer_id = 2;
+    int64 sales_order_id = 3;
+    int64 ep_campaign_id = 4;
+    double point_value = 5;
+    double recent_point = 6;
+    int32 status = 7;
+    string created_date = 8;
+    string expired_date = 9;
+    string note = 10;
+    double current_point_used = 11;
+    double next_point_used = 12;
+    int32 transaction_type = 13;
+    string status_type = 14;
+}
+
+message GetCustomerPointLogListRequest{
+    int64 limit = 1;
+    int64 offset = 2;
+    int64 customer_id = 3;
+    int64 sales_order_id = 4;
+    int32 status = 5;
+    string order_by = 6;
+    int32 transaction_type = 7;
+    string created_date = 8;
+  }
+
+message GetCustomerPointLogListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated CustomerPointLog data = 3;
+}
+
+message GetCustomerPointLogDetailRequest{
+    int64 customer_id = 1;
+    int64 sales_order_id = 2;
+    int32 status = 3;
+    int32 transaction_type = 4;
+    string created_date = 5;
+}
+
+message GetCustomerPointLogDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    CustomerPointLog data = 3;
+}
+
+message CreateCustomerPointLogRequest{
+    int64 customer_id = 2;
+    int64 sales_order_id = 3;
+    int64 ep_campaign_id = 4;
+    double point_value = 5;
+    double recent_point = 6;
+    int32 status = 7;
+    string created_date = 8;
+    string expired_date = 9;
+    string note = 10;
+    double current_point_used = 11;
+    double next_point_used = 12;
+    int32 transaction_type = 13;
+}
+
+message CreateCustomerPointLogResponse{
+    int32 code = 1;
+    string message = 2;
+    int64 customer_point_log_id = 3;
+}
+
+message Profile {
+    int32 ID = 1;
+    google.protobuf.Timestamp CreatedDate = 2;
+    string IntegrationID = 3;
+    string Attributes = 4;
+    int32 AccountID = 5;
+    int32 ClosedSessions = 6;
+    int32 TotalSales = 7;
+    string LoyaltyMembership = 8;
+    google.protobuf.Timestamp LastActivity = 9;
+}
+
+message CustomerSession {
+    int32 ID = 1;
+    google.protobuf.Timestamp CreatedDate = 2;
+    string IntegrationCode = 3;
+    int32 ApplicationID = 4;
+    string ProfileCode = 5;
+    double PointEarned = 6;
+    int32 CountGetCampaign = 7;   
+    double TotalCharge = 9;
+    double Subtotal = 10;
+    double AdditionalFee = 11;
+}
+
+message Effect {
+    int32 campaign_id = 1;
+    string effect_type = 2;
+    string name = 3;
+    double value = 4;
+    string recipient_integration_id = 5;
+    string subledger_id = 6;
+}
+
+message CustomerSessionReturn{
+    CustomerSession customer_session = 1;
+    Profile customer_profile = 2;
+    repeated Effect effect = 4;
+    double total_points = 3;
+}
+
+message SessionItemData {
+    string item_name = 1;
+    string item_code = 2;
+    string class_name = 3;
+    double unit_price = 4;
+    double order_qty = 5;
+    double unit_weight = 6;
+    map<string, string> attributes = 7;
+}
+
+message UpdateCustomerProfileTalonRequest {
+    string profile_code = 1;
+    string region = 2;
+    string customer_type = 3;
+    google.protobuf.Timestamp created_date = 4;
+    repeated string referrer_data = 5;
+}
+
+message UpdateCustomerProfileTalonResponse {
+    int32 code = 1;
+    string message = 2;
+}
+
+message UpdateCustomerSessionTalonRequest {
+    string integration_code = 1;
+    string profile_code = 2;
+    string status = 3;
+    string is_dry = 4;
+    string archetype = 5;
+    string price_set = 6;
+    string referral_code = 7;
+    string order_type = 8;
+    bool is_use_point = 9;
+    double vou_disc_amount = 10;
+    repeated SessionItemData item_list = 11;
+}
+
+message UpdateCustomerSessionTalonResponse {
+    int32 code = 1;
+    string message = 2;
+    CustomerSessionReturn data = 3;
+}
+
+message CustomerPointSummary {
+    int64 id = 1;
+    int64 customer_id = 2;
+    double earned_point = 3;
+    double redeemed_point = 4;
+    string summary_date = 5;
+}
+  
+message CreateCustomerPointSummaryRequest{
+    int64 customer_id = 1;
+    double earned_point = 2;
+    double redeemed_point = 3;
+    string summary_date = 4;
+}
+
+message CreateCustomerPointSummaryResponse {
+    int32 code = 1;
+    string message = 2;
+}
+  
+message UpdateCustomerPointSummaryRequest {
+    int64 id = 1;
+    int64 customer_id = 2;
+    double earned_point = 3;
+    double redeemed_point = 4;
+    repeated string field_update = 5;
+}
+
+message UpdateCustomerPointSummaryResponse {
+    int32 code = 1;
+    string message = 2;
+}
+  
+message GetCustomerPointSummaryRequestDetail {
+    int64 id = 1;
+    int64 customer_id = 2;
+    string summary_date = 3;
+}
+
+message GetCustomerPointSummaryDetailResponse {
+    int32 code = 1;
+    string message = 2;
+    CustomerPointSummary data = 3;
+}
+
+message MembershipAdvantage {
+    int64 id = 1;
+    string name = 2;
+    string link_url = 3;
+    string description = 4;
+    string image_url = 5;
+    int32 status = 6;
+}
+
+message MembershipLevelAdvantage {
+    int64 id = 1;
+    int64 membership_level_id = 2;
+    int64 membership_advantage_id = 3;
+}
+
+message GetMembershipAdvantageDetailRequest{
+    int64 id = 1;
+}
+
+message GetMembershipAdvantageDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    MembershipAdvantage data = 3;   
+}
+
+message GetMembershipLevelAdvantageListRequest{
+    int64 membership_level_id = 1;
+    int64 membership_advantage_id = 2;
+}
+
+message GetMembershipLevelAdvantageListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated MembershipLevelAdvantage data = 3;   
+}
+
+message MembershipReward{
+    int64 id = 1;
+    string opened_image_url = 2;
+    string closed_image_url = 3;
+    string background_image_url = 4;
+    int32 reward_level = 5;
+    double max_amount = 6;
+    int32 status = 7;
+    string description = 8;
+    int32 is_passed =9;
+    double current_percentage = 10;
+    double remaining_amount = 11;
+}
+
+message GetMembershipRewardListRequest{
+    int64 id = 1;
+}
+
+message GetMembershipRewardListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated MembershipReward data = 3;
+}
+
+message GetMembershipRewardDetailRequest{
+    int64 id = 1;
+    int64 reward_level = 2;
+    double membership_reward_amount = 3;
+}
+
+message GetMembershipRewardDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    MembershipReward data = 3;
+}
+
+message CustomerMembership{
+    int32 membership_level = 1;
+    string membership_level_name = 2;
+    int32 membership_checkpoint = 3;
+    double checkpoint_percentage =4;
+    double current_amount = 5;
+    double target_amount = 6;
+}
+
+message GetCustomerMembershipDetailRequest{
+    int64 membership_level_id = 1;
+    string profile_code = 2;
+}
+
+message GetCustomerMembershipDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    CustomerMembership data = 3;
+}
+
+message PushNotification {
+    int64 ID = 1;
+    string Code = 2;
+    string CampaignName = 3;
+    repeated string Regions = 4;
+    repeated string RegionNames = 5;
+    repeated string Archetypes = 6;
+    repeated string ArchetypeNames = 7;
+    int32 RedirectTo = 8;
+    string RedirectValue = 9;
+    string Title = 10;
+    string Message = 11;
+    int32 PushNow = 12;
+    google.protobuf.Timestamp ScheduledAt = 13;
+    int32 Status = 14;
+    string StatusConvert = 15;
+    int32 SuccessSent = 16;
+    int32 FailedSent = 17;
+    int32 Opened = 18;
+    google.protobuf.Timestamp CreatedAt = 19;
+    int64 CreatedBy = 20;
+    google.protobuf.Timestamp UpdatedAt = 21;
+}
+
+message GetPushNotificationListRequest{
+    int64 limit = 1;
+    int64 offset = 2;
+    int32 status = 3;
+    string order_by = 4;
+    string region_id = 5;
+    google.protobuf.Timestamp scheduled_at_from = 6;
+    google.protobuf.Timestamp scheduled_at_to = 7;
+    int32 push_now = 8;
+}
+
+message GetPushNotificationListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated PushNotification data = 3;
+}
+
+message GetPushNotificationDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetPushNotificationDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    PushNotification data = 3;
+}
+
+message ReferralList{
+    string name = 1;
+    google.protobuf.Timestamp created_at = 2;
+}
+
+message ReferralPointList{
+    string name = 1;
+    google.protobuf.Timestamp created_at = 2;
+    double point_value = 3;
+}
+
+message GetReferralHistoryRequest{
+    int64 referrer_id = 1;
+}
+
+message GetReferralHistoryResponse{
+    int32 code = 1;
+    string message = 2;
+    double total_point = 3;
+    int64 total_referral = 4;
+    repeated ReferralList data_referral = 5;
+    repeated ReferralPointList data_referral_point= 6;
+}
+
+message UpdatePushNotificationRequest{
+    int64 id = 1;
+    int32 Opened = 3;
+}
+
+message UpdatePushNotificationResponse{
+    int32 code = 1;
+    string message = 2;
+}
+
+message CustomerPointExpiration {
+    int64 id = 1;
+    int64 customer_id = 2;
+    double current_period_point = 3;
+    double next_period_point = 4;
+    google.protobuf.Timestamp current_period_date = 5;
+    google.protobuf.Timestamp next_period_date = 6;
+    google.protobuf.Timestamp last_updated_at = 7;
+}
+
+message GetCustomerPointExpirationDetailRequest{
+    int64 id = 1;
+    int64 customer_id = 2;
+}
+
+message GetCustomerPointExpirationDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    CustomerPointExpiration data = 3;
+}
+
+message CancelCustomerPointLogRequest{
+    int64 customer_id = 1;
+    int64 sales_order_id = 2;
+}
+
+message CancelCustomerPointLogResponse{
+    int32 code = 1;
+    string message = 2;
+}

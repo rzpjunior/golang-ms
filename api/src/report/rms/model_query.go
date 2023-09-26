@@ -1,0 +1,155 @@
+package report
+
+type reportPaymentGateway struct {
+	MerchantCode    string  `orm:"column(merchant_code)" json:"merchant_code"`
+	MerchantName    string  `orm:"column(merchant_name)" json:"merchant_name"`
+	BranchCode      string  `orm:"column(branch_code)" json:"branch_code"`
+	BranchName      string  `orm:"column(branch_name)" json:"branch_name"`
+	SalesOrderCode  string  `orm:"column(sales_order_code)" json:"sales_order_code"`
+	Type            string  `orm:"column(type)" json:"type"`
+	Channel         string  `orm:"column(channel)" json:"channel"`
+	AccountNumber   string  `orm:"column(account_number)" json:"account_number"`
+	TotalAmount     float64 `orm:"column(total_amount)" json:"total_amount"`
+	TransactionDate string  `orm:"column(transaction_date)" json:"transaction_date"`
+	TransactionTime string  `orm:"column(transaction_time)" json:"transaction_time"`
+}
+
+type reportMainOutlet struct {
+	Code                       string `orm:"column(code)" json:"code"`
+	Name                       string `orm:"column(name)" json:"name"`
+	BillingAddress             string `orm:"column(billing_address)" json:"billing_address"`
+	FinanceArea                string `orm:"column(finance_area)" json:"finance_area"`
+	PicName                    string `orm:"column(pic_name)" json:"pic_name"`
+	PhoneNumber                string `orm:"column(phone_number)" json:"phone_number"`
+	Email                      string `orm:"column(email)" json:"email"`
+	CurrentEdenPoint           string `orm:"column(current_edenpoint)" json:"current_edenpoint"`
+	DefaultPaymentTerm         string `orm:"column(default_payment_term)" json:"default_payment_term"`
+	DefaultInvoiceTerm         string `orm:"column(default_invoice_term)" json:"default_invoice_term"`
+	PaymentGroup               string `orm:"column(payment_group)" json:"payment_group"`
+	BusinessType               string `orm:"column(business_type)" json:"business_type"`
+	BusinessTypeCreditLimit    string `orm:"column(business_type_credit_limit)" json:"business_type_credit_limit"`
+	CreditLimitAmount          string `orm:"column(credit_limit_amount)" json:"credit_limit_amount"`
+	RemainingCreditLimitAmount string `orm:"column(credit_limit_remaining)" json:"remaining_credit_limit_amount"`
+	Suspended                  string `orm:"column(suspended)" json:"suspended"`
+	CustomerGroup              string `orm:"column(customer_group)" json:"customer_group"`
+	CustomerTag                string `orm:"column(customer_tag)" json:"customer_tag"`
+	Status                     string `orm:"column(status)" json:"status"`
+	CreatedAt                  string `orm:"column(created_at)" json:"created_at"`
+	CreatedBy                  string `orm:"column(created_by)" json:"created_by"`
+	LastUpdatedAt              string `orm:"column(updated_at)" json:"updated_at"`
+	LastUpdatedBy              string `orm:"column(updated_by)" json:"updated_by"`
+}
+
+type reportOutlet struct {
+	MerchantCode         string `orm:"column(main_outlet_code)" json:"main_outlet_code"`
+	OutletCode           string `orm:"column(outlet_code)" json:"outlet_code"`
+	OutletName           string `orm:"column(outlet_name)" json:"outlet_name"`
+	PicName              string `orm:"column(pic_name)" json:"pic_name"`
+	OutletPicPhoneNumber string `orm:"column(phone_number)" json:"phone_number"`
+	Archetype            string `orm:"column(archetype)" json:"archetype"`
+	WarehouseDefault     string `orm:"column(warehouse_default)" json:"warehouse_default"`
+	OutletArea           string `orm:"column(area)" json:"area"`
+	Province             string `orm:"column(province)" json:"province"`
+	City                 string `orm:"column(city)" json:"city"`
+	District             string `orm:"column(district)" json:"district"`
+	SubDistrict          string `orm:"column(sub_district)" json:"sub_district"`
+	ShippingAddress      string `orm:"column(shipping_address)" json:"shipping_address"`
+	PriceSet             string `orm:"column(price_set)" json:"price_set"`
+	SalesPerson          string `orm:"column(salesperson)" json:"salesperson"`
+	OutletStatus         string `orm:"column(status)" json:"status"`
+	CreatedAt            string `orm:"column(created_at)" json:"created_at"`
+	CreatedBy            string `orm:"column(created_by)" json:"created_by"`
+	LastUpdatedAt        string `orm:"column(last_updated_at)" json:"last_updated_at"`
+	LastUpdatedBy        string `orm:"column(last_updated_by)" json:"last_updated_by"`
+}
+
+type reportAgent struct {
+	AgentCode                  string `orm:"column(agent_code)" json:"agent_code"`
+	AgentName                  string `orm:"column(agent_name)" json:"agent_name"`
+	MainOutletName             string `orm:"column(main_outlet_name)" json:"main_outlet_name"`
+	PicName                    string `orm:"column(pic_name)" json:"pic_name"`
+	PicPhoneNumber             string `orm:"column(phone_number)" json:"phone_number"`
+	AgentEmail                 string `orm:"column(email)" json:"email"`
+	CurrentEdenPoint           string `orm:"column(current_edenpoint)" json:"current_edenpoint"`
+	DefaultPaymentTerm         string `orm:"column(default_payment_term)" json:"default_payment_term"`
+	DefaultInvoiceTerm         string `orm:"column(default_invoice_term)" json:"default_invoice_term"`
+	PaymentGroup               string `orm:"column(payment_group)" json:"payment_group"`
+	BusinessType               string `orm:"column(business_type)" json:"business_type"`
+	BusinessTypeCreditLimit    string `orm:"column(business_type_credit_limit)" json:"business_type_credit_limit"`
+	CreditLimitAmount          string `orm:"column(credit_limit_amount)" json:"credit_limit_amount"`
+	RemainingCreditLimitAmount string `orm:"column(credit_limit_remaining)" json:"remaining_credit_limit_amount"`
+	Suspended                  string `orm:"column(suspended)" json:"suspended"`
+	Archetype                  string `orm:"column(archetype)" json:"archetype"`
+	CustomerTag                string `orm:"column(customer_tag)" json:"customer_tag"`
+	WarehouseDefault           string `orm:"column(warehouse_default)" json:"warehouse_default"`
+	AgentArea                  string `orm:"column(agent_area)" json:"agent_area"`
+	AddressArea                string `orm:"column(address_area)" json:"address_area"`
+	Province                   string `orm:"column(province)" json:"province"`
+	City                       string `orm:"column(city)" json:"city"`
+	District                   string `orm:"column(district)" json:"district"`
+	SubDistrict                string `orm:"column(sub_district)" json:"sub_district"`
+	ShippingAddress            string `orm:"column(shipping_address)" json:"shipping_address"`
+	PriceSet                   string `orm:"column(price_set)" json:"price_set"`
+	SalesPerson                string `orm:"column(salesperson)" json:"salesperson"`
+	AgentStatus                string `orm:"column(agent_status)" json:"agent_status"`
+	AddressStatus              string `orm:"column(address_status)" json:"address_status"`
+	CreatedAt                  string `orm:"column(created_at)" json:"created_at"`
+	CreatedBy                  string `orm:"column(created_by)" json:"created_by"`
+	LastUpdatedAt              string `orm:"column(last_updated_at)" json:"last_updated_at"`
+	LastUpdatedBy              string `orm:"column(last_updated_by)" json:"last_updated_by"`
+}
+
+type reportVoucherLog struct {
+	VoucherCode  string  `orm:"column(voucher_code)" json:"voucher_code"`
+	RedeemCode   string  `orm:"column(redeem_code)" json:"redeem_code"`
+	RedeemDate   string  `orm:"column(redeem_date)" json:"redeem_date"`
+	VoucherType  string  `orm:"column(voucher_type)" json:"voucher_type"`
+	OrderCode    string  `orm:"column(order_code)" json:"order_code"`
+	OrderDate    string  `orm:"column(order_date)" json:"order_date"`
+	OrderStatus  string  `orm:"column(order_status)" json:"order_status"`
+	DiscAmount   float64 `orm:"column(discount_amount)" json:"discount_amount"`
+	TotalOrder   float64 `orm:"column(total_order)" json:"total_order"`
+	MerchantCode string  `orm:"column(merchant_code)" json:"merchant_code"`
+	MerchantName string  `orm:"column(merchant_name)" json:"merchant_name"`
+	OutletCode   string  `orm:"column(outlet_code)" json:"outlet_code"`
+	OutletName   string  `orm:"column(outlet_name)" json:"outlet_name"`
+	Area         string  `orm:"column(area)" json:"area"`
+	BusinessType string  `orm:"column(business_type)" json:"business_type"`
+	Archetype    string  `orm:"column(archetype)" json:"archetype"`
+}
+
+type reportSubmission struct {
+	Id                   int     `orm:"column(id)" json:"id"`
+	Type                 string  `orm:"column(task)" json:"task"`
+	CustomerTypeStr      string  `orm:"column(customer_type_str)" json:"customer_type_str"`
+	OutOfRoute           int8    `orm:"column(out_of_route)" json:"out_of_route"`
+	StartDate            string  `orm:"column(start_date)" json:"start_date"`
+	EndDate              string  `orm:"column(end_date)" json:"end_date"`
+	SubmissionDate       string  `orm:"column(submission_date)" json:"submission_date"`
+	FinishDate           string  `orm:"column(finish_date)" json:"finish_date"`
+	Salesgroup           string  `orm:"column(sales_group)" json:"sales_group"`
+	Salesperson          string  `orm:"column(salesperson)" json:"salesperson"`
+	OutletCode           string  `orm:"column(outlet_code)" json:"outlet_code"`
+	OutletName           string  `orm:"column(outlet_name)" json:"outlet_name"`
+	PhoneNumber          string  `orm:"colum(phone_number)" json:"phone_number"`
+	Latitude             float64 `orm:"column(latitude)" json:"latitude"`
+	Longitude            float64 `orm:"column(longitude)" json:"longitude"`
+	ActualTaskLatitude   float64 `orm:"column(task_latitude)" json:"task_latitude"`
+	ActualTaskLongitude  float64 `orm:"column(task_longitude)" json:"task_longitude"`
+	ActualDistance       float64 `orm:"column(actual_distance)" json:"actual_distance"`
+	ShippingAddress      string  `orm:"column(shipping_address)" json:"shipping_address"`
+	TaskPhoto            string  `orm:"column(task_photo)" json:"task_photo"`
+	Result               string  `orm:"column(result)" json:"result"`
+	FoodApp              string  `orm:"column(food_app)" json:"food_app"`
+	Status               int     `orm:"column(status)" json:"-"`
+	ObjectiveCodes       string  `orm:"column(objective_codes)" json:"-"`
+	StatusStr            string  `orm:"column(-)" json:"status"`
+	EffectiveCall        bool    `orm:"-" json:"effective_call"`
+	RevenueEffectiveCall float64 `orm:"-" json:"revenue_effective_call"`
+	OutOfRouteStr        string  `orm:"-" json:"out_of_route_str"`
+	ObjectiveCodesStr    string  `orm:"-" json:"objective_codes"`
+
+	OutletId      int `orm:"column(outlet_id)" json:"-"`
+	SalespersonId int `orm:"column(salesperson_id)" json:"-"`
+	SalesGroupId  int `orm:"column(salesgroup_id)" json:"-"`
+}

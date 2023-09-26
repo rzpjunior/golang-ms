@@ -1,0 +1,18 @@
+include:
+  - project: 'project-version3/erp-infra/gitlab-ci'
+    file:
+      - 'sonarqube-check.yml'
+      - 'cypress-test.yml'
+      - 'cypress-push.yml'
+      - 'build-image.yml'
+      - 'deploy-image.yml'
+
+stages:
+  - build
+  - deploy
+  - test
+  - reconfig
+  
+Cypress Test:
+  script:
+    - npm run test:linux --modul=Catalog

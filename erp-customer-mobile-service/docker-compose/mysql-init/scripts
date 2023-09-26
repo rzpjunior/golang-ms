@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Restore SQL from data.sql
+for file in /docker-entrypoint-initdb.d/*.sql
+do
+    echo "Restoring $file..."
+    mysql -u root -p"$MYSQL_ROOT_PASSWORD" < $file
+done

@@ -1,0 +1,223 @@
+syntax = "proto3";
+
+option go_package = "git.edenfarm.id/project-version3/erp-services/erp-protobuf/gen/proto/configuration_service";
+option objc_class_prefix = "EOP";
+
+package proto.configuration_service;
+
+import "google/protobuf/timestamp.proto";
+
+
+service ConfigurationService {
+    rpc GetGenerateCode(GetGenerateCodeRequest) returns (GetGenerateCodeResponse) {}
+    rpc GetGenerateCustomerCode(GetGenerateCodeRequest) returns (GetGenerateCodeResponse) {}
+    rpc GetGenerateReferralCode(GetGenerateCodeRequest) returns (GetGenerateCodeResponse) {}
+    rpc GetGlossaryList(GetGlossaryListRequest) returns (GetGlossaryListResponse) {}
+    rpc GetGlossaryDetail(GetGlossaryDetailRequest) returns (GetGlossaryDetailResponse) {}
+    rpc GetConfigAppList(GetConfigAppListRequest) returns (GetConfigAppListResponse) {}
+    rpc GetConfigAppDetail(GetConfigAppDetailRequest) returns (GetConfigAppDetailResponse) {}
+    rpc GetWrtDetail(GetWrtDetailRequest) returns (GetWrtDetailResponse){}
+    rpc GetWrtIdGP(GetWrtDetailRequest) returns (GetWrtDetailResponse){}
+    rpc GetWrtList(GetWrtListRequest) returns (GetWrtListResponse){}
+    rpc GetRegionPolicyDetail(GetRegionPolicyDetailRequest) returns (GetRegionPolicyDetailResponse){}
+    rpc GetRegionPolicyList(GetRegionPolicyListRequest) returns (GetRegionPolicyListResponse){}
+    rpc GetDayOffDetail(GetDayOffDetailRequest) returns (GetDayOffDetailResponse){}
+    rpc GetDayOffList(GetDayOffListRequest) returns (GetDayOffListResponse){}
+}
+
+message GenerateCode{
+    string code = 1;
+}
+
+message GetGenerateCodeRequest{
+    string format = 1;
+    string domain = 2;
+    int32 length = 3;
+}
+
+message GetGenerateCodeResponse{
+    int32 code = 1;
+    string message = 2;
+    GenerateCode data = 3;
+}
+
+message Glossary{
+    int32 id = 1;
+    string table = 2;
+    string attribute = 3;
+    int32 value_int = 4;
+    string value_name = 5;
+    string note = 6;
+}
+
+message GetGlossaryDetailRequest{
+    int32 id = 1;
+    string table = 2;
+    string attribute = 3;
+    int32 value_int = 4;
+    string value_name = 5;
+}
+
+message GetGlossaryDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    Glossary data = 3;
+}
+
+message GetGlossaryListRequest{
+    int32 id = 1;
+    string table = 2;
+    string attribute = 3;
+    int32 value_int = 4;
+    string value_name = 5;
+}
+
+message GetGlossaryListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated Glossary data = 3;
+}
+
+message ConfigApp{
+    int32 id = 1;
+    int32 application = 2;
+    string field = 3;
+    string attribute = 4;
+    string value = 5;
+}
+
+message GetConfigAppListRequest{
+    int32 id = 1;
+    int32 application = 2;
+    string field = 3;
+    string attribute = 4;
+    string value = 5;
+    int32 limit = 6;
+    int32 offset = 7;
+}
+
+message GetConfigAppListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated ConfigApp data = 3;
+}
+
+message GetConfigAppDetailRequest{
+    int32 id = 1;
+    int32 application = 2;
+    string field = 3;
+    string attribute = 4;
+    string value = 5;
+}
+
+message GetConfigAppDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    ConfigApp data = 3;
+}
+message Wrt {
+    int64 id =1;
+    string region_id =2;
+    string code = 3;
+    string name =4;
+    int32 type = 5;
+    string note = 6;
+}
+
+message GetWrtDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetWrtDetailResponse {
+    int32 code = 1;
+    string message = 2;
+    Wrt data = 3;
+}
+
+message GetWrtListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string search = 3;
+    string region_id = 4;
+    int32 type = 5;
+}
+
+message GetWrtListResponse {
+    int32 code = 1;
+    string message = 2;
+    repeated Wrt data = 3;
+}
+
+message RegionPolicy{
+    int64 id = 1;
+    string region = 2;
+    string region_id = 3;
+    string order_time_limit = 4;
+    int32 max_day_delivery_date= 5;
+    int32 weekly_day_off= 6;
+    string cs_phone_number = 7;
+    string default_price_level = 8;
+}
+
+message GetRegionPolicyDetailRequest{
+    int64 id = 1;
+    string code = 2;
+    string region_id = 3;
+    string region =4;
+}
+
+message GetRegionPolicyDetailResponse {
+    int32 code = 1;
+    string message = 2;
+    RegionPolicy data = 3;
+}
+
+message GetRegionPolicyListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string search = 3;
+    string region_id = 4;
+    
+}
+
+message GetRegionPolicyListResponse {
+    int32 code = 1;
+    string message = 2;
+    repeated RegionPolicy data = 3;
+}
+
+
+message DayOff{
+    int64 id = 1;
+    google.protobuf.Timestamp off_date = 2; 
+	string note=3;
+	int32 status =4;
+	string statusConvert =5;
+}
+
+message GetDayOffDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetDayOffDetailResponse {
+    int32 code = 1;
+    string message = 2;
+    DayOff data = 3;
+}
+
+message GetDayOffListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string search = 3;
+    google.protobuf.Timestamp start_date = 4; 
+    google.protobuf.Timestamp end_date = 5; 
+    
+}
+
+message GetDayOffListResponse {
+    int32 code = 1;
+    string message = 2;
+    repeated DayOff data = 3;
+}

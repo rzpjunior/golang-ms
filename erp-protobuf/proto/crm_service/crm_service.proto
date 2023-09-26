@@ -1,0 +1,649 @@
+syntax = "proto3";
+
+option go_package = "git.edenfarm.id/project-version3/erp-services/erp-protobuf/gen/proto/crm_service";
+option objc_class_prefix = "EOP";
+
+package proto.crm_service;
+
+import "google/protobuf/timestamp.proto";
+
+service CrmService {
+    rpc GetProspectiveCustomerList(GetProspectiveCustomerListRequest) returns (GetProspectiveCustomerListResponse){}
+    rpc GetProspectiveCustomerDetail(GetProspectiveCustomerDetailRequest) returns (GetProspectiveCustomerDetailResponse){}
+    rpc DeleteProspectiveCustomer(DeleteProspectiveCustomerRequest) returns (DeleteProspectiveCustomerResponse){}
+    rpc GetSalesAssignmentList(GetSalesAssignmentListRequest) returns (GetSalesAssignmentListResponse){}
+    rpc GetSalesAssignmentDetail(GetSalesAssignmentDetailRequest) returns (GetSalesAssignmentDetailResponse){}
+    rpc GetSalesAssignmentItemList(GetSalesAssignmentItemListRequest) returns (GetSalesAssignmentItemListResponse){}
+    rpc GetSalesAssignmentItemDetail(GetSalesAssignmentItemDetailRequest) returns (GetSalesAssignmentItemDetailResponse){}
+    rpc GetSalesAssignmentObjectiveList(GetSalesAssignmentObjectiveListRequest) returns (GetSalesAssignmentObjectiveListResponse){}
+    rpc GetSalesAssignmentObjectiveDetail(GetSalesAssignmentObjectiveDetailRequest) returns (GetSalesAssignmentObjectiveDetailResponse){}
+    rpc CheckTaskCustomerAcquisitionActive(CheckTaskCustomerAcquisitionRequest) returns (CheckTaskCustomerAcquisitionResponse){}
+    rpc CheckTaskSalesAssignmentItemActive(CheckTaskSalesAssignmentItemRequest) returns (CheckTaskSalesAssignmentItemResponse){}
+    rpc SubmitTaskVisitFU(UpdateSubmitTaskVisitFURequest) returns (UpdateSubmitTaskVisitFUResponse){}
+    rpc CheckoutTaskVisitFU(CheckoutTaskVisitFURequest) returns (CheckoutTaskVisitFUResponse){}
+    rpc BulkCheckoutTaskVisitFU(BulkCheckoutTaskVisitFURequest) returns (BulkCheckoutTaskVisitFUResponse){}
+    rpc SubmitTaskCustomerAcquisition(SubmitTaskCustomerAcquisitionRequest) returns (SubmitTaskCustomerAcquisitionResponse){}
+    rpc SubmitTaskFailed(SubmitTaskFailedRequest) returns (SubmitTaskFailedResponse){}
+    rpc CreateSalesAssignmentItem(CreateSalesAssignmentItemRequest) returns (GetSalesAssignmentItemDetailResponse){}
+    rpc GetCustomerAcquisitionById(GetCustomerAcquisitionByIdRequest) returns (GetCustomerAcquisitionDetailResponse){}
+    rpc GetCustomerAcquisitionList(GetCustomerAcquisitionListRequest) returns (GetCustomerAcquisitionListResponse){}
+    rpc GetCustomerAcquisitionListWithExcludedIds(GetCustomerAcquisitionListWithExcludedIdsRequest) returns (GetCustomerAcquisitionListResponse){}
+    rpc GetCountCustomerAcquisition(GetCountCustomerAcquisitionRequest) returns (GetCountCustomerAcquisitionResponse){}
+    rpc GetSalesSubmissionList(GetSalesSubmissionListRequest) returns (GetSalesAssignmentItemListResponse){}
+    rpc GetCustomerDetail(GetCustomerDetailRequest) returns (GetCustomerDetailResponse){}
+    rpc UpdateCustomer(UpdateCustomerRequest) returns (UpdateCustomerResponse){}
+    rpc CreateCustomer(CreateCustomerRequest) returns (CreateCustomerResponse){}
+    rpc CreateProspectiveCustomer(CreateProspectiveCustomerRequest) returns (CreateProspectiveCustomerResponse){}
+    rpc GetCustomerID(GetCustomerIDRequest) returns (GetCustomerIDResponse){}
+    rpc UpdateFixedVa(UpdateFixedVaRequest) returns (UpdateFixedVaResponse){}
+}
+
+message ProspectiveCustomer {
+	int64 id = 1;
+    string code = 2;
+    string archetype_id_gp = 3;
+    string customer_type_id_gp = 4;
+    string company_adm_division_id_gp = 5;
+    string customer_id_gp = 6;
+    string salesperson_id_gp = 7;
+    string name = 8;
+    string brand_name = 9;
+    string company_street_name = 10;
+    int32 customer_upgrade = 11;
+    int32 upgrade_status = 12;
+    int32 reg_status = 13;
+    int32 application = 14;
+    google.protobuf.Timestamp created_at = 15;
+    google.protobuf.Timestamp updated_at = 16;
+    google.protobuf.Timestamp processed_at = 17;
+    int64 processed_by = 18;
+    int32 decline_type = 19;
+    string decline_note = 20;
+    string ship_to_street_name = 21;
+    string ship_to_adm_division_id_gp = 22;
+    string site_id_gp = 23;
+    int32 bill_to_refer_to = 24;
+    string outlet_image = 25;
+    int32 time_consent = 26;
+    int32 reference_info = 27;
+    string referrer_code = 28;
+    string owner_name = 29;
+    string owner_role = 30;
+    string email = 31;
+    string business_type_id_gp = 32;
+    string pic_order_name = 33;
+    string pic_order_contact = 34;
+    string pic_finance_name = 35;
+    string pic_finance_contact = 36;
+    string id_card_doc_name = 37;
+    string id_card_doc_number = 38;
+    string id_card_doc_url = 39;
+    string taxpayer_doc_name = 40;
+    string taxpayer_doc_number = 41;
+    string taxpayer_doc_url = 42;
+    string company_contract_doc_name = 43;
+    string company_contract_doc_url = 44;
+    string notarial_deed_doc_name = 45;
+    string notarial_deed_doc_url = 46;
+    string taxable_entrepeneur_doc_name = 47;
+    string taxable_entrepeneur_doc_url = 48;
+    string company_certificate_reg_name = 49;
+    string company_certificate_reg_url = 50;
+    string business_license_doc_name = 51;
+    string business_license_doc_url = 52;
+    string payment_term_id_gp = 53;
+    int32 exchange_invoice = 54;
+    string exchange_invoice_time = 55;
+    string finance_email = 56;
+    int32 invoice_term = 57;
+}
+
+message GetProspectiveCustomerListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    string archetype_id = 6;
+    string customer_type_id = 7;
+    string region_id = 8;
+    string sub_district_id = 9;
+    string salesperson_id = 10;
+    string requested_by = 11;
+    string customer_id =12;
+}
+
+message GetProspectiveCustomerListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated ProspectiveCustomer data = 3;
+}
+
+message GetProspectiveCustomerDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetProspectiveCustomerDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    ProspectiveCustomer data = 3;
+}
+
+message DeleteProspectiveCustomerRequest{
+    int64 id = 1;
+    string code = 2;
+    int64 customer_id= 3;
+}
+
+message DeleteProspectiveCustomerResponse{
+    int32 code = 1;
+    string message = 2;
+}
+
+message SalesAssignment {
+    int64 id = 1;
+    string code = 2;
+    int64 territory_id = 3;
+    google.protobuf.Timestamp start_date  = 4;
+    google.protobuf.Timestamp end_date = 5;
+    int32 status = 6;
+}
+
+message GetSalesAssignmentListRequest {
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    int64 archetype_id = 6;
+    int64 teritory_id = 7;
+    google.protobuf.Timestamp start_date_from  = 8;
+    google.protobuf.Timestamp start_date_to  = 9;
+    google.protobuf.Timestamp end_date_from = 10;
+    google.protobuf.Timestamp end_date_to = 11;
+}
+
+message GetSalesAssignmentListResponse {
+    int32 code = 1;
+    string message = 2;
+    repeated SalesAssignment data = 3;
+}
+
+message GetSalesAssignmentDetailRequest {
+    int64 id = 1;
+    string code = 2;
+    int32 status = 3;
+    string search = 4;
+    int32 task_type = 5;
+    google.protobuf.Timestamp finish_date_from = 6;
+    google.protobuf.Timestamp finish_date_to = 7;
+}
+
+message GetSalesAssignmentDetailResponse {
+    int32 code = 1;
+    string message = 2;
+    SalesAssignment data = 3;
+}
+
+message SalesAssignmentItem {
+    int64 id = 1;
+    optional int64 sales_assignment_id = 2;
+    int64 sales_person_id = 3;
+    int64 address_id = 4;
+    int64 customer_acquisition_id = 5;
+    double latitude = 6;
+    double longitude = 7;
+    int32 task = 8;
+    int32 customer_type = 9;
+    string objective_codes = 10;
+    double actual_distance = 11;
+    int32 out_of_route = 12;
+    google.protobuf.Timestamp start_date = 13;
+    google.protobuf.Timestamp end_date = 14;
+    optional google.protobuf.Timestamp finish_date = 15;
+    google.protobuf.Timestamp submit_date = 16;
+    repeated string task_image_url = 17;
+    int32 task_answer = 18;
+    int32 status = 19;
+    int32 effective_call = 20;
+    Address address = 21;
+    User salesperson = 22;
+    CustomerAcquisitionResponse customer_acquisition = 23;
+    repeated SalesAssignmentObjective obective_values = 24;
+    
+}
+
+message GetSalesAssignmentItemListRequest {
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    int64 teritory_id = 7;
+    int64 salesperson_id = 8;
+    int32 task = 9;
+    int32 out_of_route = 10;
+    google.protobuf.Timestamp submit_date_from  = 11;
+    google.protobuf.Timestamp submit_date_to  = 12;
+    google.protobuf.Timestamp start_date_from  = 13;
+    google.protobuf.Timestamp start_date_to  = 14;
+    google.protobuf.Timestamp end_date_from = 15;
+    google.protobuf.Timestamp end_date_to = 16;
+    int32 customer_type = 17;
+}
+
+message GetSalesAssignmentItemListResponse {
+    int32 code = 1;
+    string message = 2;
+    repeated SalesAssignmentItem data = 3;
+}
+
+message GetSalesAssignmentItemDetailRequest {
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetSalesAssignmentItemDetailResponse {
+    int32 code = 1;
+    string message = 2;
+    SalesAssignmentItem data = 3;
+}
+
+message SalesAssignmentObjective {
+    int64 id = 1;
+    string code = 2;
+    string name = 3;
+    string objective = 4;
+    string survey_link = 5;
+    int32 status = 6;
+    google.protobuf.Timestamp created_at = 7;
+    int64 created_by = 8;
+    google.protobuf.Timestamp updated_at = 9;
+}
+
+message GetSalesAssignmentObjectiveListRequest {
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    repeated string codes = 5;
+    string order_by = 6;
+}
+
+message GetSalesAssignmentObjectiveListResponse {
+    int32 code = 1;
+    string message = 2;
+    repeated SalesAssignmentObjective data = 3;
+}
+
+message GetSalesAssignmentObjectiveDetailRequest {
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetSalesAssignmentObjectiveDetailResponse {
+    int32 code = 1;
+    string message = 2;
+    SalesAssignmentObjective data = 3;
+}
+
+message Address{
+    int64 id = 1;
+    string code = 2;
+    string customer_name = 3;
+    int64 archetype_id = 4;
+    int64 adm_division_id = 5;
+    int64 site_id = 6;
+    int64 salesperson_id = 7;
+    int64 territory_id = 8;
+    string address_code = 9;
+    string address_name = 10;
+    google.protobuf.Timestamp updated_at = 33;
+}
+
+message User {
+	int64 id = 1;
+	string email = 2;
+	int64 region_id = 3;
+	int64 parent_id = 4;
+	int64 site_id = 5;
+	int64 territory_id = 6;
+	string employee_code = 7;
+	string name = 8;
+	string nickname = 9;
+	string phone_number = 10;
+	int32 status = 12;
+}
+
+message BooleanResponse {
+    bool existed = 1;
+}
+
+message CheckTaskCustomerAcquisitionRequest {
+    int64 salesperson_id = 1;
+}
+
+message CheckTaskCustomerAcquisitionResponse {
+    int32 code = 1;
+    string message = 2;
+    BooleanResponse data = 3;
+}
+
+message CheckTaskSalesAssignmentItemRequest {
+    int64 salesperson_id = 1;
+}
+
+message CheckTaskSalesAssignmentItemResponse {
+    int32 code = 1;
+    string message = 2;
+    BooleanResponse data = 3;
+}
+
+
+message UpdateSubmitTaskVisitFURequest {
+    int64 id = 1;
+	int64 address_id = 2;
+	int64 customer_acquisition_id = 3;
+	int64 task_answer = 4;
+	string task_image_urls = 5;
+	double latitude = 6;
+	double longitude = 7;
+	double actual_distance = 8;
+}
+
+message UpdateSubmitTaskVisitFUResponse {
+    int32 code = 1;
+    string message = 2;
+    SalesAssignmentItem data = 3;
+}
+
+message CheckoutTaskVisitFURequest {
+    int64 id = 1;
+	int32 task = 2;
+	bool customer_acquisition = 3;
+}
+
+message CheckoutTaskVisitFUResponse {
+    int32 code = 1;
+    string message = 2;
+    optional string data = 3;
+}
+
+message BulkCheckoutTaskVisitFURequest {
+    int64 salesperson_id = 1;
+}
+
+message BulkCheckoutTaskVisitFUResponse {
+    int32 code = 1;
+    string message = 2;
+    optional string data = 3;
+}
+
+message CustomerAcquisitionResponse {
+	int64 id = 1;
+	string code = 2;
+	int32 task = 3;
+	string name = 4;
+	string phoneNumber = 5;
+	double latitude = 6;
+	double longitude = 7;
+	string address_name = 8;
+	int32 food_app = 9;
+	double potential_revenue = 10;
+	string task_image_url = 11;
+	int64 salesperson_id = 12;
+	int64 territory_id = 13;
+	google.protobuf.Timestamp finish_date = 14;
+	google.protobuf.Timestamp submit_date = 15;
+	google.protobuf.Timestamp created_at = 16;
+	google.protobuf.Timestamp updated_at = 17;
+	int32 status = 18;
+}
+
+message CustomerAcquisitionItemResponse {
+	int64 id = 1;
+	int64 customer_acquisition_id = 2;
+	int64 item_id = 3;
+	int32 is_top = 4;
+	google.protobuf.Timestamp created_at = 5;
+	google.protobuf.Timestamp updated_at = 6;
+}
+
+message SubmitTaskCustomerAcquisitionRequest {
+	int64 salesperson_id = 1;
+	string customer_name = 2;
+	string phone_number = 3;
+	string address_detail = 4;
+	int32 food_app = 5;
+	double userLatitude = 6;
+	double user_longitude = 7;
+	double potential_revenue = 8;
+	string customer_acquisition_photo = 9;
+	repeated CustomerAcqProduct product = 10;
+}
+
+message CustomerAcqProduct {
+	int64 id = 1;
+	int32 top = 2;
+}
+
+message SubmitTaskCustomerAcquisitionResponse {
+    int32 code = 1;
+    string message = 2;
+    CustomerAcquisitionResponse customer_acquisition = 3;
+    repeated CustomerAcquisitionItemResponse customer_acquisition_item = 4;
+}
+
+message SalesFailedVisitResponse {
+    int64 id = 1;
+	int64 sales_assignment_item_id = 2;
+	int64 failed_status = 3;
+	optional string description_failed = 4;
+	repeated string failed_image = 5;
+}
+
+message SubmitTaskFailedResponse {
+    int32 code = 1;
+    string message = 2;
+    SalesFailedVisitResponse data = 3;
+}
+
+message SubmitTaskFailedRequest {
+	int64 sales_assignment_item_id = 1;
+	int64 failed_status = 2;
+	optional string description_failed = 3;
+	string failed_image = 4;
+}
+
+message CreateSalesAssignmentItemRequest {
+	optional int64 sales_assignment_id = 1;
+	int64 customer_acquisition_id = 2;
+	int64 address_id = 3;
+	double latitude = 4;
+	double longitude = 5;
+	int32 task = 6;
+	int32 customer_type = 7;
+	string objective_codes = 8;
+	double actual_distance = 9;
+	int32 out_of_route = 10;
+	google.protobuf.Timestamp start_date = 11;
+	google.protobuf.Timestamp end_date = 12;
+	optional google.protobuf.Timestamp finish_date = 13;
+	google.protobuf.Timestamp submit_date = 14;
+	string task_image_urls = 15;
+	int32 task_answer = 16;
+	int32 status = 17;
+	string status_convert = 18;
+	int32 effective_call = 19;
+	int64 saleserson_id = 20;
+}
+
+message GetCustomerAcquisitionByIdRequest{
+    int64 id = 1;
+}
+
+message GetCustomerAcquisitionDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    CustomerAcquisitionResponse data = 3;
+}
+
+message GetCustomerAcquisitionListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    int64 teritory_id = 7;
+    int64 salesperson_id = 8;
+	google.protobuf.Timestamp submit_date_from = 11;
+	google.protobuf.Timestamp submit_date_to = 12;
+}
+
+message GetCustomerAcquisitionListWithExcludedIdsRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    int64 teritory_id = 7;
+    int64 salesperson_id = 8;
+	google.protobuf.Timestamp submit_date_from = 11;
+	google.protobuf.Timestamp submit_date_to = 12;
+    repeated int64 excluded_ids = 14;
+}
+
+message GetCustomerAcquisitionListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated CustomerAcquisitionResponse data = 3;
+}
+
+message GetCountCustomerAcquisitionRequest{
+    int64 salesperson_id = 1;
+	google.protobuf.Timestamp submit_date_from = 2;
+	google.protobuf.Timestamp submit_date_to = 3;
+}
+
+message GetCountCustomerAcquisitionResponse{
+    int32 code = 1;
+    string message = 2;
+    CountCustomerAcquisitionResponse data = 3;
+}
+
+message CountCustomerAcquisitionResponse{
+    int64 count = 1;
+}
+
+message GetSalesSubmissionListRequest {
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    int64 territory_id = 7;
+    int64 salesperson_id = 8;
+    int32 task = 9;
+    int32 out_of_route = 10;
+    google.protobuf.Timestamp submit_date_from  = 11;
+    google.protobuf.Timestamp submit_date_to  = 12;
+}
+
+message Customer {
+    int64 id = 1;
+    string customer_id_gp = 2;
+    int64 prospective_customer_id = 3;
+    int64 membership_level_id = 4;
+    int64 membership_checkpoint_id = 5;
+    int64 total_point = 6;
+    string profile_code = 7;
+    string email = 8;
+    string reference_info = 9;
+    int32 upgrade_status = 10;
+    string ktp_photos_url = 11;
+    string customer_photos_url = 12;
+    string customer_selfie_url = 13;
+    google.protobuf.Timestamp created_at = 14;
+    google.protobuf.Timestamp updated_at = 15;
+    int64 membership_reward_id = 16;
+    double membership_reward_ammount = 17;
+    string referral_code = 18;
+    int64 referrer_id = 19;
+    string referrer_code = 20;
+    int32 gender = 21;
+    string birth_date = 22;
+}
+
+message GetCustomerDetailRequest{
+    int64 id = 1;
+    string customer_id_gp = 2;
+    string referrer_code = 3;
+    string email = 8;
+}
+
+message GetCustomerDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    Customer data = 3;
+}
+
+message UpdateCustomerRequest {
+    int64 id = 1;
+    string customer_id_gp = 2;
+    int64 prospective_customer_id = 3;
+    int64 membership_level_id = 4;
+    int64 membership_checkpoint_id = 5;
+    int64 total_point = 6;
+    string profile_code = 7;
+    string reference_info = 8;
+    int32 upgrade_status = 9;
+    repeated string field_update = 10;
+}
+
+message UpdateCustomerResponse{
+    int32 code = 1;
+    string message = 2;
+}
+
+message CreateCustomerRequest{
+    Customer data = 1;
+}
+message CreateCustomerResponse{
+    int32 code = 1;
+    string message = 2;
+    Customer data = 3;
+}
+
+message CreateProspectiveCustomerRequest{
+    ProspectiveCustomer data = 1;
+}
+message CreateProspectiveCustomerResponse{
+    int32 code = 1;
+    string message = 2;
+    ProspectiveCustomer data = 3;
+}
+
+message CustomerID{
+    int64 customer_id = 1;
+    string customer_id_gp = 2;
+}
+message GetCustomerIDRequest{
+    repeated string customer_id_gp = 1;
+}
+message GetCustomerIDResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated CustomerID data = 3;
+}
+
+message UpdateFixedVaRequest{
+    string customer_id_gp = 1;
+    bool fixed_va_bca = 2;
+    bool fixed_va_permata = 3;
+}
+
+message UpdateFixedVaResponse{
+    int32 code = 1;
+    string message = 2;
+}

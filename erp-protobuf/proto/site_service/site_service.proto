@@ -1,0 +1,532 @@
+syntax = "proto3";
+
+option go_package = "git.edenfarm.id/project-version3/erp-services/erp-protobuf/gen/proto/site_service";
+option objc_class_prefix = "EOP";
+
+package proto.site_service;
+
+service SiteService {
+    rpc GetKoliList(GetKoliListRequest) returns (GetKoliListResponse){}
+    rpc GetKoliDetail(GetKoliDetailRequest) returns (GetKoliDetailResponse){}
+    rpc GetSalesOrderDeliveryKoli(GetSalesOrderDeliveryKoliRequest) returns (GetSalesOrderDeliveryKoliResponse){}
+    
+    rpc LoginHelper (LoginHelperRequest) returns (LoginHelperResponse){}
+    // picker
+    rpc GetPickingOrderHeader(GetPickingOrderHeaderRequest) returns (GetPickingOrderHeaderResponse){}
+    rpc GetPickingOrderDetail(GetPickingOrderDetailRequest) returns (GetPickingOrderDetailResponse){}
+    rpc GetAggregatedProductSalesOrder(GetAggregatedProductSalesOrderRequest) returns (GetAggregatedProductSalesOrderResponse){}
+    rpc StartPickingOrder(StartPickingOrderRequest) returns (SuccessResponse){}
+    rpc SubmitPicking(SubmitPickingRequest) returns (SuccessResponse){}
+    rpc GetSalesOrderPicking(GetSalesOrderPickingRequest) returns (GetSalesOrderPickingResponse){}
+    rpc GetSalesOrderPickingDetail(GetSalesOrderPickingDetailRequest) returns (GetSalesOrderPickingDetailResponse){}
+    rpc SubmitSalesOrder(SubmitSalesOrderRequest) returns (SuccessResponse){}
+    rpc History(HistoryRequest) returns (HistoryResponse){}
+    rpc HistoryDetail(HistoryDetailRequest) returns (HistoryDetailResponse){}
+    rpc PickerWidget(PickerWidgetRequest) returns (PickerWidgetResponse){}
+    // spv & checker
+    rpc GetSalesOrderToCheck(GetSalesOrderToCheckRequest) returns (GetSalesOrderToCheckResponse){}
+    // spv
+    rpc SPVGetSalesOrderToCheckDetail(GetSalesOrderToCheckDetailRequest) returns (GetSalesOrderToCheckDetailResponse){}
+    rpc SPVRejectSalesOrder(SPVRejectSalesOrderRequest) returns (SuccessResponse){}
+    rpc SPVAcceptSalesOrder(SPVAcceptSalesOrderRequest) returns (SuccessResponse){}
+    rpc SPVWidget (SPVWidgetRequest) returns (SPVWidgetResponse){}
+    rpc SPVWrtMonitoring(GetWrtMonitoringListRequest) returns (GetWrtMonitoringListResponse) {}
+    rpc SPVWrtMonitoringDetail(GetWrtMonitoringDetailRequest) returns (GetWrtMonitoringDetailResponse) {}
+    // checker
+    rpc CheckerGetSalesOrderToCheckDetail(GetSalesOrderToCheckDetailRequest) returns (GetSalesOrderToCheckDetailResponse){}
+    rpc CheckerStartChecking(CheckerStartCheckingRequest) returns (SuccessResponse){}
+    rpc CheckerSubmitChecking(CheckerSubmitCheckingRequest) returns (SuccessResponse){}
+    rpc CheckerRejectSalesOrder(CheckerRejectSalesOrderRequest) returns (SuccessResponse){}
+    rpc CheckerGetDeliveryKoli(CheckerGetDeliveryKoliRequest) returns (CheckerGetDeliveryKoliResponse){}
+    rpc CheckerAcceptSalesOrder(CheckerAcceptSalesOrderRequest) returns (CheckerAcceptSalesOrderResponse){}
+    rpc CheckerHistory(CheckerHistoryRequest) returns (CheckerHistoryResponse){}
+    rpc CheckerHistoryDetail(CheckerHistoryDetailRequest) returns (CheckerHistoryDetailResponse){}
+    rpc CheckerWidget (CheckerWidgetRequest) returns (CheckerWidgetResponse){}
+}
+
+message Koli {
+    int64 id = 1;
+    string code = 2;
+    string value = 3;
+    string name = 4;
+    string note = 5;
+    int32 status = 6;
+}
+
+message DeliveryKoli {
+    int64 id = 1;
+    string sales_order_code = 2;
+    int64 koli_id = 3;
+    string name = 4;
+    double quantity = 5;
+}
+
+message GetKoliListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+}
+
+message GetKoliListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated Koli data = 3;
+}
+
+message GetKoliDetailRequest{
+    int64 id = 1;
+}
+
+message GetKoliDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    Koli data = 3;
+}
+
+message GetSalesOrderDeliveryKoliRequest{
+    string sop_number = 1;
+}
+
+message GetSalesOrderDeliveryKoliResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated DeliveryKoli data = 3;
+}
+
+message PickingOrderHeader {
+    string doc_number = 1;
+    string picker_id = 2;
+    string doc_date = 3;
+    int32 status = 4;
+    int64 total_sales_order = 5;
+    string note = 6;
+}
+
+message PickingOrderDetail {
+    string doc_number = 1;
+    int32 status = 2;
+    repeated AggregatedProduct Product = 3;
+}
+
+message AggregatedProduct {
+    string item_number = 1;
+    string item_name = 2;
+    string picture = 3;
+    string uom_description = 4;
+    double total_order_qty = 5;
+    double total_picked_qty = 6;
+    int32 total_sales_order = 7;
+    int32 status = 8;
+}
+
+message AggregatedProductSalesOrder{
+    string item_number = 1;
+    string item_name = 2;
+    string uom_description = 3;
+    string picture = 4;
+    repeated SalesOrderInformation sales_order = 5;
+}
+
+message SalesOrderInformation{
+    int64 id = 1;
+    string sop_number = 2;
+    string merchant_name = 3;
+    string wrt = 4;
+    double order_qty = 6;
+    double picked_qty = 7;
+    string unfulfill_note = 8;
+    int32 status = 9;
+}
+
+message PickingOrder {
+    int64 id = 1;
+    string doc_number = 2;
+    int32 status = 3;
+}
+
+message PickingOrderItem {
+    int64 id = 1;
+    int64 picking_order_assign_id = 2;
+    string item_number = 3;
+    string item_name = 4;
+    string picture = 5;
+    double order_qty = 6;
+    double pick_qty = 7;
+    double check_qty = 8;
+    double excess_qty = 9;
+    string unfulfill_note = 10;
+    string uom = 11;
+    int32 status = 12;
+}
+
+message SalesOrderPicking {
+    string sop_number = 1;
+    string merchant_name = 2;
+    string sop_note = 3;
+    double total_koli = 4;
+    int32 status = 5;
+    bool ready_to_pack = 6;
+    bool contain_unfulfill = 7;
+}
+
+message SalesOrderToCheck {
+    string sop_number = 1;
+    string merchant_name = 2;
+    string delivery_date = 3;
+    string wrt = 4;
+    string sop_note = 5;
+    int64 total_item_on_progress = 6;
+    int64 total_item = 7;
+    double total_koli = 8;
+    string checker_name = 9;
+    string picker_name = 10;
+    int32 status = 11;
+    int32 count_print_do = 12;
+    int32 count_print_si = 13;
+}
+
+message GetPickingOrderHeaderRequest {
+    int32 limit = 1;
+    int32 offset = 2;
+    string locncode = 3;
+    string sopnumbe = 4;
+    string docnumbr = 5;
+    string itemnmbr = 6;
+    string gnl_helper_id = 7;
+    int32 wms_picking_status = 8;
+    string custname = 9;
+}
+
+message GetPickingOrderHeaderResponse {
+    repeated PickingOrderHeader data = 1;
+}
+
+message GetPickingOrderDetailRequest {
+    string id = 1;
+    string item_name = 2;
+}
+
+message GetPickingOrderDetailResponse {
+    PickingOrderDetail data = 1;
+}
+
+message GetAggregatedProductSalesOrderRequest {
+    string id = 1;
+    string item_number = 2;
+}
+
+message GetAggregatedProductSalesOrderResponse{
+    AggregatedProductSalesOrder data = 1;
+}
+
+message StartPickingOrderRequest {
+    string doc_number = 1;
+}
+
+message SubmitPickingModel {
+    int64 id = 1;
+    double pick_qty = 2;
+    string unfulfill_note = 3;
+}
+
+message SubmitPickingRequest {
+    repeated SubmitPickingModel request = 1;
+}
+
+message GetSalesOrderPickingRequest{
+    string doc_number = 1;
+}
+
+message GetSalesOrderPickingResponse {
+    repeated SalesOrderPicking data = 1;
+}
+
+message GetSalesOrderPickingDetailRequest {
+    string sop_number = 1;
+}
+
+message GetSalesOrderPickingDetailResponse {
+    string sop_number = 1;
+    string merchant_name = 2;
+    string wrt = 3;
+    string delivery_date = 4;
+    double total_koli = 5;
+    int64 total_item_on_progress = 6;
+    int64 total_item = 7;
+    string sop_note = 8;
+    repeated PickingOrderItem item = 9;
+    int32 status = 10;
+    string helper_id = 11;
+    string helper_name = 12;
+}
+
+message RequestDeliveryKoli {
+    int64 id = 1;
+    double quantity = 2;
+}
+
+message SubmitSalesOrderRequest {
+    string sop_number = 1;
+    repeated RequestDeliveryKoli request= 2;
+    string picker_id = 3;
+}
+
+message HistoryRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string picker_id = 3;
+    string sop_number = 4;
+    string custname = 5;
+}
+
+message HistoryResponse{
+    repeated SalesOrderToCheck data = 1;
+}
+
+message HistoryDetailRequest{
+    string sop_number = 1;
+}
+
+message HistoryDetailResponse{
+    string sop_number = 1;
+    string merchant_name = 2;
+    string wrt = 3;
+    string delivery_date = 4;
+    double total_koli = 5;
+    int64 total_item_on_progress = 6;
+    int64 total_item = 7;
+    string sop_note = 8;
+    repeated PickingOrderItem item = 9;
+    int32 status = 10;
+}
+
+message GetSalesOrderToCheckRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string site_id = 3;
+    string sop_number = 4;
+    repeated int32 status = 5;
+    repeated string wrt_ids = 6;
+    string custname = 7;
+}
+
+message GetSalesOrderToCheckResponse{
+    repeated SalesOrderToCheck data = 1;
+}
+
+message GetSalesOrderToCheckDetailRequest {
+    string sop_number = 1;
+    string checker_id = 2;
+}
+
+message GetSalesOrderToCheckDetailResponse {
+    string sop_number = 1;
+    string delivery_date = 2;
+    string merchant_name = 3;
+    string sop_note = 4;
+    string wrt = 5;
+    string picker_name = 6;
+    double total_koli = 7;
+    int64 total_item_on_progress = 8;
+    int64 total_item = 9;
+    repeated PickingOrderItem item = 10;
+    int32 status = 11;
+}
+
+message SPVRejectSalesOrderRequest{
+    string sop_number = 1;
+    string spv_id = 2;
+}
+
+message SPVAcceptSalesOrderRequest{
+    string sop_number = 1;
+    string spv_id = 2;
+}
+
+message CheckerStartCheckingRequest {
+    string sop_number = 1;
+    string checker_id = 2;
+}
+
+message CheckerSubmitCheckingModel {
+    string item_number = 1;
+    double check_qty = 2;
+}
+
+message CheckerSubmitCheckingRequest {
+    string sop_number = 1;
+    repeated CheckerSubmitCheckingModel request = 2;
+    string checker_id = 3;
+}
+
+message CheckerRejectSalesOrderRequest {
+    string sop_number = 1;
+    repeated string item_number_reject = 2;
+    string checker_id = 3;
+}
+
+message CheckerGetDeliveryKoliRequest {
+    string sop_number = 1;
+}
+
+message CheckerGetDeliveryKoliResponse {
+    repeated DeliveryKoli data = 1;
+}
+
+message CheckerAcceptSalesOrderRequest {
+    string sop_number = 1;
+    repeated RequestDeliveryKoli koli = 2;
+    string checker_id = 3;
+}
+
+message CheckerAcceptSalesOrderResponse {
+    bool success = 1;
+    string delivery_order = 2;
+    string sales_invoice = 3;
+}
+
+message SuccessResponse{
+    bool success = 1;
+}
+
+message CheckerHistoryRequest {
+    int32 limit = 1;
+    int32 offset = 2;
+    string checker_id = 3;
+    string wrt_id = 4;
+    string sop_number = 5;
+    string custname = 6;
+}
+
+message CheckerHistoryResponse {
+    repeated SalesOrderToCheck data = 1;
+}
+
+message CheckerHistoryDetailRequest{
+    string checker_id = 1;
+    string sop_number = 2;
+}
+
+message CheckerHistoryDetailResponse{
+    string sop_number = 1;
+    string delivery_date = 2;
+    string merchant_name = 3;
+    string sop_note = 4;
+    string wrt = 5;
+    string picker_name = 6;
+    double total_koli = 7;
+    int64 total_item_on_progress = 8;
+    int64 total_item = 9;
+    repeated PickingOrderItem item = 10;
+    int32 status = 11;
+    int32 count_print_do = 12;
+    int32 count_print_si = 13;
+}
+
+message PickerWidgetRequest{
+    string gnl_helper_id = 1;
+}
+
+message PickerWidgetResponse{
+    int64 total_sales_order = 1;
+    int64 total_new = 2;
+    int64 total_on_progress = 3;
+    double total_on_progress_percentage = 4;
+    int64 total_picked = 5;
+    double total_picked_percentage = 6;
+    int64 total_need_approval = 7;
+    double total_need_approval_percentage = 8;
+}
+
+message SPVWidgetRequest{
+    string site_id_gp = 1;
+}
+
+message SPVWidgetResponse{
+    int64 total_sales_order = 1;
+    int64 total_new = 2;
+    int64 total_on_progress = 3;
+    double total_on_progress_percentage = 4;
+    int64 total_need_approval = 5;
+    double total_need_approval_percentage = 6;
+    int64 total_finished = 7;
+    double total_finished_percentage = 8;
+}
+
+message CheckerWidgetRequest{
+    string checker_id = 1;
+}
+
+message CheckerWidgetResponse{
+    int64 total_sales_order = 1;
+    int64 total_picked = 2;
+    int64 total_finished = 3;
+    double total_finished_percentage = 4;
+    int64  total_checking = 5;
+    double total_checking_percentage = 6;
+}
+
+message GetWrtMonitoringListRequest{
+    string site_id = 1;
+    int64 type = 2;
+    repeated string helper_id = 3;
+}
+
+message WrtMonitoring{
+    string wrt_id = 1;
+    string wrt_desc = 2;
+    int64 count_so = 3;
+    int64 on_progress = 4;
+    double on_progress_percentage = 5;
+    int64 finished = 6;
+    double finished_percentage = 7;
+}
+
+message GetWrtMonitoringListResponse{
+    repeated WrtMonitoring data = 1;
+}
+
+message GetWrtMonitoringDetailRequest{
+    string site_id = 1;
+    string wrt_id = 2;
+    int64 type = 3;
+    repeated string helper_id = 4;
+}
+
+message WrtMonitoringDetail{
+    string sop_number = 1;
+    string merchant_name = 2;
+    double total_koli = 3;
+    string helper_code = 4;
+    string helper_name = 5;
+    int32 status = 6;
+}
+
+message GetWrtMonitoringDetailResponse{
+    repeated WrtMonitoringDetail data = 1;
+}
+
+
+message LoginHelperRequest{
+    string email = 1;
+    string password = 2;
+    string timezone = 3;
+    string firebase_token = 4;
+}
+
+message LoginHelperResponse{
+    int32 code = 1;
+    string message  = 2;
+    message User  {
+        string id = 1;
+        string name = 2;
+        string site_id = 3;
+        string site_name = 4;
+        string role_name = 5;
+    } 
+    User user = 3;
+    string token = 4;
+    string firebase_token = 5;
+}

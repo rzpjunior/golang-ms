@@ -1,0 +1,14 @@
+include:
+  - project: 'project-version3/erp-infra/gitlab-ci'
+    file:
+      - 'sonarqube-check.yml'
+      - 'build-image.yml'
+      - 'deploy-image.yml'
+
+stages:
+  - test
+  - build
+  - deploy
+
+before_script:
+  - cp $ENV .env

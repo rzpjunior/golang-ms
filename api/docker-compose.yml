@@ -1,0 +1,53 @@
+version: '2'
+
+networks:
+  kafka-net:
+    driver: bridge
+services:
+    # Redis
+    redis:
+        image: redis:latest
+        volumes:
+            - /data
+        environment:
+            - ALLOW_EMPTY_PASSWORD=yes
+        ports:
+            - 6379:6379
+    redis-cli:
+      depends_on:
+        - redis
+      image: redis
+      network_mode: host
+      command: redis-cli -h 127.0.0.1
+    zookeeper-server:
+        image: 'bitnami/zookeeper:latest'
+        networks:
+          - kafka-net
+        ports:
+          - '2181:2181'
+        environment:
+          - ALLOW_ANONYMOUS_LOGIN=yes
+    kafka-server1:
+        image: 'bitnami/kafka:latest'
+        networks:
+          - kafka-net
+        ports:
+          - '9092:9092'
+        environment:
+          - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper-server:2181
+          - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+          - ALLOW_PLAINTEXT_LISTENER=yes
+        depends_on:
+          - zookeeper-server
+
+    mongodb_container:
+        image: mongo:latest
+        environment:
+          MONGO_INITDB_ROOT_USERNAME: root
+          MONGO_INITDB_ROOT_PASSWORD: secret
+        ports:
+          - 27017:27017
+        volumes:
+          - mongodb_data_container:/data/db
+volumes:
+  mongodb_data_container:

@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option go_package = "git.edenfarm.id/project-version3/erp-services/erp-protobuf/gen/proto/storage_service";
+option objc_class_prefix = "EOP";
+
+package proto.storage_service;
+
+service storageService {
+    // rpc UploadImageGRPCStream(stream UploadImageGRPCStreamRequest) returns (UploadImageGRPCStreamResponse) {};   
+    rpc UploadImageGRPC(UploadImageGRPCStreamRequest) returns (UploadImageGRPCStreamResponse) {};
+}
+
+
+message UploadImageGRPCStreamRequest {
+    string file_type = 1;
+    bytes content = 2;
+    string file_name = 3; 
+}
+
+message UploadImageGRPCStreamResponse {
+    int32 code = 1;
+    string message = 2;
+    string url = 3;
+}
+

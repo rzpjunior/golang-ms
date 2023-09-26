@@ -1,0 +1,87 @@
+[app]
+host="0.0.0.0"
+port=8003
+name="erp-configuration-service"
+debug=false
+env="development"
+
+[grpc]
+host="0.0.0.0"
+port=5002
+
+[jwt]
+key="Erp#jwt!S3cr3tK3y"
+
+[sentry]
+enabled=true
+dsn="localhost"
+timeout="5s"
+
+[trace]
+enabled=true
+
+  [trace.jaeger]
+  host="jaeger-collector.jaeger"
+  port="14268"
+
+[metric]
+enabled=true
+
+[database]
+enabled=true
+connection="mysql"
+name="configuration"
+max_open_conns=280
+max_idle_conns=20
+conn_lifetime_max="1h"
+
+  [database.write]
+  host="local-laptop"
+  port=3030
+  username="dirga.fifty"
+  password="7V3y5h5thPag"
+
+  [database.read]
+  host="local-laptop"
+  port=3030
+  username="dirga.fifty"
+  password="7V3y5h5thPag"
+
+[client]
+enabled=true
+
+  [client.account_service_grpc]
+  enabled=true
+  host="svc-svc-account-grpc.svc-account"
+  port=5013
+  timeout="30s"
+  max_concurrent_requests=30
+  error_percent_threshold=20
+  tls=false
+  pem_tls_path=""
+  secret=""
+  realtime=true
+  
+  [client.audit_service_grpc]
+  enabled=true
+  host="svc-svc-audit-grpc.svc-audit"
+  port=5011
+  timeout="30s"
+  max_concurrent_requests=30
+  error_percent_threshold=20
+  tls=false
+  pem_tls_path=""
+  secret=""
+  realtime=true
+  
+  [client.bridge_service_grpc]
+  enabled=true
+  host="svc-svc-bridge-grpc.svc-bridge"
+  port=5001
+  timeout="30s"
+  max_concurrent_requests=30
+  error_percent_threshold=20
+  tls=false
+  pem_tls_path=""
+  secret=""
+  realtime=true

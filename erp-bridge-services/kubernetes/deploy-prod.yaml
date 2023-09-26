@@ -1,0 +1,161 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: svc-bridge
+  labels:
+    app: svc-bridge
+  namespace: svc-bridge
+  annotations:
+    configmap.reloader.stakater.com/reload: "env-svc-bridge"  
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: svc-bridge
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: svc-bridge
+    spec:
+      imagePullSecrets:
+      - name: registry
+      containers:
+      - name: svc-bridge-http
+        image: git.edenfarm.id:5050/project-version3/erp-services/erp-bridge-services/master:<VERSION>
+        command: ["/app/service"]
+        args: ["api"]
+        ports:
+          - name: http-port
+            containerPort: 8001           
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: 50Mi
+            cpu: 15m
+          limits:
+            memory: 350Mi
+            cpu: 200m
+        volumeMounts:
+        - name: tz-config
+          mountPath: /etc/localtime
+        - name: env-value
+          mountPath: /app/env.toml
+          subPath: env-svc-bridge.toml
+          readOnly: true
+      - name: svc-bridge-grpc
+        image: git.edenfarm.id:5050/project-version3/erp-services/erp-bridge-services/master:<VERSION>
+        command: ["/app/service"]
+        args: ["grpc"]
+        ports:
+          - name: grpc-port
+            containerPort: 5001           
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: 50Mi
+            cpu: 15m
+          limits:
+            memory: 350Mi
+            cpu: 200m
+        volumeMounts:
+        - name: tz-config
+          mountPath: /etc/localtime
+        - name: env-value
+          mountPath: /app/env.toml
+          subPath: env-svc-bridge.toml
+          readOnly: true
+      volumes:
+        - name: tz-config
+          hostPath:
+            path: /usr/share/zoneinfo/Asia/Jakarta
+            type: File
+        - name: env-value
+          configMap:
+            name: env-svc-bridge
+      tolerations:
+      - key: instance_type
+        value: service
+        effect: NoSchedule
+        operator: Equal
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: role
+                operator: In
+                values:
+                - devops
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - svc-bridge
+            topologyKey: kubernetes.io/hostname
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-svc-bridge-http
+  namespace: svc-bridge
+  labels:
+    app: svc-bridge-http
+spec:
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: http-port
+  selector:
+    app: svc-bridge
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-svc-bridge-grpc
+  namespace: svc-bridge
+  labels:
+    app: svc-bridge-grpc
+spec:
+  ports:
+  - name: grpc
+    protocol: TCP
+    port: 5001
+    targetPort: grpc-port
+  selector:
+    app: svc-bridge
+---
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: hpa-svc-bridge
+  namespace: svc-bridge
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: svc-bridge
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 75
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 75

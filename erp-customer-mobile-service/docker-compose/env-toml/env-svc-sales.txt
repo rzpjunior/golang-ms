@@ -1,0 +1,147 @@
+[app]
+host="0.0.0.0"
+port=8008
+name="erp-sales-service"
+debug=false
+env="development"
+
+[grpc]
+host="0.0.0.0"
+port=5006
+
+[jwt]
+key="Erp#jwt!S3cr3tK3y"
+
+[sentry]
+enabled=true
+dsn="localhost"
+timeout="5s"
+
+[trace]
+enabled=true
+
+  [trace.jaeger]
+  host="jaeger-collector.jaeger"
+  port="14268"
+
+[metric]
+enabled=true
+
+[database]
+enabled=true
+connection="mysql"
+name="sales"
+max_open_conns=280
+max_idle_conns=20
+conn_lifetime_max="1h"
+
+  [database.write]
+  host="local-laptop"
+  port=3030
+  username="dirga.fifty"
+  password="7V3y5h5thPag"
+
+  [database.read]
+  host="local-laptop"
+  port=3030
+  username="dirga.fifty"
+  password="7V3y5h5thPag"
+
+[client]
+enabled=true
+
+  [client.account_service_grpc]
+  enabled=true
+  host="svc-svc-account-grpc.svc-account"
+  port=5013
+  timeout="30s"
+  max_concurrent_requests=30
+  error_percent_threshold=20
+  tls=false
+  pem_tls_path=""
+  secret=""
+  realtime=true
+
+  [client.audit_service_grpc]
+  enabled=true
+  host="svc-svc-audit-grpc.svc-audit"
+  port=5011
+  timeout="30s"
+  max_concurrent_requests=30
+  error_percent_threshold=20
+  tls=false
+  pem_tls_path=""
+  secret=""
+  realtime=true
+
+  [client.bridge_service_grpc]
+  enabled=true
+  host="svc-svc-bridge-grpc.svc-bridge"
+  port=5001
+  timeout="30s"
+  max_concurrent_requests=30
+  error_percent_threshold=20
+  tls=false
+  pem_tls_path=""
+  secret=""
+  realtime=true
+  
+  [client.configuration_service_grpc]
+  enabled=true
+  host="svc-svc-configuration-grpc.svc-configuration"
+  port=5002
+  timeout="30s"
+  max_concurrent_requests=30
+  error_percent_threshold=20
+  tls=false
+  pem_tls_path=""
+  secret=""
+  realtime=true
+
+  [client.catalog_service_grpc]
+  enabled=true
+  host="svc-svc-inventory-grpc.svc-inventory"
+  port=5003
+  timeout="30s"
+  max_concurrent_requests=30
+  error_percent_threshold=20
+  tls=false
+  pem_tls_path=""
+  secret=""
+  realtime=true
+
+  [client.crm_service_grpc]
+  enabled=true
+  host="svc-svc-crm-grpc.svc-crm"
+  port=5008
+  timeout="30s"
+  max_concurrent_requests=30
+  error_percent_threshold=20
+  tls=false
+  pem_tls_path=""
+  secret=""
+  realtime=true
+
+[client.campaign_service_grpc]
+  enabled=true
+  host="svc-svc-campaign-grpc.svc-campaign"
+  port=5004
+  timeout="30s"
+  max_concurrent_requests=30
+  error_percent_threshold=20
+  tls=false
+  pem_tls_path=""
+  secret=""
+  realtime=true
+
+[client.promotion_service_grpc]
+  enabled=true
+  host="svc-svc-promotion-grpc.svc-promotion"
+  port=5005
+  timeout="30s"
+  max_concurrent_requests=30
+  error_percent_threshold=20
+  tls=false
+  pem_tls_path=""
+  secret=""
+  realtime=true

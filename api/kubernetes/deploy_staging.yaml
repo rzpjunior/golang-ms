@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coreapi-staging
+  labels:
+    app: coreapi-staging
+  namespace: core-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: coreapi-staging
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 33%
+  template:
+    metadata:
+      labels:
+        app: coreapi-staging
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: image-staging
+        image: git.edenfarm.id:5050/project-version2/api/staging:<VERSION>
+        ports:
+          - containerPort: 8082
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "50Mi"
+            cpu: "500m"
+          limits:
+            memory: "500Mi"
+            cpu: "2000m"
+        volumeMounts:
+        - name: tz-config
+          mountPath: /etc/localtime
+      volumes:
+        - name: tz-config
+          hostPath:
+            path: /usr/share/zoneinfo/Asia/Jakarta
+            type: File
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-coreapi-staging
+  namespace: core-api
+  labels:
+    app: coreapi-staging
+spec:
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8082
+  selector:
+    app: coreapi-staging

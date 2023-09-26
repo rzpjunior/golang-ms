@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+option go_package = "git.edenfarm.id/project-version3/erp-services/erp-protobuf/gen/proto/settlement_service";
+option objc_class_prefix = "EOP";
+
+package proto.settlement_service;
+
+service SettlementService {
+    rpc CreateSalesInvoiceExternal(CreateSalesInvoiceExternalRequest) returns (CreateSalesInvoiceExternalResponse){}    
+    rpc GetSalesInvoiceExternalXendit (GetSalesInvoiceExternalRequest) returns (GetSalesInvoiceExternalResponse){}    
+    rpc GenerateFixedVaXendit (GenerateFixedVaXenditRequest) returns (GenerateFixedVaXenditResponse){}
+}
+
+
+message CreateSalesInvoiceExternalRequest {
+    string payment_method = 1;
+    string delivery_date = 2;
+    string order_time_limit = 3;
+    string sales_order_code = 4;
+    string email = 5;
+    double total_charge = 6;
+    int64 sales_order_id = 7;
+  }
+
+message CreateSalesInvoiceExternalResponse {
+    int32 code = 1;
+    string message = 2;
+}
+
+message GetSalesInvoiceExternalRequest {
+    int64 sales_order_id = 1;
+  }
+
+message XenditInvoiceResponse {
+    double amount = 1;
+    int64 expiry_date = 2;
+    string bank_account_number = 3;
+    string bank_code = 4;
+  }
+
+message GetSalesInvoiceExternalResponse {
+    int32 code = 1;
+    string message = 2;
+    XenditInvoiceResponse data = 3;
+  }
+
+message FixedVaXendit {
+    string account_number = 1;
+    string account_name = 2;
+  }
+
+message GenerateFixedVaXenditResponse {
+    int32 code = 1;
+    string message = 2;
+    FixedVaXendit data = 3;
+  }
+
+message GenerateFixedVaXenditRequest {
+    string external_id = 1;
+    string bank_code = 2;
+  }

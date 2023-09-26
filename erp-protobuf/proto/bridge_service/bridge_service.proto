@@ -1,0 +1,5718 @@
+syntax = "proto3";
+
+option go_package = "git.edenfarm.id/project-version3/erp-services/erp-protobuf/gen/proto/bridge_service";
+option objc_class_prefix = "EOP";
+
+package proto.bridge_service;
+
+import "google/protobuf/timestamp.proto";
+
+service BridgeService {
+    // GP Integrated
+    // Wrt
+    rpc GetWrtGPList(GetWrtGPListRequest) returns (GetWrtGPResponse){}
+    rpc GetWrtGPDetail(GetWrtGPDetailRequest) returns (GetWrtGPResponse){}
+    // Item
+    rpc GetItemGPList(GetItemGPListRequest) returns (GetItemGPResponse){}
+    rpc GetItemMasterComplexGP(GetItemMasterComplexGPListRequest) returns (GetItemMasterComplexGPListResponse){}
+    
+    rpc GetItemGPDetail(GetItemGPDetailRequest) returns (GetItemGPResponse){}
+    // Site
+    rpc GetSiteGPList(GetSiteGPListRequest) returns (GetSiteGPResponse){}
+    rpc GetSiteGPDetail(GetSiteGPDetailRequest) returns (GetSiteGPResponse){}
+    // Courier
+    rpc GetCourierGPList(GetCourierGPListRequest) returns (GetCourierGPResponse){}
+    rpc GetCourierGPDetail(GetCourierGPDetailRequest) returns (GetCourierGPResponse){}
+    // Courier Vendor
+    rpc GetCourierVendorGPList(GetCourierVendorGPListRequest) returns (GetCourierVendorGPResponse){}
+    rpc GetCourierVendorGPDetail(GetCourierVendorGPDetailRequest) returns (GetCourierVendorGPResponse){}
+    // Vehicle Profile
+    rpc GetVehicleProfileGPList(GetVehicleProfileGPListRequest) returns (GetVehicleProfileGPResponse){}
+    rpc GetVehicleProfileGPDetail(GetVehicleProfileGPDetailRequest) returns (GetVehicleProfileGPResponse){}
+    // Adm Division
+    rpc GetAdmDivisionGPList(GetAdmDivisionGPListRequest) returns (GetAdmDivisionGPResponse){}
+    rpc GetAdmDivisionGPDetail(GetAdmDivisionGPDetailRequest) returns (GetAdmDivisionGPResponse){}
+    // Adm Division Coverage
+    rpc GetAdmDivisionCoverageGPList(GetAdmDivisionCoverageGPListRequest) returns (GetAdmDivisionCoverageGPResponse){}
+    rpc GetAdmDivisionCoverageGPDetail(GetAdmDivisionCoverageGPDetailRequest) returns (GetAdmDivisionCoverageGPResponse){}
+    // Payment Method
+    rpc GetPaymentMethodGPList(GetPaymentMethodGPListRequest) returns (GetPaymentMethodGPResponse){}
+    rpc GetPaymentMethodGPDetail(GetPaymentMethodGPDetailRequest) returns (GetPaymentMethodGPResponse){}
+    // Payment Term
+    rpc GetPaymentTermGPList(GetPaymentTermGPListRequest) returns (GetPaymentTermGPResponse){}
+    rpc GetPaymentTermGPDetail(GetPaymentTermGPDetailRequest) returns (GetPaymentTermGPResponse){}
+    // Sales Person
+    rpc GetSalesPersonGPList(GetSalesPersonGPListRequest) returns (GetSalesPersonGPResponse){}
+    rpc GetSalesPersonGPDetail(GetSalesPersonGPDetailRequest) returns (GetSalesPersonGPResponse){}
+    // Customer Type
+    rpc GetCustomerTypeGPList(GetCustomerTypeGPListRequest) returns (GetCustomerTypeGPResponse){}
+    rpc GetCustomerTypeGPDetail(GetCustomerTypeGPDetailRequest) returns (GetCustomerTypeGPResponse){}
+    // Archetype
+    rpc GetArchetypeGPList(GetArchetypeGPListRequest) returns (GetArchetypeGPResponse){}
+    rpc GetArchetypeGPDetail(GetArchetypeGPDetailRequest) returns (GetArchetypeGPResponse){}
+    // Order Type
+    rpc GetOrderTypeGPList(GetOrderTypeGPListRequest) returns (GetOrderTypeGPResponse){}
+    rpc GetOrderTypeGPDetail(GetOrderTypeGPDetailRequest) returns (GetOrderTypeGPResponse){}
+    // Vendor Classification
+    rpc GetVendorClassificationGPList(GetVendorClassificationGPListRequest) returns (GetVendorClassificationGPResponse){}
+    rpc GetVendorClassificationGPDetail(GetVendorClassificationGPDetailRequest) returns (GetVendorClassificationGPResponse){}
+    // Uom
+    rpc GetUomGPList(GetUomGPListRequest) returns (GetUomGPResponse){}
+    rpc GetUomGPDetail(GetUomGPDetailRequest) returns (GetUomGPResponse){}
+    // Item Class
+    rpc GetItemClassGPList(GetItemClassGPListRequest) returns (GetItemClassGPResponse){}
+    rpc GetItemClassGPDetail(GetItemClassGPDetailRequest) returns (GetItemClassGPResponse){}
+    // Sales Territory
+    rpc GetSalesTerritoryGPList(GetSalesTerritoryGPListRequest) returns (GetSalesTerritoryGPResponse){}
+    rpc GetSalesTerritoryGPDetail(GetSalesTerritoryGPDetailRequest) returns (GetSalesTerritoryGPResponse){}
+    // Customer
+    rpc GetCustomerGPList(GetCustomerGPListRequest) returns (GetCustomerGPResponse){}
+    rpc GetCustomerGPDetail(GetCustomerGPDetailRequest) returns (GetCustomerGPResponse){}
+    // Address
+    rpc GetAddressGPList(GetAddressGPListRequest) returns (GetAddressGPResponse){}
+    rpc GetAddressGPDetail(GetAddressGPDetailRequest) returns (GetAddressGPResponse){}
+    // Vendor
+    rpc GetVendorGPList(GetVendorGPListRequest) returns (GetVendorGPResponse){}
+    rpc GetVendorGPDetail(GetVendorGPDetailRequest) returns (GetVendorGPResponse){}
+    // Helper
+    rpc GetHelperGPList(GetHelperGPListRequest) returns (GetHelperGPResponse){}
+    rpc GetHelperGPDetail(GetHelperGPDetailRequest) returns (GetHelperGPResponse){}
+
+    rpc CreateAddress(CreateAddressRequest) returns (CreateAddressResponse){}
+    rpc UpdateAddress(UpdateAddressRequest) returns (UpdateAddressResponse){}
+    rpc SetDefaultAddress(SetDefaultAddressRequest) returns (SetDefaultAddressResponse){}
+    rpc DeleteAddress(DeleteAddressRequest) returns (DeleteAddressResponse){}
+
+    // Transaction List (Sales Order & Invoice)
+    rpc GetTransactionListGPList(GetTransactionListGPListRequest)returns(GetTransactionListGPResponse){}
+    rpc GetTransactionListGPDetail(GetTransactionListGPDetailRequest)returns(GetTransactionListGPResponse){}
+    // Transaction Detail (Sales Order & Invoice Item)
+    rpc GetTransactionDetailGPList(GetTransactionDetailGPListRequest)returns(GetTransactionDetailGPResponse){}
+    rpc GetTransactionDetailGPDetail(GetTransactionDetailGPDetailRequest)returns(GetTransactionDetailGPResponse){}
+    
+    //Transaction create(Sales Order)
+    rpc CreateSalesOrderGP(CreateSalesOrderGPRequest)returns(CreateSalesOrderGPResponse){}
+
+    // Picking Order
+    rpc GetPickingOrderGPHeader(GetPickingOrderGPHeaderRequest) returns (GetPickingOrderGPHeaderResponse){}
+    rpc GetPickingOrderGPDetail(GetPickingOrderGPDetailRequest) returns (GetPickingOrderGPDetailResponse){}
+    rpc SubmitPickingCheckingPickingOrder(SubmitPickingCheckingRequest) returns (SubmitPickingCheckingResponse){}
+
+    // login helper
+    rpc LoginHelper(LoginHelperRequest) returns (LoginHelperResponse){}
+
+    // Bridge Dummies
+    rpc GetAddressList(GetAddressListRequest) returns (GetAddressListResponse){}
+    rpc GetAddressListWithExcludedIds(GetAddressListWithExcludedIdsRequest) returns (GetAddressListResponse){}
+    rpc GetAddressDetail(GetAddressDetailRequest) returns (GetAddressDetailResponse){}
+    rpc GetAdmDivisionList(GetAdmDivisionListRequest) returns (GetAdmDivisionListResponse){}
+    rpc GetAdmDivisionDetail(GetAdmDivisionDetailRequest) returns (GetAdmDivisionDetailResponse){}
+    rpc GetArchetypeList(GetArchetypeListRequest) returns (GetArchetypeListResponse){}
+    rpc GetArchetypeDetail(GetArchetypeDetailRequest) returns (GetArchetypeDetailResponse){}
+    rpc GetCustomerTypeList(GetCustomerTypeListRequest) returns (GetCustomerTypeListResponse){}
+    rpc GetCustomerTypeDetail(GetCustomerTypeDetailRequest) returns (GetCustomerTypeDetailResponse){}
+    rpc GetClassList(GetClassListRequest) returns (GetClassListResponse){}
+    rpc GetClassDetail(GetClassDetailRequest) returns (GetClassDetailResponse){}
+    rpc GetItemList(GetItemListRequest) returns (GetItemListResponse){}
+    rpc GetItemDetail(GetItemDetailRequest) returns (GetItemDetailResponse){}
+    rpc UpdateItemPackable(UpdateItemPackableRequest) returns (UpdateItemPackableResponse){}
+    rpc UpdateItemFragile(UpdateItemFragileRequest) returns (UpdateItemFragileResponse){}
+    rpc GetRegionList(GetRegionListRequest) returns (GetRegionListResponse){}
+    rpc GetRegionDetail(GetRegionDetailRequest) returns (GetRegionDetailResponse){}
+    rpc GetSalespersonList(GetSalespersonListRequest) returns (GetSalespersonListResponse){}
+    rpc GetSalespersonDetail(GetSalespersonDetailRequest) returns (GetSalespersonDetailResponse){}
+    rpc GetSiteList(GetSiteListRequest) returns (GetSiteListResponse){}
+    rpc GetSiteInIdsList(GetSiteInIdsListRequest) returns (GetSiteListResponse){}
+    rpc GetSiteDetail(GetSiteDetailRequest) returns (GetSiteDetailResponse){}
+    rpc GetSubDistrictList(GetSubDistrictListRequest) returns (GetSubDistrictListResponse){}
+    rpc GetSubDistrictDetail(GetSubDistrictDetailRequest) returns (GetSubDistrictDetailResponse){}
+    rpc GetTerritoryList(GetTerritoryListRequest) returns (GetTerritoryListResponse){}
+    rpc GetTerritoryDetail(GetTerritoryDetailRequest) returns (GetTerritoryDetailResponse){}
+    rpc GetUomList(GetUomListRequest) returns (GetUomListResponse){}
+    rpc GetUomDetail(GetUomDetailRequest) returns (GetUomDetailResponse){}
+    rpc GetSalesOrderList(GetSalesOrderListRequest) returns (GetSalesOrderListResponse){}
+    rpc GetSalesOrderDetail(GetSalesOrderDetailRequest) returns (GetSalesOrderDetailResponse){}
+    rpc GetSalesOrderItemList(GetSalesOrderItemListRequest) returns (GetSalesOrderItemListResponse){}
+    rpc GetSalesOrderItemDetail(GetSalesOrderItemDetailRequest) returns (GetSalesOrderItemDetailResponse){}
+    rpc CreateSalesOrder(CreateSalesOrderRequest) returns (CreateSalesOrderResponse){}
+    rpc GetSalesOrderListGPAll(GetSalesOrderGPListRequest) returns (GetSalesOrderGPListResponse){}
+    rpc GetSalesOrderListGPByID(GetSalesOrderGPListByIDRequest) returns (GetSalesOrderGPListResponse){}
+    
+
+    rpc GetCourierList(GetCourierListRequest) returns (GetCourierListResponse){}
+    rpc GetCourierDetail(GetCourierDetailRequest) returns (GetCourierDetailResponse){}
+    rpc ActivateEmergencyCourier(EmergencyCourierRequest) returns (EmergencyCourierResponse){}
+    rpc DeactivateEmergencyCourier(EmergencyCourierRequest) returns (EmergencyCourierResponse){}
+    rpc GetCourierVendorList(GetCourierVendorListRequest) returns (GetCourierVendorListResponse){}
+    rpc GetCourierVendorDetail(GetCourierVendorDetailRequest) returns (GetCourierVendorDetailResponse){}
+    rpc GetVehicleProfileList(GetVehicleProfileListRequest) returns (GetVehicleProfileListResponse){}
+    rpc GetVehicleProfileDetail(GetVehicleProfileDetailRequest) returns (GetVehicleProfileDetailResponse){}
+    rpc GetWrtList(GetWrtListRequest) returns (GetWrtListResponse){}
+    rpc GetWrtDetail(GetWrtDetailRequest) returns (GetWrtDetailResponse){}
+    // Customer
+    rpc GetCustomerList(GetCustomerListRequest) returns (GetCustomerListResponse){}
+    rpc GetCustomerDetail(GetCustomerDetailRequest) returns (GetCustomerDetailResponse){}
+    rpc UpdateCustomer(UpdateCustomerRequest) returns (UpdateCustomerResponse){}
+    rpc CreateCustomerGP(CreateCustomerGPRequest) returns (CreateCustomerGPResponse){}
+    rpc UpdateCustomerGP(UpdateCustomerGPRequest) returns (UpdateCustomerGPResponse){}
+    rpc UpdateFixedVa(UpdateFixedVaRequest) returns (UpdateFixedVaResponse){}
+
+    rpc GetOrderTypeList(GetOrderTypeListRequest) returns (GetOrderTypeListResponse){}
+    rpc GetOrderTypeDetail(GetOrderTypeDetailRequest) returns (GetOrderTypeDetailResponse){}
+    rpc GetSalesPaymentTermList(GetSalesPaymentTermListRequest) returns (GetSalesPaymentTermListResponse){}
+    rpc GetSalesPaymentTermDetail(GetSalesPaymentTermDetailRequest) returns (GetSalesPaymentTermDetailResponse){}
+    rpc GetDivisionList(GetDivisionListRequest) returns (GetDivisionListResponse){}
+    rpc GetDivisionDetail(GetDivisionDetailRequest) returns (GetDivisionDetailResponse){}
+    rpc GetDistrictList(GetDistrictListRequest) returns (GetDistrictListResponse){}
+    rpc GetDistrictDetail(GetDistrictDetailRequest) returns (GetDistrictDetailResponse){}
+    rpc GetDistrictInIdsList(GetDistrictInIdsListRequest) returns (GetDistrictListResponse){}
+    rpc GetBankList(GetBankListRequest) returns (GetBankListResponse){}
+    rpc GetBankDetail(GetBankDetailRequest) returns (GetBankDetailResponse){} 
+    rpc GetDeliveryFeeList(GetDeliveryFeeListRequest) returns (GetDeliveryFeeListResponse){}
+    rpc GetDeliveryFeeDetail(GetDeliveryFeeDetailRequest) returns (GetDeliveryFeeDetailResponse){}
+    rpc GetDeliveryFeeGPList(GetDeliveryFeeGPListRequest) returns (GetDeliveryFeeGPListResponse){}
+    
+    // Vendor
+    rpc GetVendorList(GetVendorListRequest) returns (GetVendorListResponse){}
+    rpc GetVendorDetail(GetVendorDetailRequest) returns (GetVendorDetailResponse){}
+    rpc CreateVendor(CreateVendorRequest) returns (CreateVendorResponse){}
+
+    // Vendor Organization
+    rpc GetVendorOrganizationList(GetVendorOrganizationListRequest) returns (GetVendorOrganizationListResponse){}
+    rpc GetVendorOrganizationDetail(GetVendorOrganizationDetailRequest) returns (GetVendorOrganizationDetailResponse){}
+    rpc GetVendorClassificationList(GetVendorClassificationListRequest) returns (GetVendorClassificationListResponse){}
+    rpc GetVendorClassificationDetail(GetVendorClassificationDetailRequest) returns (GetVendorClassificationDetailResponse){}
+    
+    rpc GetVendorOrganizationGPList(GetVendorOrganizationGPListRequest) returns (GetVendorOrganizationGPResponse){}
+    rpc GetVendorOrganizationGPDetail(GetVendorOrganizationGPDetailRequest) returns (GetVendorOrganizationGPResponse){}
+
+
+    // Purchase Plan
+    rpc GetPurchasePlanList(GetPurchasePlanListRequest) returns (GetPurchasePlanListResponse){}
+    rpc GetPurchasePlanDetail(GetPurchasePlanDetailRequest) returns (GetPurchasePlanDetailResponse){}
+    rpc GetPurchasePlanItemList(GetPurchasePlanItemListRequest) returns (GetPurchasePlanItemListResponse){}
+    rpc GetPurchasePlanItemDetail(GetPurchasePlanItemDetailRequest) returns (GetPurchasePlanItemDetailResponse){}
+    rpc AssignPurchasePlanGP(AssignPurchasePlanGPRequest) returns (AssignPurchasePlanGPResponse){}
+    rpc CancelAssignPurchasePlan(CancelAssignPurchasePlanRequest) returns (CancelAssignPurchasePlanResponse){}
+    rpc GetPurchasePlanGPList(GetPurchasePlanGPListRequest) returns (GetPurchasePlanGPResponse){}
+    rpc GetPurchasePlanGPDetail(GetPurchasePlanGPDetailRequest) returns (GetPurchasePlanGPResponse){}
+
+    // Purchase Order
+    rpc CreatePurchaseOrder(CreatePurchaseOrderRequest) returns (GetPurchaseOrderDetailResponse){}
+    rpc CreatePurchaseOrderGP(CreatePurchaseOrderGPRequest) returns (CreatePurchaseOrderGPResponse){}
+    rpc UpdatePurchaseOrder(UpdatePurchaseOrderRequest) returns (GetPurchaseOrderDetailResponse){}
+    rpc UpdatePurchaseOrderGP(UpdatePurchaseOrderGPRequest) returns (CreatePurchaseOrderGPResponse){}
+    rpc UpdateProductPurchaseOrder(UpdateProductPurchaseOrderRequest) returns (GetPurchaseOrderDetailResponse){}
+    rpc GetPurchaseOrderList(GetPurchaseOrderListRequest) returns (GetPurchaseOrderListResponse){}
+    rpc GetPurchaseOrderDetail(GetPurchaseOrderDetailRequest) returns (GetPurchaseOrderDetailResponse){}
+    rpc GetPurchaseOrderItemList(GetPurchaseOrderItemListRequest) returns (GetPurchaseOrderItemListResponse){}
+    rpc GetPurchaseOrderItemDetail(GetPurchaseOrderItemDetailRequest) returns (GetPurchaseOrderItemDetailResponse){}
+    rpc CommitPurchaseOrder(CommitPurchaseOrderRequest) returns (GetPurchaseOrderDetailResponse){}
+    rpc CancelPurchaseOrder(CancelPurchaseOrderRequest) returns (GetPurchaseOrderDetailResponse){}
+    rpc CancelPurchaseOrderGP(CancelPurchaseOrderGPRequest) returns (CancelPurchaseOrderGPResponse){}
+    rpc GetPurchaseOrderGPList(GetPurchaseOrderGPListRequest) returns (GetPurchaseOrderGPResponse){}
+    rpc GetPurchaseOrderGPDetail(GetPurchaseOrderGPDetailRequest) returns (GetPurchaseOrderGPResponse){}
+    rpc CommitPurchaseOrderGP(CommitPurchaseOrderGPRequest) returns (CreateTransferRequestGPResponse){}
+    rpc CreateConsolidatedShipmentGP(CreateConsolidatedShipmentGPRequest) returns (CreateConsolidatedShipmentGPResponse){}
+    rpc UpdateConsolidatedShipmentGP(UpdateConsolidatedShipmentGPRequest) returns (UpdateConsolidatedShipmentGPResponse){}
+
+    // Item Transfer
+    rpc GetItemTransferList(GetItemTransferListRequest) returns (GetItemTransferListResponse){}
+    rpc GetItemTransferDetail(GetItemTransferDetailRequest) returns (GetItemTransferDetailResponse){}
+    rpc GetItemTransferItemDetail(GetItemTransferItemDetailRequest) returns (GetItemTransferItemDetailResponse){}
+    rpc CreateItemTransfer(CreateItemTransferRequest) returns (GetItemTransferDetailResponse){}
+    rpc UpdateItemTransfer(UpdateItemTransferRequest) returns (GetItemTransferDetailResponse){}
+    rpc CommitItemTransfer(CommitItemTransferRequest) returns (GetItemTransferDetailResponse){}
+    rpc GetInTransitTransferGPList(GetInTransitTransferGPListRequest) returns (GetInTransitTransferGPResponse){}
+    rpc GetInTransitTransferGPDetail(GetInTransitTransferGPDetailRequest) returns (GetInTransitTransferGPResponse){}
+    rpc GetTransferRequestGPList(GetTransferRequestGPListRequest) returns (GetTransferRequestGPResponse){}
+    rpc GetTransferRequestGPDetail(GetTransferRequestGPDetailRequest) returns (GetTransferRequestGPResponse){}
+    rpc CreateTransferRequestGP(CreateTransferRequestGPRequest) returns (CreateTransferRequestGPResponse){}
+    rpc UpdateTransferRequestGP(UpdateTransferRequestGPRequest) returns (CreateTransferRequestGPResponse){}
+    rpc UpdateInTransitTransferGP(UpdateInTransitTransferGPRequest) returns (UpdateInTransitTransferGPResponse){}
+    rpc CommitTransferRequestGP(CommitTransferRequestGPRequest) returns (CommitTransferRequestGPResponse){}
+
+    // Goods Receipt
+    rpc GetReceivingList(GetReceivingListRequest) returns (GetReceivingListResponse){}
+    rpc GetReceivingDetail(GetReceivingDetailRequest) returns (GetReceivingDetailResponse){}
+    rpc CreateReceiving(CreateReceivingRequest) returns (GetReceivingDetailResponse){}
+    rpc ConfirmReceiving(ConfirmReceivingRequest) returns (GetReceivingDetailResponse){}
+    rpc GetGoodsReceiptGPList(GetGoodsReceiptGPListRequest) returns (GetGoodsReceiptGPResponse){}
+    rpc GetGoodsReceiptGPDetail(GetGoodsReceiptGPDetailRequest) returns (GetGoodsReceiptGPResponse){}
+    rpc CreateGoodsReceiptGP(CreateGoodsReceiptGPRequest) returns (CreateTransferRequestGPResponse){}
+    rpc UpdateGoodsReceiptGP(UpdateGoodsReceiptGPRequest) returns (CreateTransferRequestGPResponse){}
+
+    // Sales Invoice, Invoice Item & Payment
+    rpc GetSalesInvoiceList(GetSalesInvoiceListRequest) returns (GetSalesInvoiceListResponse){}
+    rpc GetSalesInvoiceGPList(GetSalesInvoiceGPListRequest) returns (GetSalesInvoiceGPListResponse){}
+    rpc GetSalesInvoiceGPDetail(GetSalesInvoiceGPDetailRequest) returns (GetSalesInvoiceGPDetailResponse){}
+    rpc GetSalesInvoiceDetail(GetSalesInvoiceDetailRequest) returns (GetSalesInvoiceDetailResponse){}
+    rpc GetSalesPaymentList(GetSalesPaymentListRequest) returns (GetSalesPaymentListResponse){}
+    rpc GetSalesPaymentDetail(GetSalesPaymentDetailRequest) returns (GetSalesPaymentDetailResponse){}
+    rpc GetSalesInvoiceItemList(GetSalesInvoiceItemListRequest) returns (GetSalesInvoiceItemListResponse){}
+    rpc CreateSalesInvoiceGP(CreateSalesInvoiceGPRequest) returns (CreateSalesInvoiceGPResponse){}
+    rpc CreateSalesPaymentGP(CreateSalesPaymentGPRequest) returns (CreateSalesInvoiceGPResponse){}
+    rpc CreateSalesPaymentGPnonPBD(CreateSalesPaymentGPnonPBDRequest) returns (CreateSalesPaymentGPnonPBDResponse){}
+    rpc GetSalesPaymentGPList(GetSalesPaymentGPListRequest) returns (GetSalesPaymentGPResponse){}
+    rpc GetSalesPaymentGPDetail(GetSalesPaymentGPDetailRequest) returns (GetSalesPaymentGPResponse){}
+    rpc GetSalesMovementGP(GetSalesMovementGPRequest) returns (GetSalesMovementGPResponse){}
+
+    //Delivery Order
+    rpc GetDeliveryOrderDetail(GetDeliveryOrderDetailRequest) returns (GetDeliveryOrderDetailResponse){}
+    rpc CreateDeliveryOrder(CreateDeliveryOrderRequest) returns (CreateDeliveryOrderResponse){}
+
+    //Delivery Order GP
+    rpc GetDeliveryOrderListGP(GetDeliveryOrderGPListRequest) returns (GetDeliveryOrderGPListResponse){}
+
+    rpc GetCashReceiptList(GetCashReceiptListRequest) returns (GetCashReceiptListResponse){}
+    rpc CreateCashReceipt(CreateCashReceiptRequest) returns (CreateCashReceiptResponse){}
+    // rpc CreateCashReceiptnonPBD(CreateCashReceiptnonPBDRequest) returns (CreateCashReceiptnonPBDResponse){}
+
+    // Customer Class
+    rpc GetCustomerClassList(GetCustomerClassListRequest) returns (GetCustomerClassResponse){}
+    rpc GetCustomerClassDetail(GetCustomerClassDetailRequest) returns (GetCustomerClassResponse){}
+
+    // Sales Price Level
+    rpc GetSalesPriceLevelList(GetSalesPriceLevelListRequest) returns (GetSalesPriceLevelResponse){}
+    rpc GetSalesPriceLevelDetail(GetSalesPriceLevelDetailRequest) returns (GetSalesPriceLevelResponse){}
+
+    // Shipping Method
+    rpc GetShippingMethodList(GetShippingMethodListRequest) returns (GetShippingMethodResponse){}
+    rpc GetShippingMethodDetail(GetShippingMethodDetailRequest) returns (GetShippingMethodResponse){}
+
+    // Voucher
+    rpc CreateVoucherGP(CreateVoucherGPRequest) returns (CreateVoucherGPResponse){}
+    rpc GetVoucherGPList(GetVoucherGPListRequest) returns (GetVoucherGPResponse){}
+}
+
+message Address{
+    int64 id = 1;
+    string code = 2;
+    string customer_name = 3;
+    int64 archetype_id = 4;
+    int64 adm_division_id = 5;
+    int64 site_id = 6;
+    int64 salesperson_id = 7;
+    int64 territory_id = 8;
+    string address_code = 9;
+    string address_name = 10;
+    string contact_person = 11;
+    string city = 12;
+    string state = 13;
+    string zip_code = 14;
+    string country_code = 15;
+    string country = 16;
+    optional double latitude = 17;
+    optional double longitude = 18;
+    string ups_zone = 19;
+    string shipping_method = 20;
+    int64 tax_schedule_id = 21;
+    int32 print_phone_number = 22;
+    string phone_1 = 23;
+    string phone_2 = 24;
+    string phone_3 = 25;
+    string fax_number = 26;
+    string shipping_address = 27;
+    string bca_va = 28;
+    string other_va = 29;
+    string note = 30;
+    int32 status = 31;
+    google.protobuf.Timestamp created_at = 32;
+    google.protobuf.Timestamp updated_at = 33;
+    int64 district_id = 34;
+}
+
+message AdmDivision{
+    int64 id = 1;
+    string code = 2;
+    int64 province_id = 3;
+    int64 city_id = 4;
+    int64 district_id = 5;
+    int64 sub_district_id = 6;
+    int64 region_id = 7;
+    string postal_code = 8;
+    string province = 9;
+    string city = 10;
+    string district = 11;
+    string region = 12;
+    int32 status = 13;
+    google.protobuf.Timestamp created_at = 14;
+    google.protobuf.Timestamp updated_at = 15;
+}
+
+message AdmDivisionGP{
+    string code = 1;
+    string region = 2;
+    string state = 3;
+    string city = 4; 
+    string district = 5;
+    string subdistrict = 6;
+    string zipcode = 7;
+}
+
+message Archetype{
+    int64 id = 1;
+    string code = 2;
+    int64 customer_type_id = 3;
+    string description = 4;
+    int32 status = 5;
+    google.protobuf.Timestamp created_at = 6;
+    google.protobuf.Timestamp updated_at = 7;
+}
+
+message CustomerType{
+    int64 id = 1;
+    string code = 2;
+    string description = 3;
+    string group_type = 4;
+    string abbreviation = 5;
+    int32 status = 6;
+    google.protobuf.Timestamp created_at = 7;
+    google.protobuf.Timestamp updated_at = 8;
+}
+
+message Class{
+    int64 id = 1;
+    string code = 2;
+    string description = 3;
+    int32 status = 4;
+    google.protobuf.Timestamp created_at = 5;
+    google.protobuf.Timestamp updated_at = 6;
+}
+
+message OrderType{
+    int64 id = 1;
+    string code = 2;
+    string description = 3;
+    int32 status = 4;
+    google.protobuf.Timestamp created_at = 5;
+    google.protobuf.Timestamp updated_at = 6;
+}
+
+message SalesPaymentTerm{
+    int64 id = 1;
+    string code = 2;
+    string description = 3;
+    int32 status = 4;
+    google.protobuf.Timestamp created_at = 5;
+    google.protobuf.Timestamp updated_at = 6;
+}
+
+message Item{
+    int64 id = 1;
+    string code = 2;
+    int64 uom_id = 3;
+    int64 class_id = 4;
+    int64 item_category_id = 5;
+    string description = 6;
+    double unit_weight_conversion = 7;
+    double order_min_qty = 8;
+    double order_max_qty = 9;
+    string item_type = 10;
+    string packability = 11;
+    string capitalize = 12;
+    string note = 13;
+    string exclude_archetype = 14;
+    int32 max_day_delivery_date = 15;
+    string fragile_goods = 16;
+    string taxable = 17;
+    string order_channel_restriction = 18;
+    int32 status = 19;
+    google.protobuf.Timestamp created_at = 20;
+    google.protobuf.Timestamp updated_at = 21;
+    Uom uom = 22;
+}
+
+message ItemGP{
+    string itemnmbr = 1;
+    string itemdesc = 2;
+    string itmshnam = 3;
+    int32 itemtype = 4;
+    string item_type_desc = 5;
+    string itmgedsc = 6;
+    double stndcost = 7;
+    double currcost = 8;
+    double itemshwt = 9;
+    int32 decplqty = 10;
+    int32 decplcur = 11;
+    int32 taxoptns = 12;
+    string purchase_tax_option_desc = 13;
+    string uomschdl = 14;
+    int32 gnl_cb_capitalitem = 15;
+    string gnl_cb_capitalitem_desc = 16;
+    int32 gnl_cb_allowdirectpo = 17;
+    string gnl_cb_allowdirectpo_desc = 18;
+    double gnl_weighttolerance = 19;
+    int32 inactive = 20;
+    string inactive_desc = 21;
+    string itmclscd = 22;
+    double minorqty = 23;
+    double maxordqty = 24;
+}
+
+message ItemMasterComplexGP{
+    string itemnmbr = 1;
+    string itemdesc = 2;
+    string uomschdl = 3;
+    double minorqty = 4;
+    double maxordqty = 5;
+    double itemshwt = 6;
+    string itmclscd = 7;
+    int32 inactive = 8;
+    string inactive_desc = 9;
+    repeated PriceLevel price_level = 10;
+    repeated Site site = 11;
+    double gnl_weightwolerance = 12;
+    repeated PriceTiering price_tiering = 13;
+
+    message PriceLevel {
+        string gnl_region = 1;
+        string gnl_cust_type_id = 2;
+        string prclevel = 3;
+        double price = 4;
+      }
+      
+    message Site {
+        string gnl_region = 1;
+        string locncode = 2;
+        int32 gnl_cb_salability = 3;
+        string gnl_cb_salability_desc = 4;
+        double total_stock = 5;
+    }
+      
+    message PriceTiering{
+        string docnumbr = 1;
+        string gnl_region = 2;
+        string effective_date = 3;
+        int32 gnl_min_qty = 4;
+        double gnl_discount_amount = 5;
+        int32 gnl_quota_user = 6;
+    }
+}
+
+message Region{
+    int64 id = 1;
+    string code = 2;
+    string description = 3;
+    int32 status = 4;
+    google.protobuf.Timestamp created_at = 5;
+    google.protobuf.Timestamp updated_at = 6;
+}
+
+message Salesperson{
+    int64 id = 1;
+    string code = 2;
+    string firstname = 3;
+    string middlename = 4;
+    string lastname = 5;
+    int32 status = 6;
+    google.protobuf.Timestamp created_at = 7;
+    google.protobuf.Timestamp updated_at = 8;
+}
+
+message Site{
+    int64 id = 1;
+    string code = 2;
+    string description = 3;
+    int32 status = 4;
+    google.protobuf.Timestamp created_at = 5;
+    google.protobuf.Timestamp updated_at = 6;
+    Region region = 7;
+}
+
+message SiteGP{
+    string locncode = 1;
+    string gnl_site_type_id = 2;
+    string locndscr = 3;
+    string addresS1 = 4;
+    string addresS2 = 5;
+    string addresS3 = 6;
+    string phonE1 = 7;
+    string phonE2 = 8;
+    string phonE3 = 9;
+    string city = 10;
+    string state = 11;
+    string faxnumbr = 12;
+    string zipcode = 13;
+    string ccode = 14;
+    string country = 15;
+    string staxschd = 16;
+    string pctaxsch = 17;
+    string location_segment = 18;
+    string gnl_administrative_code = 19;
+    int32 inactive = 20;
+    string inactive_desc = 21;
+}
+
+message SubDistrict{
+    int64 id = 1;
+    string code = 2;
+    string description = 3;
+    int32 status = 4;
+    google.protobuf.Timestamp created_at = 5;
+    google.protobuf.Timestamp updated_at = 6;
+    
+}
+
+message Territory{
+    int64 id = 1;
+    string code = 2;
+    string description = 3;
+    int64 region_id = 4;
+    int64 salesperson_id = 5;
+    int64 customer_type_id = 6;
+    int64 sub_district_id = 7;
+    google.protobuf.Timestamp created_at = 8;
+    google.protobuf.Timestamp updated_at = 9;
+}
+
+message Uom{
+    int64 id = 1;
+    string code = 2;
+    string description = 3;
+    int32 status = 4;
+    google.protobuf.Timestamp created_at = 5;
+    google.protobuf.Timestamp updated_at = 6;
+    int32 decimal_enabled = 7;
+}
+
+message SalesOrder{
+    int64 id = 1;
+    string code = 2;
+    string doc_number = 3;
+    string address_id = 4;
+    string customer_id = 5;
+    string salesperson_id = 6;
+    string wrt_id = 7;
+    int32 application = 8;
+    int32 status = 9;
+    int64 order_type_id = 10;
+    google.protobuf.Timestamp order_date = 11;
+    double total = 12;
+    google.protobuf.Timestamp created_date = 13;
+    google.protobuf.Timestamp modified_date = 14;
+    google.protobuf.Timestamp finished_date = 15;
+    google.protobuf.Timestamp created_at = 16;
+    google.protobuf.Timestamp updated_at = 17;
+    string site_id = 18;
+}
+
+message SalesOrderItem{
+    int64 id = 1;
+    int64 sales_order_id = 2;
+    string item_id = 3;
+    double order_qty = 4;
+    double default_price = 5;
+    double unit_price = 6;
+    int32 taxable_item = 7;
+    double tax_percentage = 8;
+    double shadow_price = 9;
+    double subtotal = 10;
+    double weight = 11;
+    string note = 12;
+    google.protobuf.Timestamp created_at = 13;
+    google.protobuf.Timestamp updated_at = 14;
+}
+
+message TransactionListGP{
+    string sop_type_id = 1;
+    string sop_type_desc = 2;
+    string sop_number = 3;
+    string customer_id = 4;
+    string customer_name = 5;
+    string address_id = 6;
+    string region_desc = 7;
+    string doc_date = 8;
+    string request_ship_date = 9;
+    string wrt_id = 10;
+    string archetype_id = 11;
+    string order_channel_id = 12;
+    string sales_order_code = 13;
+    string batch_id = 14;
+    string default_site_id = 15;
+    string customer_po_number = 16;
+    string currency_id = 17;
+    double amount_received = 18;
+    double terms_disc_taken = 19;
+    double on_account = 20;
+    string comment_id = 21;
+    double total_weight = 22;
+    double subtotal = 23;
+    double trade_disc = 24;
+    double freight = 25;
+    double miscellaneous = 26;
+    double tax = 27;
+    double total = 28;
+}
+
+message TransactionDetailGP{
+    string sop_number = 1;
+    string item_number = 2;
+    string uom_id = 3;
+    double order_quantity = 4;
+    double unit_price = 5;
+    double extended_price = 6;
+    string item_desc = 7;
+    double markdown = 8;
+    double unit_cost = 9;
+    string req_ship_date = 10;
+    string date_shipped = 11;
+    bool product_push = 12;
+    double qty_ordered = 13;
+    double qty_fulfilled = 14;
+    double qty_canceled = 15;
+    double qty_back_order = 16;
+    double total_weight = 17;
+    string site_id = 18;
+    string price_level_id = 19;
+    string ship_to_address = 20;
+    string shipping_method = 21;
+    double qty_available = 22;
+}
+
+message Wrt {
+    int64 id =1;
+    int64 region_id =2;
+    string code = 3;
+    string start_time = 4;
+    string end_time = 5;
+    Region region = 6;
+}
+
+message Courier{
+    int64 id = 1;
+    int64 role_id = 2;
+    int64 user_id = 3;
+    string code = 4;
+    string name = 5;
+    string phone_number = 6;
+    int64 vehicle_profile_id = 7;
+    string license_plate = 8;
+    int32 emergency_mode = 9;
+    google.protobuf.Timestamp last_emergency_time = 10;
+    int32 status = 11;
+}
+
+message CourierGP{
+    string gnl_courier_id = 1;
+    string gnl_courier_name = 2;
+    string phonname = 3;
+    string email = 4;
+    string password = 5;
+    string gnl_vehicle_profile_id = 6;
+    string gnl_license_plate = 7;
+    int32 inactive = 8;
+    string inactivE_DESC = 9;
+    optional int32 gnl_emergencymode = 10;
+    string gnl_emergencydate = 11;
+    string gnl_emergencytime = 12;
+}
+
+message CourierVendor{
+    int64 id = 1;
+    int64 site_id = 2;
+    string code = 3;
+    string name = 4;
+    string note = 5;
+    int32 status = 6;
+}
+
+message CourierVendorGP{
+    string gnl_courier_vendor_id = 1;
+    string gnl_courier_vendor_name = 2;
+    string locncode = 3;
+    int32 inactive = 4;
+    string inactivE_DESC = 5;
+}
+
+message VehicleProfile{
+    int64 id = 1;
+    int64 courier_vendor_id = 2;
+    string code = 3;
+    string name = 4;
+    double max_koli = 5;
+    double max_weight = 6;
+    double max_fragile = 7;
+    double speed_factor = 8;
+    int32 routing_profile = 9;
+    int32 status = 10;
+    string skills = 11;
+    double initial_cost = 12;
+    double subsequent_cost = 13;
+    int64 max_available_vehicle = 14; 
+}
+
+message VehicleProfileGP{
+    string gnl_vehicle_profile_id = 1;
+    string gnl_description100 = 2;
+    string gnl_courier_vendor_id = 3;
+    double gnl_max_koli = 4;
+    double gnl_max_weight = 5;
+    double gnl_max_fragile = 6;
+    double gnl_speed_factor = 7;
+    string gnl_routing_profile = 8;
+    string gnl_skills = 9;
+    double gnl_initial_cost = 10;
+    double gnl_subsequent_Cost = 11;
+    double gnl_max_avail_vehicle = 12;
+    string locncode = 13;
+    int32 inactive = 14;
+    string inactivE_DESC = 15;
+}
+
+message Vendor{
+    int64 id = 1;
+    string code = 2;
+    int64 vendor_organization_id = 3;
+    int64 vendor_classification_id = 4;
+    int64 sub_district_id = 5;
+    string pic_name = 6;
+    string email = 7;
+    string phone_number = 8;
+    int64 payment_term_id = 9;
+    int32 rejectable = 10;
+    int32 returnable = 11;
+    string address = 12;
+    string note = 13;
+    int32 status = 14;
+    string latitude = 15;
+    string longitude = 16;
+    google.protobuf.Timestamp created_at = 17;
+    int64 created_by = 18;
+}
+
+message VendorOrganization{
+    int64 id = 1;
+    string code = 2;
+    int64 vendor_classification_id = 3;
+    int64 sub_district_id = 4;
+    int64 payment_term_id = 5;
+    string name = 6;
+    string address = 7;
+    string note = 8;
+    int32 status = 9;
+}
+
+message VendorClassification{
+    int64 id = 1;
+    string commodity_code = 2;
+    string commodity_name = 3;
+    string badge_code = 4;
+    string badge_name = 5;
+    string type_code = 6;
+    string type_name = 7;
+}
+
+message PurchasePlan{
+    int64 id = 1;
+    string code = 2;
+    int64 vendor_organization_id = 3;
+    int64 site_id = 4;
+    google.protobuf.Timestamp recognition_date = 5;
+    google.protobuf.Timestamp eta_date = 6;
+    string eta_time = 7;
+    double total_price = 8;
+    double total_weight = 9;
+    double total_purchase_plan_qty = 10;
+    double total_purchase_qty = 11;
+    string note = 12;
+    int32 status = 13;
+    int64 assigned_to = 14;
+    int64 assigned_by = 15;
+    google.protobuf.Timestamp assigned_at = 16;
+    google.protobuf.Timestamp created_at = 17;
+    int64 created_by = 18;
+}
+
+message PurchasePlanItem{
+    int64 id = 1;
+	int64 purchase_plan_id = 2;
+	int64 item_id = 3;
+	double purchase_plan_qty = 4;
+	double purchase_qty = 5;
+	double unit_price = 6;
+	double subtotal = 7;
+	double weight = 8;
+}
+
+message PurchaseOrder{
+    int64 id = 1;
+    string code = 2;
+    int64 vendor_id = 3;
+    int64 site_id = 4;
+    int64 term_payment_pur_id = 5;
+    int64 vendor_classification_id = 6;
+    int64 purchase_plan_id = 7;
+    int64 consolidated_shipment_id = 8;
+    int32 status = 9;
+    google.protobuf.Timestamp recognition_date = 10;
+    google.protobuf.Timestamp eta_date = 11;
+    string site_address = 12;
+    string eta_time = 13;
+    double tax_pct = 14;
+    double delivery_fee = 15;
+    double total_price = 16;
+    double tax_amount = 17;
+    double total_charge = 18;
+    double total_invoice = 19;
+    double total_weight = 20;
+    string note = 21;
+    int32 delta_print = 22;
+    double latitude = 23;
+    double longitude = 24;
+    google.protobuf.Timestamp updated_at = 25;
+    int64 updated_by = 26;
+    int32 created_from = 27;
+    int32 has_finished_gr = 28;
+    google.protobuf.Timestamp created_at = 29;
+    int64 created_by = 30;
+    google.protobuf.Timestamp committed_at = 31;
+    int64 committed_by = 32;
+    int64 assigned_to = 33;
+    int64 assigned_by = 34;
+    google.protobuf.Timestamp assigned_at = 35;
+    int32 locked = 36;
+    int64 locked_by = 37;
+    repeated PurchaseOrderItem PurchaseOrderItems = 38;
+    repeated ReceivingListinDetailResponse receiving = 39;
+}
+
+message PurchaseOrderItem{
+    int64 id = 1;
+    int64 purchase_order_id = 2;
+	int64 purchase_plan_item_id = 3;
+	int64 item_id = 4;
+	double order_qty = 5;
+	double unit_price = 6;
+	int32 taxable_item = 7;
+	int32 include_tax = 8;
+	double tax_percentage = 9;
+	double tax_amount = 10;
+	double unit_price_tax = 11;
+	double subtotal = 12;
+	double weight = 13;
+	string note = 14;
+	double purchase_qty = 15;
+    Item item = 16;
+}
+
+message GetAddressListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    int64 archetype_id = 6;
+    int64 adm_division_id = 7;
+    int64 site_id = 8;
+    int64 salesperson_id = 9;
+    int64 territory_id = 10;
+    int64 tax_schedule_id = 11;
+    int64 customer_id = 12;
+}
+
+message GetAddressListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated Address data = 3;
+}
+
+message GetAddressDetailRequest{
+    int64 id = 1;
+    string code = 2;
+    int64 customer_id = 3;
+}
+
+message GetAddressDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    Address data = 3;
+}
+
+message GetAdmDivisionListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    int64 region_id = 6;
+    int64 sub_district_id = 7;
+    int64 province_id=8;
+    int64 city_id=9;
+    int64 district_id=10;
+}
+
+message GetAdmDivisionListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated AdmDivision data = 3;
+}
+
+message GetAdmDivisionDetailRequest{
+    int64 id = 1;
+    string code = 2;
+    int64 region_id = 3;
+    int64 sub_district_id = 4;
+    int64 province_id=5;
+    int64 city_id=6;
+    int64 district_id=7;
+}
+
+message GetAdmDivisionDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    AdmDivision data = 3;
+}
+
+message GetAdmDivisionGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string adm_division_code = 3;
+    string region = 4;
+    string state = 5;
+    string city = 6;
+    string district = 7;
+    string sub_district = 8;
+}
+
+message GetAdmDivisionGPDetailRequest{
+    string id = 1;
+    string type = 2;
+    double limit = 3;
+    double offset = 4;
+    string code = 5;
+    string region = 6;
+    string state = 7;
+    string city = 8;
+    string district = 9;
+    string subdistrict = 10;
+    string region_like = 11;
+    string state_like = 12;
+    string city_like = 13;
+    string district_like = 14;
+    string subdistrict_like = 15;
+    string region_others = 16;
+}
+
+message GetAdmDivisionGPResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated AdmDivisionGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message GetArchetypeListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    int64 customer_type_id = 6;
+}
+
+message GetArchetypeListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated Archetype data = 3;
+}
+
+message GetArchetypeDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetArchetypeDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    Archetype data = 3;
+}
+
+message GetCustomerTypeListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+}
+
+message GetCustomerTypeListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated CustomerType data = 3;
+}
+
+message GetCustomerTypeDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetCustomerTypeDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    CustomerType data = 3;
+}
+
+message UpdateCustomerRequest{
+    Customer data =1;
+}
+
+message UpdateCustomerResponse{
+    int32 code = 1;
+    string message = 2;
+    Customer data = 3;
+}
+
+message GetClassListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+}
+
+message GetClassListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated Class data = 3;
+}
+
+message GetClassDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetClassDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    Class data = 3;
+}
+
+message GetItemListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    int64 uom_id = 6;
+    int64 class_id = 7;
+    int64 item_category_id = 8;
+}
+
+message GetItemListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated Item data = 3;
+}
+
+message GetItemDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetItemDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    Item data = 3;
+}
+
+message GetItemGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string item_number = 3;
+    string description = 4;
+    string class_id = 5;
+    string uom_id = 6;
+    string inactive = 7;
+}
+
+message GetItemMasterComplexGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string item_number = 3;
+    string description = 4;
+    string class_id = 5;
+    string uom_id = 6;
+    string inactive = 7;
+    string locncode = 8;
+    string gnl_region = 9;
+    string gnl_salability = 10;
+    string gnl_cust_type_id = 11;
+    string prclevel = 12;
+    string gnl_storability = 13;
+    string order_by = 14;
+}
+
+message GetItemGPDetailRequest{
+    string id = 1;
+}
+
+message GetItemGPResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated ItemGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message GetItemMasterComplexGPListResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated ItemMasterComplexGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+message UpdateItemPackableRequest{
+    int64 id = 1;
+    bool packable = 2;
+}
+
+message UpdateItemPackableResponse{
+    int32 code = 1;
+    string message = 2;
+}
+
+message UpdateItemFragileRequest{
+    int64 id = 1;
+    bool fragile = 2;
+}
+
+message UpdateItemFragileResponse{
+    int32 code = 1;
+    string message = 2;
+}
+
+message GetRegionListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+}
+
+message GetRegionListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated Region data = 3;
+}
+
+message GetRegionDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetRegionDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    Region data = 3;
+}
+
+message GetSalespersonListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+}
+
+message GetSalespersonListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated Salesperson data = 3;
+}
+
+message GetSalespersonDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetSalespersonDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    Salesperson data = 3;
+}
+
+message GetSiteListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+}
+
+message GetSiteInIdsListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    repeated int64 ids = 4;
+    string order_by = 5;
+}
+
+message GetSiteListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated Site data = 3;
+}
+
+message GetSiteDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetSiteDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    Site data = 3;
+}
+
+message GetSiteGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string site_id = 3;
+    string site_type = 4;
+    string description = 5;
+    string adm_div_id = 6;
+    string locncode = 7;
+    string locndscr = 8;
+    string gnl_site_type_id = 9;
+    string gnl_administrative_code = 10;
+    int32 inactive = 11;
+}
+
+message GetSiteGPDetailRequest{
+    string id = 1;
+}
+
+message GetSiteGPResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated SiteGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message GetSubDistrictListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+}
+
+message GetSubDistrictListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated SubDistrict data = 3;
+}
+
+message GetSubDistrictDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetSubDistrictDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    SubDistrict data = 3;
+}
+
+message GetTerritoryListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    int64 region_id = 8;
+    int64 salesperson_id = 9;
+    int64 customer_type_id = 10;
+    int64 sub_district_id = 11;
+}
+
+message GetTerritoryListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated Territory data = 3;
+}
+
+message GetTerritoryDetailRequest{
+    int64 id = 1;
+    string code = 2;
+    int64 salesperson_id = 3;
+}
+
+message GetTerritoryDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    Territory data = 3;
+}
+
+message GetUomListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+}
+
+message GetUomListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated Uom data = 3;
+}
+
+message GetUomDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetUomDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    Uom data = 3;
+}
+
+message GetSalesOrderListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    int64 address_id = 6;
+    int64 customer_id = 7;
+    int64 salesperson_id = 8;
+    int64 site_id = 9;
+    google.protobuf.Timestamp order_date_from = 10;
+    google.protobuf.Timestamp order_date_to = 11;
+}
+
+message GetSalesOrderListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated SalesOrder data = 3;
+}
+
+message GetSalesOrderDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetSalesOrderDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    SalesOrder data = 3;
+}
+
+message CreateSalesOrderRequest{
+    SalesOrder data = 1;
+    repeated SalesOrderItem dataitem = 2;
+}
+
+message CreateSalesOrderResponse{
+    int32 code = 1;
+    string message = 2;
+    SalesOrder data = 3;
+}
+
+message GetCourierListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    int64 vehicle_profile_id = 6;
+    int64 emergency_mode = 7;
+}
+
+message GetCourierListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated Courier data = 3;
+}
+
+message GetCourierDetailRequest{
+    int64 id = 1;
+    string code = 2;
+    int64 user_id=3;
+}
+
+message GetCourierDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    Courier data = 3;
+}
+
+message GetCourierGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string orderby = 3;
+    string gnl_courier_vendor_id = 4;
+    string gnl_vehicle_profile_id = 5;
+    string gnl_courier_id = 6;
+    string gnl_courier_name = 7;
+    string phonname = 8;
+    int32  inactive = 9;
+}
+
+message GetCourierGPDetailRequest{
+    string id = 1;
+}
+
+message GetCourierGPResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated CourierGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message GetSalesOrderItemListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    int64 sales_order_id = 6; 
+    int64 item_id = 7;
+}
+
+message GetSalesOrderItemListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated SalesOrderItem data = 3;
+}
+
+message GetSalesOrderItemDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetSalesOrderItemDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    SalesOrderItem data = 3;
+}
+
+message GetTransactionListGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string type = 3;
+}
+
+message GetTransactionListGPDetailRequest{
+    string type = 1;
+    string id = 2;
+}
+
+message GetTransactionListGPResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated TransactionListGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message GetTransactionDetailGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string sop_number = 3;
+}
+
+message GetTransactionDetailGPDetailRequest{
+    string id = 1;
+}
+
+message GetTransactionDetailGPResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated TransactionDetailGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message GetCourierVendorListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    int64 site_id=6;
+}
+
+message GetCourierVendorListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated CourierVendor data = 3;
+}
+
+message GetCourierVendorDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetCourierVendorDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    CourierVendor data = 3;
+}
+
+message GetCourierVendorGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    string locncode = 6;
+    string gnl_courier_vendor_id = 7;
+    string gnl_courier_vendor_name = 8;
+    int32 inactive = 9;
+}
+
+message GetCourierVendorGPDetailRequest{
+    string id = 1;
+}
+
+message GetCourierVendorGPResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated CourierVendorGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message GetWrtListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string search = 3;
+    int64 region_id = 4;
+}
+
+message GetWrtListResponse {
+    int32 code = 1;
+    string message = 2;
+    repeated Wrt data = 3;
+}
+
+message Customer{
+    int64 id = 1;                         
+    string code = 2;
+    string referral_code = 3;
+    string name = 4;
+    int32 Gender = 5;
+    google.protobuf.Timestamp birth_date = 6;
+    string pic_name = 7;
+    string phone_number = 8;
+    string alt_phone_number = 9;
+    string email = 10;
+    string password = 11;
+    string billing_address = 12;
+    string Note = 13;
+    string reference_info = 14;
+    string tag_customer = 15;
+    int32 status = 16;
+    int32 suspended = 17;
+    int32 upgrade_status = 18;
+    int32 customer_group = 19;
+    string tag_customer_name = 20;
+    string referrer_code = 21;
+    google.protobuf.Timestamp createdAt = 22;                
+    int64 created_by = 23;
+    google.protobuf.Timestamp last_updated_at = 24;              
+    int64 last_updated_by = 25;
+    double total_point = 26;
+    int32 customer_type_credit_limit = 27;
+    double earned_point  = 28;
+    double redeemed_point  = 29;
+    int32 custom_credit_limit = 30;
+    double credit_limit_amount  = 31;
+    string profile_code = 32;
+    double remaining_credit_limit_amount = 33;
+    double average_sales = 34;
+    double remaining_outstanding = 35;
+    double OverdueDebt = 36;
+    string KTPPhotosUrl = 37;
+    string MerchantPhotosUrl = 38;         
+    repeated string KTPPhotosUrlArr = 39;  
+    repeated string MerchantPhotosUrlArr = 40;
+    int64 MembershipLevelID = 41;
+    int64 MembershipCheckpointID = 42;
+    int64 MembershipRewardID = 43;
+    double MembershipRewardAmount = 44;
+    int64 term_payment_sls_id = 45;
+    string birth_date_string = 46;
+    string customer_type_id= 47;
+}
+
+message GetCustomerListRequest{ 
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5; 
+    int64 customer_type_id = 6;
+    int64 referrer_id = 7;
+}
+
+message GetVehicleProfileListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    int64 courier_vendor_id=6;
+}
+
+message GetVehicleProfileListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated VehicleProfile data = 3;
+}
+
+message GetVehicleProfileDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetVehicleProfileDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    VehicleProfile data = 3;
+}
+
+message GetVehicleProfileGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string gnl_courier_vendor_id = 3;
+    string orderby = 4;
+    string locncode = 5;
+    int32 inactive = 6;
+    string gnl_description100 = 7;
+}
+
+message GetVehicleProfileGPDetailRequest{
+    string id = 1;
+}
+
+message GetVehicleProfileGPResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated VehicleProfileGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message GetCustomerListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated Customer data = 3;
+}
+
+message GetCustomerDetailRequest{
+    int64 id = 1;
+    string code = 2;
+    int32 limit = 3;
+    int32 offset = 4;
+    int32 status = 5;
+    string search = 6;
+    string order_by = 7;
+    string phone_number = 8;
+}
+
+message GetCustomerDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    Customer data = 3; 
+}
+
+message GetWrtDetailRequest{
+    int64 id = 1;
+}
+
+message GetWrtDetailResponse {
+    int32 code = 1;
+    string message = 2;
+    Wrt data = 3;
+}
+
+message GetOrderTypeListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+}
+
+message GetOrderTypeListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated OrderType data = 3;
+}
+
+message GetOrderTypeDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetOrderTypeDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    OrderType data = 3;
+}
+
+message GetSalesPaymentTermListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+}
+
+message GetSalesPaymentTermListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated SalesPaymentTerm data = 3;
+}
+
+message GetSalesPaymentTermDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetSalesPaymentTermDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    SalesPaymentTerm data = 3;
+}
+
+message EmergencyCourierRequest{
+    string id = 1;
+}
+
+message EmergencyCourierResponse{
+    int32 code = 1;
+    int32 gnl_emergencymode = 2;
+    string message = 3;
+}
+
+message Division{
+    int64 id = 1;
+    string code = 2;
+    string name = 3;
+    string note = 4;
+    int32 status = 5;
+}
+
+message GetDivisionListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+}
+
+message GetDivisionListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated Division data = 3;
+}
+
+message GetDivisionDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetDivisionDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    Division data = 3;
+}
+
+
+message GetAddressListWithExcludedIdsRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    int64 archetype_id = 6;
+    int64 adm_division_id = 7;
+    int64 site_id = 8;
+    int64 salesperson_id = 9;
+    int64 territory_id = 10;
+    int64 tax_schedule_id = 11;
+    repeated int64 excluded_ids = 12;
+}
+
+message District{
+    int64 id = 1;
+    string code = 2;
+    string value = 3;
+    string name = 4;
+    string note = 5;
+    int32 status = 6;
+    string status_convert = 7;
+}
+
+message GetDistrictListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+}
+
+message GetDistrictListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated District data = 3;
+}
+
+message GetDistrictDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetDistrictDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    District data = 3;
+}
+
+message GetDistrictInIdsListRequest{
+    repeated int64 ids = 1;
+    int32 limit = 2;
+    int32 offset = 3;
+    int32 status = 4;
+    string search = 5;
+    string order_by = 6;
+}
+
+message Bank{
+    int64 id = 1;
+    string code = 2;
+    string name = 3;
+    string note = 4;
+    int32 status = 5;
+    string value =6;
+    string image_url=7;
+    string payment_guide_url=8;
+    int32 publish_iva=9;
+    int32 publish_fva=10;
+}
+
+message GetBankListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    repeated int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+}
+
+message GetBankListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated Bank data = 3;
+}
+
+message GetBankDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetBankDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    Bank data = 3;
+}
+
+message DeliveryFee{
+    int64 id = 1;
+    string code = 2;
+    string name = 3;
+    string note = 4;
+    int32 status = 5;
+    double minimum_order =6;
+    double delivery_fee=7;
+    int64 region_id=8;
+    string customer_type_id=9;
+}
+
+message GetDeliveryFeeListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    repeated int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    int64 region_id=6;
+    string customer_type_id=7;
+}
+
+
+message GetDeliveryFeeListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated DeliveryFee data = 3;
+}
+
+message DeliveryFeeGP{
+    string gnl_region = 1;
+    string gnl_cust_type_id = 2;
+    int64 minorqty = 3;
+    double gnl_delivery_fee = 4;
+}
+
+message GetDeliveryFeeGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string gnl_region = 3;
+    string gnl_cust_type_id = 4;
+    int64 minorqty = 5;
+    double gnl_delivery_fee = 6;
+}
+
+message GetDeliveryFeeGPListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated DeliveryFeeGP data = 3;
+}
+
+message GetDeliveryFeeDetailRequest{
+    int64 id = 1;
+    string code = 2;
+    int64 region_id=3;
+    string customer_type_id=4;
+}
+
+message GetDeliveryFeeDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    DeliveryFee data = 3;
+}
+
+message GetVendorListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+}
+
+message GetVendorListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated Vendor data = 3;
+}
+
+message GetVendorDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetVendorDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    Vendor data = 3;
+}
+message GetVendorOrganizationListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+}
+
+message GetVendorOrganizationListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated VendorOrganization data = 3;
+}
+
+message GetVendorOrganizationDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetVendorOrganizationDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    VendorOrganization data = 3;
+}
+message GetVendorClassificationListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+}
+
+message GetVendorClassificationListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated VendorClassification data = 3;
+}
+
+message GetVendorClassificationDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetVendorClassificationDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    VendorClassification data = 3;
+}
+
+message GetPurchasePlanListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+}
+
+message GetPurchasePlanListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated PurchasePlan data = 3;
+}
+
+message GetPurchasePlanDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetPurchasePlanDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    PurchasePlan data = 3;
+}
+
+message GetPurchasePlanItemListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+}
+
+message GetPurchasePlanItemListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated PurchasePlanItem data = 3;
+}
+
+message GetPurchasePlanItemDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetPurchasePlanItemDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    PurchasePlanItem data = 3;
+}
+
+message GetPurchaseOrderListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+}
+
+message GetPurchaseOrderListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated PurchaseOrder data = 3;
+}
+
+message GetPurchaseOrderDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetPurchaseOrderDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    PurchaseOrder data = 3;
+}
+
+message GetPurchaseOrderItemListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+}
+
+message GetPurchaseOrderItemListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated PurchaseOrderItem data = 3;
+}
+
+message GetPurchaseOrderItemDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetPurchaseOrderItemDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    PurchaseOrderItem data = 3;
+}
+
+message AdmDivisionCoverageGP {
+    string gnl_region = 1;
+    string gnl_administrative_code = 2; 
+    string gnl_province = 3; 
+    string gnl_city = 4;
+    string gnl_district = 5;
+    string gnl_subdistrict = 6;
+    string locncode = 7;
+}
+
+message GetAdmDivisionCoverageGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string gnl_administrative_code = 3; 
+    string gnl_province = 4;
+    string gnl_city = 5;
+    string gnl_district = 6;
+    string gnl_subdistrict =7;
+    string locncode = 8;
+}
+
+message GetAdmDivisionCoverageGPDetailRequest{
+    string id = 1;
+}
+
+message GetAdmDivisionCoverageGPResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated AdmDivisionCoverageGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+
+message CreatePurchaseOrderRequest{
+	int64 vendor_id = 1;
+	int64 site_id = 2;
+	string order_date = 3;
+	string str_eta_date = 4;
+	string eta_time = 5;
+	double delivery_fee = 6;
+	string note = 7;
+	double tax_pct = 8;
+	double latitude = 9;
+	double longitude = 10;
+    repeated CreatePurchaseOrderItemRequest items = 11;
+}
+
+message CreatePurchaseOrderItemRequest {
+	int64 item_id = 1;
+	double order_qty = 2;
+	double unit_price = 3;
+	string note = 4;
+	double purchase_qty = 5;
+	int32 include_tax = 6;
+	double tax_percentage = 7;
+}
+
+message CreatePurchaseOrderGPResponse{
+    int32 code = 1;
+    string message = 2;
+    string ponumber = 3;
+}
+
+message PickingList {
+    string id = 1;
+    google.protobuf.Timestamp doc_date = 2;
+    string site_id = 3;
+    google.protobuf.Timestamp request_ship_date = 4;
+    int32 status = 5;
+}
+
+message PickingOrder {
+    string id = 1;
+    google.protobuf.Timestamp doc_date = 2;
+    string sop_number = 3;
+    string picker_id = 4;
+    int32 status = 5;
+}
+
+message PickingOrderDetail{
+    string id = 1;
+    google.protobuf.Timestamp doc_date = 2;
+    string sop_number = 3;
+    string item_number = 4;
+    int32 status = 5;
+}
+
+
+message PickingOrderGPHeader {
+    string docnumbr = 1;
+    string wms_picker_id = 2;
+    string wms_picker_name = 3;
+    string docdate = 4;
+    string strttime = 5;
+    string endtime = 6;
+    int32 wms_picking_status = 7;
+    string wms_picking_status_desc = 8;
+    int32 sales_order_count = 9;
+    string note = 10;
+}
+
+message PickingOrderGPDetail {
+    string docnumbr = 1;
+    string wms_picker_id = 2;
+    string wms_picker_name = 3;
+    string docdate = 4;
+    string strttime = 5;
+    string endtime = 6;
+    int32 wms_picking_status = 7;
+    string wms_picking_status_desc = 8;
+    int32 sales_order_count = 9;
+    // string note = 10;
+    repeated PickingOrderGPProduct details = 10;
+}
+
+message PickingOrderGPProduct {
+    int32 seqnumbr = 1;
+    string locncode = 2;
+    string locndscr = 3;
+    string bin = 4;
+    string itemnmbr = 5;
+    string itemdesc = 6;
+    string sopnumbe = 7;
+    // string custnmbr = 8;
+    int32 lnitmseq = 8;
+    string ivm_uofm = 9;
+    string umschdsc = 10;
+    double ivm_qty = 11;
+    double wms_qty_pick = 12;
+    double wms_qty_excess = 13;
+}
+
+message GetPickingOrderGPHeaderRequest {
+    int32 limit = 1;
+    int32 offset = 2;
+    string locncode = 3;
+    string sopnumbe = 4;
+    string docnumbr = 5;
+    string itemnmbr = 6;
+    string docdate_from = 7;
+    string docdate_to = 8;
+    string gnl_helper_id = 9;
+    int32 wms_picking_status = 10;
+    string custname = 11;
+}
+
+message GetPickingOrderGPHeaderResponse {
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated PickingOrderGPHeader data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message GetPickingOrderGPDetailRequest {
+    string id = 1;
+}
+
+message GetPickingOrderGPDetailResponse {
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated PickingOrderGPDetail data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+
+message PickingDetails {
+    string sopnumbe = 1;
+    int32 lnitmseq = 2;
+    double ivm_qty_pickso = 3;
+}
+  
+message Picking {
+    string docnumbr = 1;
+    string strttime = 2;
+    string endtime = 3;
+    repeated PickingDetails details = 4;
+}
+  
+message CheckingDetails {
+    string sopnumbe = 1;
+    int32 lnitmseq = 2;
+    double ivm_qty_pickso = 3;
+}
+  
+message Checking {
+    string docnumbr = 1;
+    string sopnumbe = 2;
+    string strttime = 3;
+    string endtime = 4;
+    string wms_picker_id = 5;
+    int32 ivm_koli = 6;
+    string imv_jenis_koli = 7;
+    repeated CheckingDetails details = 8;
+}
+  
+message SubmitPickingCheckingRequest {
+    string interid = 1;
+    string uniqueid = 2;
+    string bachnumb = 3;
+    Picking picking = 4;
+    repeated Checking checking = 5;
+}
+
+message SubmitPickingCheckingResponse{
+    message Data {
+        message Checking {
+            string docnumbr = 1;
+        }
+        message DeliveryOrder {
+            string docnumbr = 1;
+        }
+        message SalesInvoice {
+            string docnumbr = 1;
+        }
+        string bachnumb = 1;
+        Checking checking = 2;
+        DeliveryOrder delivery_order = 3;
+        SalesInvoice sales_invoice = 4;
+    }
+    int32 code = 1;
+    string message = 2;
+    Data data = 3;
+}
+
+message LoginHelperRequest{
+    string interid = 1;
+    int32  type = 2;
+    string email = 3;
+    string password = 4;
+}
+
+message LoginHelperResponse{
+    int32 code = 1;
+    string message = 2;
+}
+
+message CommitPurchaseOrderRequest{
+    int64 id = 1;
+}
+
+message CancelPurchaseOrderRequest{
+    int64 id = 1;
+    string note = 2;
+}
+
+message WrtGP {
+    string gnL_Region = 1;
+    string gnL_WRT_ID = 2;
+    string strttime = 3;
+    string endtime = 4;
+    optional int32 inactive = 5;
+  }
+  
+  message GetWrtGPResponse {
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated WrtGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+  }
+
+message GetWrtGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string status = 3;
+    string search = 4;
+    string gnl_region = 5;
+    string gnl_wrt_id = 6;
+    string order_by = 7;
+}
+
+message GetWrtGPDetailRequest{
+    string id = 1;
+}
+
+message UpdatePurchaseOrderRequest{
+	int64 id = 1;
+    int64 vendor_id = 2;
+	int64 site_id = 3;
+	string order_date = 4;
+	string str_eta_date = 5;
+	string eta_time = 6;
+	double delivery_fee = 7;
+	string note = 8;
+	double tax_pct = 9;
+	double latitude = 10;
+	double longitude = 11;
+    repeated UpdatePurchaseOrderItemRequest items = 12;
+}
+
+message UpdateProductPurchaseOrderRequest{
+	int64 id = 1;
+	double delivery_fee = 2;
+	double tax_pct = 3;
+    repeated UpdatePurchaseOrderItemRequest items = 4;
+}
+
+message UpdatePurchaseOrderItemRequest {
+    int64 id = 1;
+	int64 item_id = 2;
+	double order_qty = 3;
+	double unit_price = 4;
+	string note = 5;
+	double purchase_qty = 6;
+	int32 include_tax = 7;
+	double tax_percentage = 8;
+}
+
+message ItemTransfer {
+    int64 id = 1;
+    string code = 2;
+    google.protobuf.Timestamp request_date = 3;
+    google.protobuf.Timestamp recognition_date = 4;
+    google.protobuf.Timestamp eta_date = 5;
+    string eta_time = 6;
+    google.protobuf.Timestamp ata_date = 7;
+    string ata_time = 8;
+    double additional_cost = 9;
+    string additional_cost_note = 10;
+    int32 stock_type = 11;
+    double total_cost = 12;
+    double total_charge = 13;
+    double total_weight = 14;
+    string note = 15;
+    int32 status = 16;
+    int32 locked = 17;
+    int64 locked_by = 18;
+    int64 total_sku = 19;
+    int64 SiteOriginId = 20;
+    int64 SiteDestinationId = 21;
+    google.protobuf.Timestamp updated_at = 22;
+    int64 updated_by = 23;
+    repeated ItemTransferItem ItemTransferItem = 24;
+    Site site_origin = 25;
+    Site site_destination = 26;
+    repeated ReceivingListinDetailResponse receiving = 27;
+}
+
+message ItemTransferItem {
+    int64 id = 1;
+    int64 item_transfer_id = 2;
+    int64 item_id = 3;
+    double deliver_qty = 4;
+    double receive_qty = 5;
+    double request_qty = 6;
+    string receive_note = 7;
+    double unit_cost = 8;
+    double subtotal = 9;
+    double weight = 10;
+    string note = 11;
+    ItemTransfer transfer_item = 12;
+    Item item = 13;
+}
+
+message GetItemTransferListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+}
+
+message GetItemTransferListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated ItemTransfer data = 3;
+}
+
+message GetItemTransferDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetItemTransferDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    ItemTransfer data = 3;
+}
+
+message SalesInvoice {
+    int64 id = 1;
+    string code = 2;
+    string code_ext = 3;
+    int32 status = 4;
+    google.protobuf.Timestamp recognition_date = 5;
+    google.protobuf.Timestamp due_date = 6;
+    string billing_address = 7;
+    double delivery_fee = 8;
+    string vou_redeem_code = 9;
+    double vou_disc_amount = 10;
+    double point_redeem_amount = 11;
+    int32 adjustment = 12;
+    double adj_amount = 13;
+    string adj_note = 14;
+    double total_price = 15;
+    double total_charge = 16;
+    int64 delta_print = 17;
+    string note = 18;
+    int64 voucher_id = 19;
+    double remaining_amount = 20;
+}
+
+message GetSalesInvoiceDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetSalesInvoiceDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    SalesInvoice data = 3;
+}
+
+message SalesPayment {
+    int64 id = 1;
+    string code = 2;
+    int32 status = 3;
+    google.protobuf.Timestamp recognition_date = 4;
+    double amount = 5;
+    string bank_receive_num = 6;
+    int32 paid_off = 7;
+    string image_url = 8;
+    string note = 9;
+    google.protobuf.Timestamp created_at = 10;
+    int64 created_by = 11;
+    string cancellation_note = 12;
+    google.protobuf.Timestamp received_date = 14;
+    int64 sales_invoice_id = 15;
+}
+
+message GetSalesPaymentListRequest{
+    int64 sales_invoice_id = 1;
+}
+
+message GetSalesPaymentListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated SalesPayment data = 3;
+}
+
+message GetSalesPaymentDetailRequest{
+    int64 id = 1;
+}
+
+message GetSalesPaymentDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    SalesPayment data = 3;
+}
+
+message SalesInvoiceItem {
+    int64 id = 1;
+    int64 sales_invoice_id = 2;
+    int64 sales_order_item_id = 3;
+    int64 item_id = 4;
+    double invoice_qty = 5;
+    double unit_price = 6;
+    double subtotal = 7;
+    string note = 8;
+    int32 taxable_item = 9;
+    double tax_percentage = 10;
+    double sku_disc_amount = 11;
+}
+
+message GetSalesInvoiceItemListRequest{
+    int64 sales_invoice_id = 1;
+}
+
+message GetSalesInvoiceItemListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated SalesInvoiceItem data = 3;
+}
+
+message DeliveryOrder{
+    int64 id = 1;
+    int64 code = 2;
+    string shipping_address = 3;
+    google.protobuf.Timestamp recognition_date = 4;
+    string receipt_note = 5;
+    double total_weight = 6;
+    int32 delta_print = 7;
+    string note = 8;
+    int32 status = 9;
+    string cancellation_note = 10;
+    int32 has_delivered = 11;
+    google.protobuf.Timestamp created_at = 12;
+    google.protobuf.Timestamp updated_at = 13;
+    int64 created_by = 14;
+    int64 updated_by = 15;
+    google.protobuf.Timestamp confirmed_at = 16;
+    int64 confirmed_by = 17;
+    google.protobuf.Timestamp cancelled_at = 18;
+    int64 cancelled_by = 19;
+    int64 sales_order_id = 20;
+    int64 site_id = 21;
+    int64 wrt_id = 22;
+}
+
+message GetDeliveryOrderListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    int64 site_id = 6;
+    google.protobuf.Timestamp order_date_from = 7;
+    google.protobuf.Timestamp order_date_to = 8;
+    int64 sales_order_id = 9;
+    int64 wrt_id = 10;
+}
+
+message GetDeliveryOrderListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated DeliveryOrder data = 3;
+}
+
+message DeliveryOrderGP {
+    string docnumbr = 1;
+    string docdate = 2;
+    string sopnumbe = 3;
+    string status = 4;
+    repeated ItemDetail details = 5;
+    DocumentAttachment dataAttachment = 6;
+}
+
+message ItemDetail {
+    string itemnmbr = 1;
+    string itemdesc = 2;
+    string uofm = 3;
+    double qtyorder = 4;
+    double ivm_qty_pack = 5;
+}
+
+message DocumentAttachment {
+    string documentBody = 1;
+    string documentViewBody = 2;
+    int32 print_count = 3;
+}
+
+message GetDeliveryOrderGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string docNumber = 3;
+    string sopNumbe = 4;
+    string delta_user = 5;
+}
+
+message GetDeliveryOrderGPListResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated DeliveryOrderGP data = 5;
+    bool succeeded = 6;
+    string errors = 7;
+    string message = 8;
+}
+
+message GetDeliveryOrderDetailRequest{
+    int64 id = 2;
+    string code = 3;
+    google.protobuf.Timestamp order_date_from = 4;
+    google.protobuf.Timestamp order_date_to = 5;
+    int64 sales_order_id = 6;
+    int64 site_id = 7;
+    int64 wrt_id = 8;
+}
+
+message GetDeliveryOrderDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    DeliveryOrder data = 3;
+}
+
+message DetailOrder {
+    int32 ivm_cb = 1;
+    string sopnumbe = 2;
+    double qtyorder = 3;
+    double ivm_qty_pack = 4;
+  }
+  
+  message DetailItem {
+    int32 lnseqnbr = 1;
+    string itemnmbr = 2;
+    string uofm = 3;
+    double qtyorder = 4;
+    double ivm_qty_pack = 5;
+    string locncode = 6;
+  }
+  
+  message CreateDeliveryOrderRequest {
+    string interid = 1;
+    string docnumbr = 2;
+    string docdate = 3;
+    string custnmbr = 4;
+    string custname = 5;
+    string gnL_courier_id = 6;
+    repeated DetailOrder detail_order = 7;
+    repeated DetailItem detail_item = 8;
+  }
+
+  message CreateDeliveryOrderResponse {
+    string code = 1;
+    string message = 2;
+  }
+  
+
+message PaymentMethodGP{
+    string pmntnmbr = 1;
+    string vendorid = 2;
+    string docnumbr = 3;
+    string docdate = 4;
+    string chekbkid = 5;
+    int32 pyenttyp = 6;
+    string payment_method_desc = 7;
+    string prp_payment_method_id = 8;
+    string prp_payment_method_desc = 9;
+    int32 inactive = 10;
+    string inactive_desc = 11;
+}
+
+message GetPaymentMethodGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+}
+
+message GetPaymentMethodGPDetailRequest{
+    string id = 1;
+}
+
+message GetPaymentMethodGPResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated PaymentMethodGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message PaymentTermGP {
+    string pymtrmid = 1;
+    int64 duetype = 2;
+    string duedesc = 3;
+    int64 duedtds = 4;
+    int64 calculateDateFrom = 5;
+    int64 calculateDateFromDays = 6;
+    int64 disctype = 7;
+    int64 discdtds = 8;
+    int64 dsclctyp = 9;
+    double dscdlram = 10;
+    int64 dscpctam = 11;
+    int64 salpurch = 12;
+    int64 discntcb = 13;
+    int64 freight = 14;
+    int64 misc = 15;
+    int64 tax = 16;
+    string duetype_desc = 17;
+    int32 gnl_payment_usefor = 18;
+    string gnl_payment_usefor_desc = 19;
+}
+
+message SalesPersonGP {
+    string slprsnid = 1;
+    string employid = 2;
+    string vendorid = 3;
+    string slprsnfn = 4;
+    string sprsnsmn = 5;
+    string sprsnsln = 6;
+    string addresS1 = 7;
+    string addresS2 = 8;
+    string addresS3 = 9;
+    string city = 10;
+    string state = 11;
+    string zip = 12;
+    string country = 13; 
+    string phonE1 = 14;
+    string phonE2 = 15;
+    string phonE3 = 16;
+    string fax = 17;
+    string commcode = 18;
+    int64 comprcnt = 19;
+    int64 comappto = 20;
+    double costtodt = 21;
+    double cstlstyr = 22;
+    double ttlcomtd = 23;
+    double ttlcomly = 24;
+    double comsltdt = 25;
+    double comsllyr = 26;
+    double ncomsltd = 27;
+    double ncomslyr = 28;
+    int64 noteindex = 29;
+    string gnL_Supervisor1 = 30;
+    int32 inactive = 31;
+    string salsterr = 32;
+}
+
+message CustomerTypeGP {
+    string gnL_Cust_Type_ID = 1;
+    string gnL_CustType_Description = 2; 
+    int32 gnL_Cust_Group = 3;
+    int32 inactive = 4;
+    string inactive_desc = 5;
+    string gnL_Cust_Group_desc = 6;
+}
+
+message ArchetypeGP {
+    string gnl_archetype_id = 1;
+    string gnl_archetypedescription = 2;
+    string gnl_cust_type_id = 3;
+    string gnl_custtype_description = 4;
+    int32 inactive = 5;
+    string inactive_desc = 6;
+}
+
+message OrderTypeGP {
+    string docid = 1;
+    string sopnumbe = 2;
+    string usdociD1 = 3;
+    string usdociD2 = 4;
+}
+
+message UomGP {
+    string uomschdl = 1;
+    string umschdsc = 2;
+    string baseuofm = 3;
+    int64 umdpqtys = 4;
+    string uofm = 5;
+    double qtybsuom = 6;
+    string equivuom = 7; 
+    double gnL_UOM_KG = 8;
+}
+
+message ItemClassGP {
+    int32 gnL_CB_CapitalItem = 1;
+    string gnL_CB_CapitalItem_DESC = 2;
+    int32 gnL_CB_AllowDirectPO = 3;
+    string gnL_CB_AllowDirectPO_DESC = 4;
+    string itmclscd = 5;
+    string itmclsdc = 6;
+    int32 defltcls = 7;
+    string noteindx = 8;
+    int32 itemtype = 9;
+    string itemtypE_DESC = 10;
+    int32 itmtrkop = 11;
+    string itmtrkoP_DESC = 12;
+    string lottype = 13;
+    string itmgedsc = 14;
+    int32 taxoptns = 15;
+    string taxoptnS_DESC = 16;
+    string itmtshid = 17;
+    int32 purchase_Tax_Options = 18;
+    string purchase_Tax_Options_Desc = 19;
+    string purchase_Item_Tax_Schedu = 20;
+    string uomschdl = 21;
+    int32 vctnmthd = 22;
+    string vctnmthD_DESC = 23;
+    string uscatvlS_1 = 24;
+    string uscatvlS_2 = 25;
+    string uscatvlS_3 = 26;
+    string uscatvlS_4 = 27;
+    string uscatvlS_5 = 28;
+    string uscatvlS_6 = 29;
+    int32 decplqty = 30;
+    string decplqtY_DESC = 31;
+    string purpvidx = 32;
+    string uppvidx = 33;
+    string ivretidx = 34;
+    string asmvridx = 35;
+    string prclevel = 36;
+    string priceGroup = 37;
+    int32 pricmthd = 38;
+    string pricmthD_DESC = 39;
+    string tcc = 40;
+    int32 revalue_Inventory = 41;
+    int32 tolerance_Percentage = 42;
+    string cntryorgn = 43;
+    int32 sttstclvlprcntg = 44;
+    int32 lotexpwarn = 45;
+    int32 lotexpwarndays = 46;
+    string useQtyOverageTolerance = 47;
+    string useQtyShortageTolerance = 48;
+    int32 qtyOverTolerancePercent = 49;
+    int32 qtyShortTolerancePercent = 50;
+    string ivscrvix = 51;
+}
+
+message SalesTerritoryGP {
+    string salsterr = 1;
+    string slterdsc = 2;
+    string slprsnid = 3;
+    string stmgrfnm = 4;
+    string stmgrmnm = 5;
+    string stmgrlnm = 6;
+    string country = 7;
+    double costtodt = 8;
+    double ttlcomtd = 9;
+    double ttlcomly = 10;
+    double ncomslyr = 11;
+    double comsllyr = 12;
+    double cstlstyr = 13;
+    double comsltdt = 14;
+    double ncomsltd = 15;
+    double noteindx = 16;
+    string modifdt = 17;
+    string creatddt = 18;
+}
+
+message AddressGP {
+    string custnmbr = 1;
+    string custname = 2;
+    string adrscode = 3;
+    string slprsnid = 4;
+    string shipmthd = 5;
+    string taxschid = 6;
+    string cntcprsn = 7;
+    string addresS1 = 8;
+    string addresS2 = 9;
+    string addresS3 = 10;
+    string country = 11;
+    string city = 12;
+    string state = 13;
+    string zip = 14;
+    string phonE1 = 15;
+    string phonE2 = 16;
+    string phonE3 = 17;
+    string cCode = 18;
+    string locncode = 19;
+    string salsterr = 20;
+    string userdeF1 = 21;
+    string userdeF2 = 22;
+    string shipToName = 23;
+    string gnL_Administrative_Code = 24;
+    string gnL_Archetype_ID = 25;
+    double gnL_Longitude = 26;
+    double gnL_Latitude = 27;
+    string gnL_Address_Note = 28;
+    int32 inactive = 29;
+    string crusrid = 30;
+    string creatddt = 31;
+    string mdfusrid = 32;
+    string modifdt = 33;
+    string type_address = 34;
+    AdministrativeDiv administrative_div = 35;
+    string prstadcd = 36;
+}
+
+message GetPaymentTermGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string payment_usefor = 3;
+    string payment_term_id = 4;
+}
+
+message GetPaymentTermGPDetailRequest{
+    string id = 1;
+}
+
+message GetPaymentTermGPResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated PaymentTermGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message GetSalesPersonGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string sales_territory_id = 3;
+    string status = 4;
+    string search = 5;
+}
+
+message GetSalesPersonGPDetailRequest{
+    string id = 1;
+}
+
+message GetSalesPersonGPResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated SalesPersonGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message GetCustomerTypeGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string id = 3;
+    string description = 4;
+    string customer_group_id = 5;
+    string inactive = 6;
+}
+
+message GetCustomerTypeGPDetailRequest{
+    string id = 1;
+}
+
+message GetCustomerTypeGPResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated CustomerTypeGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message GetArchetypeGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string gnl_archetype_id = 3;
+    string gnl_archetypedescription = 4;
+    string gnl_cust_type_id = 5;
+    string inactive = 6;
+}
+
+message GetArchetypeGPDetailRequest{
+    string id = 1;
+}
+
+message GetArchetypeGPResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated ArchetypeGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message GetOrderTypeGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+}
+
+message GetOrderTypeGPDetailRequest{
+    string id = 1;
+}
+
+message GetOrderTypeGPResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated OrderTypeGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message GetUomGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string search = 3;
+}
+
+message GetUomGPDetailRequest{
+    string id = 1;
+}
+
+message GetUomGPResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated UomGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message GetItemClassGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string search = 3;
+}
+
+message GetItemClassGPDetailRequest{
+    string id = 1;
+}
+
+message GetItemClassGPResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated ItemClassGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message GetSalesTerritoryGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string search = 3;
+}
+
+message GetSalesTerritoryGPDetailRequest{
+    string id = 1;
+}
+
+message GetSalesTerritoryGPResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated SalesTerritoryGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message GetAddressGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string customer_number = 3;
+    string customer_name = 4;
+    string exclude_type = 5;
+    string status = 6;
+    string adrscode = 7;
+}
+
+message GetAddressGPDetailRequest{
+    string id = 1;
+}
+
+message GetAddressGPResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated AddressGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message CreateItemTransferRequest {
+    string request_date_str = 1;
+    int64 site_origin_id = 2;
+    int64 site_destination_id = 3;
+    string note = 4;
+    int32 stock_type_id = 5;
+    repeated CreateItemTransferItemRequest item_transfer_items = 6;
+}
+
+message CreateItemTransferItemRequest {
+    int64 item_id = 1;
+    double transfer_qty = 2;
+    double request_qty = 3;
+    double receive_qty = 4;
+    string receive_note = 5;
+    double unit_cost = 6;
+    string note = 7;
+}
+
+message UpdateItemTransferRequest {
+    int64 id = 1;
+    int64 site_origin_id = 2;
+    int64 site_destination_id = 3;
+    string recognition_date_str = 4;
+    string request_date_str = 5;
+    string eta_date_str = 6;
+    string eta_time_str = 7;
+    double additional_cost = 8;
+    string additional_cost_note = 9;
+    string note = 10;
+    repeated UpdateItemTransferItemRequest item_transfer_items = 11;
+}
+  
+  message UpdateItemTransferItemRequest {
+    int64 id = 1;
+    int64 item_id = 2;
+    double transfer_qty = 3;
+    double request_qty = 4;
+    double receive_qty = 5;
+    string receive_note = 6;
+    double unit_cost = 7;
+    string note = 8;
+}
+
+message GetItemTransferItemDetailRequest{
+    int64 id = 2;
+}
+
+message GetItemTransferItemDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    ItemTransferItem data = 3;
+}
+
+message CommitItemTransferRequest {
+    int64 id = 1;
+    string recognition_date = 2;
+    string eta_date = 3;
+    string eta_time = 4;
+    double additional_cost = 5;
+    string additional_cost_note = 6;
+    repeated UpdateItemTransferItemRequest item_transfer_items = 7;
+}
+
+message Receiving {
+    int64 id = 1;
+    int64 site_id = 2;
+    int64 purchase_order_id = 3;
+    int64 item_transfer_id = 4;
+    string code = 5;
+    google.protobuf.Timestamp ata_date = 6;
+    string ata_time = 7;
+    double total_weight = 8;
+    string note = 9;
+    int32 status = 10;
+    int32 inbound_type = 11;
+    int32 valid_supplier_return = 12;
+    google.protobuf.Timestamp created_at = 13;
+    int64 created_by = 14;
+    google.protobuf.Timestamp confirmed_at = 15;
+    int64 confirmed_by = 16;
+    int32 locked = 17;
+    int32 stock_type = 18;
+    int64 locked_by = 19;
+    google.protobuf.Timestamp updated_at = 20;
+    int64 updated_by = 21;
+  
+    Site site = 22;
+    PurchaseOrder purchase_order = 23;
+    ItemTransfer item_transfer = 24;
+  
+    repeated ReceivingItem receiving_items = 25;
+}
+  
+message ReceivingItem {
+    int64 id = 1;
+    int64 purchase_order_item_id = 2;
+    int64 item_transfer_item_id = 3;
+    double deliver_qty = 4;
+    double reject_qty = 5;
+    double receive_qty = 6;
+    double weight = 7;
+    string note = 8;
+    int32 reject_reason = 9;
+    int32 is_disabled = 10;
+  
+    Receiving receiving = 11;
+    PurchaseOrderItem purchase_order_item = 12;
+    ItemTransferItem item_transfer_item = 13;
+    Item item = 14;
+}
+
+message GetReceivingListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+}
+
+message GetReceivingListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated Receiving data = 3;
+}
+  
+message GetReceivingDetailRequest{
+    int64 id = 2;
+}
+
+message GetReceivingDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    Receiving data = 3;
+}
+
+message CreateReceivingRequest {
+    int64 id = 1;
+    int64 site_id = 2;
+    string ata_date_str = 3;
+    string ata_time_str = 4;
+    string note = 5;
+    string inbound_type = 6;
+  
+    repeated CreateReceivingItemRequest receiving_item = 7;
+}
+  
+message CreateReceivingItemRequest {
+    string receiving_item_id = 1;
+    string item_id = 2;
+    string inbound_item_id = 3;
+    double delivery_qty = 4;
+    double reject_qty = 5;
+    int32 reject_reason = 6;
+    double receive_qty = 7;
+    string note = 8;
+}
+
+message CreateAddressRequest{
+    string custnmbr = 1;
+    string custname = 2;
+    string adrscode = 3;
+    string slprsnid = 4;
+    string shipmthd = 5;
+    string taxschid = 6;
+    string cntcprsn = 7;
+    string addresS1 = 8;
+    string addresS2 = 9;
+    string addresS3 = 10;
+    string country = 11;
+    string city = 12;
+    string state = 13;
+    string zip = 14;
+    string phonE1 = 15;
+    string phonE2 = 16;
+    string phonE3 = 17;
+    string cCode = 18;
+    string locncode = 19;
+    string salsterr = 20;
+    string userdeF1 = 21;
+    string userdeF2 = 22;
+    string shipToName = 23;
+    string gnL_Administrative_Code = 24;
+    string gnL_Archetype_ID = 25;
+    double gnL_Longitude = 26;
+    double gnL_Latitude = 27;
+    string gnL_Address_Note = 28;
+    string inactive = 29;
+    string crusrid = 30;
+    string creatddt = 31;
+    string mdfusrid = 32;
+    string modifdt = 33;
+    string type_address = 34;
+    string param = 35;
+    string fax = 36;
+    string upzone = 37;
+}
+
+message CreateAddressResponse{
+    int32 code = 1;
+    string message = 2;
+}
+
+message UpdateAddressRequest{
+    string custnmbr = 1;
+    string custname = 2;
+    string adrscode = 3;
+    string slprsnid = 4;
+    string shipmthd = 5;
+    string taxschid = 6;
+    string cntcprsn = 7;
+    string addresS1 = 8;
+    string addresS2 = 9;
+    string addresS3 = 10;
+    string country = 11;
+    string city = 12;
+    string state = 13;
+    string zip = 14;
+    string phonE1 = 15;
+    string phonE2 = 16;
+    string phonE3 = 17;
+    string cCode = 18;
+    string locncode = 19;
+    string salsterr = 20;
+    string userdeF1 = 21;
+    string userdeF2 = 22;
+    string shipToName = 23;
+    string gnL_Administrative_Code = 24;
+    string gnL_Archetype_ID = 25;
+    double gnL_Longitude = 26;
+    double gnL_Latitude = 27;
+    string gnL_Address_Note = 28;
+    int32 inactive = 29;
+    string crusrid = 30;
+    string creatddt = 31;
+    string mdfusrid = 32;
+    string modifdt = 33;
+    string type_address = 34;
+    string param = 35;
+    string fax = 36;
+    string upzone = 37;
+    string interid = 38;
+}
+
+message UpdateAddressResponse{
+    int32 code = 1;
+    string message = 2;
+}
+
+message SetDefaultAddressRequest{
+    string adrscode = 1;
+    string custnmbr = 2;
+}
+
+message SetDefaultAddressResponse{
+    int32 code = 1;
+    string message = 2;
+}
+
+message DeleteAddressRequest{
+    string adrscode = 1;
+}
+
+message DeleteAddressResponse{
+    int32 code = 1;
+    string message = 2;
+}
+
+message ConfirmReceivingRequest{
+    string id = 1;
+    string inbound_type = 2;
+}
+
+message ReceivingListinDetailResponse{
+    string id = 1;
+    string code = 2;
+    int32 status = 3;
+}
+
+message VendorGP {
+
+    message Vpymtrmid {
+        string PYMTRMID = 1;
+        uint32 calculatedatefromdays = 2;
+    }
+
+    message Vorganization {
+        string PRP_Vendor_Org_ID = 1;
+        string PRP_Vendor_Org_Desc = 2;
+        uint32 INACTIVE = 3;
+        string INACTIVE_DESC = 4;
+        string CREATDDT = 5;
+        string MODIFDT = 6;
+        string CRUSRID = 7;
+        string MDFUSRID = 8;
+    }
+
+    message Vclassification {
+        string PRP_Vendor_CLASF_ID = 1;
+        string PRP_Vendor_CLASF_Desc = 2;
+        uint32 INACTIVE = 3;
+        string INACTIVE_DESC = 4;
+        string CREATDDT = 5;
+        string MODIFDT = 6;
+        string CRUSRID = 7;
+        string MDFUSRID = 8;
+    }
+
+    message Vpaymentmethod {
+        string PRP_Payment_Method = 1;
+        string PRP_Payment_Method_Desc = 2;
+        uint32 INACTIVE = 3;
+        string INACTIVE_DESC = 4;
+        string CREATDDT = 5;
+        string MODIFDT = 6;
+        string CRUSRID = 7;
+        string MDFUSRID = 8;
+    }
+
+    message Vlatestgoodsreceipt {
+        string POPRCTNM = 1;
+        string STATUS = 2;
+        string CREATDDT = 3;
+        string LOCNCODE = 4;
+        string PONUMBER = 5;
+        string TRNUMBER = 6;
+    }
+
+    message VVendorAddress {
+        string vendorid = 1;
+        string adrscode = 2;
+        AdministrativeCode prp_administrative_code = 3;
+    }
+
+    message AdministrativeCode {
+        string gnl_administrative_code = 1;
+        string gnl_province = 2;
+        string gnl_region = 3;
+        string gnl_city = 4;
+        string gnl_district = 5;
+        string gnl_subdistrict = 6;
+        string gnl_zipcode = 7;
+    }
+
+    string VENDORID = 1;
+    string VENDNAME = 2;
+    string VNDCLSID = 3;
+    string VNDCNTCT = 4;
+    string ADDRESS1 = 5;
+    string ADDRESS2 = 6;
+    string ADDRESS3 = 7;
+    string CITY = 8;
+    string STATE = 9;
+    string ZIPCODE = 10;
+    string COUNTRY = 11;
+    string PHNUMBR1 = 12;
+    string PHNUMBR2 = 13;
+    string PHONE3 = 14;
+    string FAXNUMBR = 15;
+    string UPSZONE = 16;
+    string SHIPMTHD = 17;
+    string TAXSCHID = 18;
+    string ACNMVNDR = 19;
+    string TXIDNMBR = 20;
+    uint32 VENDSTTS = 21;
+    string CREATDDT = 22;
+    string CURNCYID = 23;
+    string TXRGNNUM = 24;
+    uint32 TRDDISCT = 25;
+    double MINORDER = 26;
+    Vpymtrmid PYMTRMID = 27;
+    string COMMENT1 = 28;
+    string COMMENT2 = 29;
+    string USERDEF1 = 30;
+    string USERDEF2 = 31;
+    string PYMNTPRI = 32;
+    Vorganization Organization = 33;
+    Vclassification Classification = 34;
+    Vpaymentmethod PaymentMethod = 35;
+    Vlatestgoodsreceipt LatestGoodsReceipt = 36;
+    VVendorAddress vaddcdpr = 37;
+}
+  
+message GetVendorGPResponse {
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated VendorGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+  }
+
+message GetVendorGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string orderby = 5;
+    string vendorOrg = 6;
+    string state = 7;
+}
+
+message GetVendorGPDetailRequest{
+    string id = 1;
+}
+
+message HelperGP {
+  string gnl_helper_id = 1;
+  string gnl_helper_name = 2;
+  string employid = 3;
+  string userid = 4;
+  message HelperGPSites{
+    string locncode = 1;
+  }
+  repeated HelperGPSites sites = 5;
+  int32 gnl_helper_type = 6;
+  string helper_type_desc = 7;
+  string gnl_supervisor_id = 8;
+  string gnl_password = 9;
+  int32 inactive = 10;
+  string inactive_desc = 11;
+}
+
+message GetHelperGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string gnl_helper_id = 3;
+    string gnl_helper_name = 4;
+    string employid = 5;
+    string userid = 6;
+    int32 inactive = 7;
+    string locncode = 8;
+    string gnl_helper_type = 9;
+}
+
+message GetHelperGPDetailRequest{
+    string id = 1;
+}
+
+message GetHelperGPResponse {
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated HelperGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message CreateVendorRequest{
+    string interid = 1;
+    string vendorid = 2;
+    string vendname = 3;
+    string vendshnm = 4;
+    string vndchknm = 5;
+    string vendstts = 6;
+    string prP_Vendor_Org_ID = 7;
+    string prP_Vendor_CLASF_ID = 8;
+    string vndcntct = 9;
+    string addresS1 = 10;
+    string addresS2 = 11;
+    string phnumbR1 = 12;
+    string phnumbR2 = 13;
+    string PRP_Payment_Method = 14;
+    string vaddcdpr = 15;
+    string vadcdpad = 16;
+    string vadcdsfr = 17;
+    string vadcdtro = 18;
+    string pymtrmid = 19;
+}
+
+message CreateVendorResponse{
+    int32 code = 1;
+    string message = 2;
+}
+
+message AssignPurchasePlanGPRequest{
+    string prp_purchaseplan_no = 1;
+    string prp_purchaseplan_user = 2;
+}
+
+message AssignPurchasePlanGPResponse{
+    int32 code = 1;
+    string message = 2;   
+}
+
+
+message CancelPurchaseOrderGPRequest{
+    string po_number = 1;
+    string user_id = 2;
+}
+
+message CancelPurchaseOrderGPResponse{
+    int32 code = 1;
+    string message = 2;   
+}
+
+message CancelAssignPurchasePlanRequest{
+
+}
+
+message CancelAssignPurchasePlanResponse{
+    
+}
+
+message GetSalesInvoiceListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    int64 customer_id = 6;
+    int64 address_id = 7;
+    int64 salesperson_id = 8;
+    google.protobuf.Timestamp order_date_from = 9;
+    google.protobuf.Timestamp order_date_to = 10;
+}
+
+message GetSalesInvoiceListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated SalesInvoice data = 3;
+}
+
+message CustomerGP {
+    string custnmbr = 1;
+    string custname = 2;
+    string custclas = 3;
+    string cprcstnm = 4;
+    string cntcprsn = 5;
+    string stmtname = 6;
+    string shrtname = 7;
+    repeated CustomerAddressGP adrscode = 8;
+    string upszone = 9;
+    string shipmthd = 10;
+    string taxschid = 11;
+    string addresS1 = 12;
+    string addresS2 = 13;
+    string addresS3 = 14;
+    string country = 15;
+    string city = 16;
+    string state = 17;
+    string zip = 18;
+    string phonE1 = 19;
+    string phonE2 = 20;
+    string phonE3 = 21;
+    string fax = 22;
+    string prbtadcd = 23;
+    string prstadcd = 24;
+    string staddrcd = 25;
+    string slprsnid = 26;
+    string chekbkid = 27;
+    repeated pymtrmid pymtrmid = 28;
+    int32 crlmttyp = 29;
+    string crlmttyp_desc = 30;
+    double crlmtamt = 31;
+    string curncyid = 32;
+    string ratetpid = 33;
+    string custdisc = 34;
+    string prclevel = 35;
+    string minpytyp = 36;
+    string minimum_payment_type_desc = 37;
+    string minpydlr = 38;
+    string minpypct = 39;
+    string fnchatyp = 40;
+    string finance_charge_amt_type_desc = 41;
+    string fnchpcnt = 42;
+    string finchdlr = 43;
+    string mxwoftyp = 44;
+    string maximum_writeoff_type_desc = 45;
+    string mxwrofam = 46;
+    string commenT1 = 47;
+    string commenT2 = 48;
+    string userdeF1 = 49;
+    string userdeF2 = 50;
+    string taxexmT1 = 51;
+    string taxexmT2 = 52;
+    string txrgnnum = 53;
+    string balnctyp = 54;
+    string balance_type_desc = 55;
+    string stmtcycl = 56;
+    string statement_cycle_desc = 57;
+    string bankname = 58;
+    string bnkbrnch = 59;
+    string salsterr = 60;
+    int32 inactive = 61;
+    string hold = 62;
+    string crcardid = 63;
+    string crcrdnum = 64;
+    string ccrdxpdt = 65;
+    string creatddt = 66;
+    string modifdt = 67;
+    repeated CustomerTypefromCustomerGP customer_type = 68;
+    int64 gnl_business_type = 69;
+    string gnl_business_type_desc = 70;
+    string gnl_referrer_code = 71;
+    string gnl_referral_code = 72;
+    AdministrativeDiv administrative_div = 73;
+    int32 shipcomplete = 74;
+    string shipcomplete_desc = 75;
+    double remaining_amount = 76;
+    double remaining_credit_limit = 77;
+}
+
+message GetCustomerGPResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated CustomerGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message GetCustomerGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string phone = 3;
+    string id = 4;
+    string name = 5;
+    string adress_id = 6;
+    string prstadcd = 7;
+    string salsterr = 8;
+    string sales_person_id = 9;
+    string customer_type_id = 10;
+    string referrer_code = 11;
+    string referral_code = 12;
+    string inactive = 13;
+    string orderby = 14;
+
+}
+
+message GetCustomerGPDetailRequest{
+    string id = 1;
+}
+
+message CreateCustomerGPRequest {
+    string interid = 1;
+    string custnmbr = 2;
+    string custname = 3;
+    string custclas = 4;
+    string custpriority = 5;
+    string cprcstnm = 6;
+    string stmtname = 7;
+    string shrtname = 8;
+    string upszone = 9;
+    CreateAddressRequest address = 10;
+    string shipmthd = 11;
+    string taxschid = 12;
+    string prbtadcd = 13;
+    string prstadcd = 14;
+    string staddrcd = 15;
+    string slprsnid = 16;
+    string pymtrmid = 17;
+    string salsterr = 18;
+    string userdef1 = 19;
+    string userdef2 = 20;
+    string declid = 21;
+    string comment1 = 22;
+    string comment2 = 23;
+    int32 custdisc = 24;
+    int32 disgrper = 25;
+    int32 duegrper = 26;
+    string prclevel = 27;
+    string gnl_cust_type_id = 28;
+    string gnl_referrer_code = 29;
+    string gnl_referral_code = 30;
+    int32 gnl_business_type = 31;
+    string gnl_social_sec_num = 32;
+    int32 hold = 33;
+    int32 inactive = 34;
+    string cntcprsn = 35;
+    int32 crlmttyp = 36;
+    string crlmttyp_desc = 37;
+    double crlmtamt = 38;
+}
+
+message CreateCustomerGPResponse {
+    int32 code = 1;
+    string message = 2;
+    string custnmbr = 3;
+    string gnL_referral_code = 4;
+    string gnl_referrer_code = 5;
+    string shipcomplete = 6;
+}
+
+
+message CustomerAddressGP {
+    string adrscode = 1;
+    string shipToName = 2;
+    repeated AdministrativeDivision administrativeDivision = 3;
+}
+    
+message AdministrativeDivision {
+    repeated CustAddrTypeShipTo custAddrTypeShipTo = 1;
+    repeated CustAddrTypeBillTo custAddrTypeBillTo = 2;
+    repeated CustAddrTypeStatementTo custAddrTypeStatementTo = 3;
+}
+    
+message CustAddrTypeShipTo {
+    string prstadcd = 1;
+    string shipToName = 2;
+    string gnL_Administrative_Code = 3;
+}
+    
+message CustAddrTypeBillTo {
+    string prbtadcd = 1;
+    string shipToName = 2;
+    string gnL_Administrative_Code = 3;
+}
+    
+message CustAddrTypeStatementTo {
+    string staddrcd = 1;
+    string shipToName = 2;
+    string gnL_Administrative_Code = 3;
+}
+
+message pymtrmid {
+    string pymtrmid = 1;
+    int64 calculateDateFromDays = 2;
+}
+
+message SalesOrderGP {
+    string sopnumbe = 1;
+    string docdate = 2;
+    string reqShipDate = 3;
+    int32 status = 4;
+    string statuS_STRING = 5;
+    int32  soptype = 6;
+    string soptypE_STRING = 7;
+    string docid = 8;
+    double orfrtamt = 9;
+    double orsubtot = 10;
+    double taxamnt = 11;
+    double totaL_VOUCHER = 12;
+    double total = 13;
+    double gnL_TotalWeight = 14;
+    string commntid = 15;
+    string creatddt = 16;
+    string gnL_WRT_ID = 17;
+    string gnL_Region = 18;
+    string orignumb = 19;
+    string custnmbr = 20;
+    string custname = 21;
+    string slprsnid = 22;
+    string prstadcd = 23;
+    repeated AddressGP address = 24;
+    string gnL_Archetype_ID = 25;
+    string gnL_Order_Channel = 26;
+    string gnL_SO_Code_Apps = 27;
+    string cstponbr = 28;
+    string curncyid = 29;
+    double distknam = 30;
+    double acctamnt = 31;
+    double trdisamt = 32;
+    double frtamnt = 33;
+    double miscamnt = 34;
+    string phnumbR1 = 35;
+    string city = 36;
+    string pymtrmid = 37;
+    int32 duedtds = 38;
+    string locncode = 39;
+    string locndscr = 40;
+    string gnL_Administrative_Code = 41;
+    string salsterr = 42;
+    string slterdsc = 43;
+    repeated Detail details = 44;
+    repeated CustomerGP customer = 45;
+    repeated WrtGP wrt = 46;
+    repeated TermOfPayment term_of_payments = 47;
+    repeated Territory territory = 48;
+    repeated SiteGP site = 49;
+    repeated VoucherDetailGP voucher = 50;
+    string shipmthd = 51;
+    double docamnt = 52;
+     
+    message VoucherDetailGP {
+        int32 gnL_voucher_type = 1;
+        string gnL_voucher_type_desc = 2;
+        string gnL_voucher_id = 3;
+        double ordocamt = 4;
+    }
+
+    message Detail {
+        string itemnmbr = 1;
+        string itemdesc = 2;
+        double quantity = 3;
+        double unitprce = 4;
+        double xtndprce = 5;
+        double gnL_Weight = 6;
+        double mrkdnamt = 7;
+        string uofm = 8;
+    }
+    message TermOfPayment{
+        string pymtrmid = 1;
+        int32 duedtds = 2;
+    }
+    message Territory{
+        string salsterr = 1;
+        string slterdsc = 2;
+    }
+}
+
+message GetSalesOrderGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string custnumber = 3;
+    string so_number = 4;
+    string custname = 5;
+    string region = 6;
+    string order_channel = 7;
+    string so_code_apps = 8;
+    string wrt_id = 9;
+    string locncode = 10;
+    string ordertype= 11;
+    string salesperson_id = 12;
+    string status = 13;
+    string docdate_from = 14;
+    string docdate_to = 15;
+    string req_ship_date_from = 16;
+    string req_ship_date_to = 17;
+    string docid = 18;
+    string orderby = 19;
+}
+
+message GetSalesOrderGPListResponse{
+  int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated SalesOrderGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message GetSalesOrderGPListByIDRequest{
+    string id = 1;
+}
+
+// message GetSalesOrderGPListByIDResponse{
+//     int32 pageNumber = 1;
+//       int32 pageSize = 2;
+//       int32 totalPages = 3;
+//       int32 totalRecords = 4;
+//       repeated SalesOrderGP data = 5;
+//       bool succeeded = 6;
+//       repeated string errors = 7;
+//       string message = 8;
+//   }
+
+message CustomerTypefromCustomerGP {
+    string gnL_Cust_Type_ID = 1;
+    string gnL_CustType_Description = 2;
+    int32 inactive = 3;
+    string inactivE_DESC = 4;
+}
+
+message AdministrativeDiv {
+    string gnl_administrative_code = 1;
+    string gnl_region = 2;
+    string gnl_city = 3;
+    string gnl_subdistrict = 4;
+    string gnl_district = 5;
+}
+
+
+message GetPurchasePlanGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string prp_purchaseplan_no = 3;
+    string locncode = 4;
+    string prp_purchaseplan_date_from = 5;
+    string prp_purchaseplan_date_to = 6;
+    int32 status = 7;
+    string field_purchaser = 8;
+    string prp_vendor_org_desc = 9;
+}
+
+message GetPurchasePlanGPDetailRequest{
+    string id = 1;
+}
+
+message GetPurchasePlanGPResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated PurchasePlanGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message PurchasePlanGP{
+    string prp_region = 1;
+    string prp_purchaseplan_no = 2;
+    string docdate = 3;
+    repeated SitePP.Location site_id = 4;
+    repeated VendorOrganizationPP vendor_organization = 5;
+    string prp_purchaseplan_date = 6;
+    string prp_estimatedarrival_tim = 7;
+    string prp_purchaseplan_user = 8;
+    string prp_note = 9;
+    double subtotal = 10;
+    int32 pr_status = 11;
+    string pr_status_desc = 12;
+    string creatddt = 13;
+    string crusrid = 14;
+    repeated Detail detail = 15;
+    string locncode = 16;
+    string prp_vendor_org_id = 17;
+    Assigned_to assigned_to = 18;
+    Created_by created_by = 19;
+    Assigned_by assigned_by = 20;
+
+    message Assigned_to{
+       string prp_purchaseplan_user = 1;
+       string prp_purchaseplan_username = 2;
+       string employeeid = 3;
+    }
+
+    message Created_by{
+       string crusrid = 1;
+       string crusrname = 2; 
+       string employeeid = 3;
+    }
+
+    message Assigned_by{
+        string prp_assigned_by = 1;
+        string prp_assigned_by_name = 2;
+        string employeeid = 3;
+    }
+
+    message Detail {
+        string itemnmbr = 1;
+        string itemdesc = 2;
+        string uomschdl = 3;
+        double quantity = 4;
+        double unitcost = 5;
+        double extdcost = 6;
+        int32 itemshwt = 7;
+    }
+}
+
+message VendorOrganizationPP {
+    string prp_vendor_org_id = 1;
+    string prp_vendor_org_desc = 2;
+}
+
+message SitePP {
+    message Location {
+      string locncode = 1;
+      int32 inactive = 2;
+      string gnl_description100 = 3;
+      message AdminDivision {
+        string gnl_region = 1;
+        string gnl_subdistrict = 2;
+      }
+      repeated AdminDivision adm_division = 4;
+    }
+    repeated Location site_id = 1;
+}
+
+message GetPurchaseOrderGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string code = 3;
+    repeated int32 status = 4;
+    string purchase_plan_id = 5;
+    string reqdate_from = 6;
+    string reqdate_to = 7;
+    bool is_not_consolidated = 8;
+    string is_purchase_plan = 9;
+    string orderby = 10;
+    string prp_purchaseplan_user = 11;
+    string locncode = 12;
+    string prp_cs_no = 13;
+    string vendor_id = 14;
+    string ponumber = 15;
+    string ponumberlike = 16;
+}
+
+message GetPurchaseOrderGPDetailRequest{
+    string id = 1;
+}
+
+message GetPurchaseOrderGPResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated PurchaseOrderGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message Poinvoice {
+    string poprctnm = 1;
+     int32 status = 2;
+    string status_desc = 3;
+}
+
+message PoDetail {
+    string ponumber = 1;
+    int32 ord = 2;
+    int32 polnesta = 3;
+    int32 potype = 4;
+    string poptype_desc = 5;
+    string buyerid = 6;
+    string itemnmbr = 7;
+    string itemdesc = 8;
+    string vendorid = 9;
+    string vnditnum = 10;
+    string vnditdsc = 11;
+    string locncode = 12;
+    string uofm = 13;
+    double umqtyinb = 14;
+    double qtyorder = 15;
+    double qtycance = 16;
+    double unitcost = 17;
+    double taxamnt = 18;
+    double extdcost = 19;
+    int32 invindx = 20;
+    string reqstdby = 21;
+    string commntid = 22;
+    int32 doctype = 23;
+    string doctype_desc = 24;
+    int32 decplcur = 25;
+    string decplcur_desc = 26;
+    int32 decplqty = 27;
+    string decplqty_desc = 28;
+    int32 brkfld1 = 29;
+    string jobnumbr = 30;
+    string costcode = 31;
+    int32 costtype = 32;
+    int32 currnidx = 33;
+    double oruntcst = 34;
+    double orextcst = 35;
+    string purchase_item_tax_schedu = 36;
+    string purchase_site_tax_schedu = 37;
+    int32 purchsitetxschsrc = 38;
+    double ortaxamt = 39;
+    double bcktxamt = 40;
+    double obtaxamt = 41;
+    string landed_cost_group_id = 42;
+    string shipmthd = 43;
+    string origprmdate = 44;
+    string fstrcptdt = 45;
+    string lstrcptdt = 46;
+    string adrscode = 47;
+    string cmpnynam = 48;
+    string contact = 49;
+    string addresS1 = 50;
+    string addresS2 = 51;
+    string addresS3 = 52;
+    string city = 53;
+    string state = 54;
+    string zipcode = 55;
+    string ccode = 56;
+    string country = 57;
+    string phone1 = 58;
+    string phone2 = 59;
+    string phone3 = 60;
+    string fax = 61;
+    int32 addrsource = 62;
+    int32 flags = 63;
+    string projnum = 64;
+    int32 itmtrkop = 65;
+    string itmtrkop_desc = 66;
+    string prp_payment_method = 67;
+    string prp_region = 68;
+    string deprtmnt = 69;
+    string prp_locncode = 70;
+    string prp_pr_reference = 71;
+    string prp_pp_reference = 72;
+    string prp_cs_reference = 73;
+}
+
+message PurchaseOrderGP {
+    string ponumber = 1;
+    int32 potype = 2;
+    string potype_desc = 3;
+    string docdate = 4;
+    string buyerid = 5;
+    string vendorid = 6;
+    string vendname = 7;
+    string reqdate = 8;
+    int32 postatus = 9;
+    string postatus_desc = 10;
+    string commntid = 11;
+    string pymtrmid = 12;
+    double bcktxamt = 13;
+    double obtaxamt = 14;
+    string shipmthd = 15;
+    string cmpnynam = 16;
+    string contact = 17;
+    string addresS1 = 18;
+    string addresS2 = 19;
+    string addresS3 = 20;
+    string city = 21;
+    string state = 22;
+    string zipcode = 23;
+    string cCode = 24;
+    string country = 25;
+    string phonE1 = 26;
+    string phonE2 = 27;
+    string phonE3 = 28;
+    string fax = 29;
+    string prp_payment_method = 30;
+    string prp_region = 31;
+    string deprtmnt = 32;
+    string prp_locncode = 33;
+    string prp_pr_reference = 34;
+    string prp_pp_reference = 35;
+    string prp_purchaseplan_user = 36;
+    string prp_cs_reference = 37;
+    string prp_estimatedarrival_dat = 38;
+    string prp_estimatedarrival_tim = 39;
+    double subtotal = 40;
+    double trdisamt = 41;
+    double frtamnt = 42;
+    double mscchamt = 43;
+    double taxamnt = 44;
+    double total = 45;
+    double prepaymentamount = 46;
+    repeated Poinvoice poinvoice = 47;
+    repeated Poinvoice poreceiving = 48;
+    repeated PoDetail poDetail = 49;
+}
+
+message GetVendorOrganizationGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string orderby = 3;
+    string prp_vendor_org_id = 4;
+    string prp_vendor_org_desc = 5;
+    int32 inactive = 6;
+    string status = 7;
+}
+
+message GetVendorOrganizationGPDetailRequest{
+    string id = 1;
+}
+
+message GetVendorOrganizationGPResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated VendorOrganizationGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message VendorOrganizationGP{
+    string prp_vendor_org_id = 1;
+    string prp_vendor_org_desc = 2;
+    int32 inactive = 3;
+    string inactive_desc = 4;
+}
+
+message GetVendorClassificationGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+}
+
+message GetVendorClassificationGPDetailRequest{
+    string id = 1;
+}
+
+message GetVendorClassificationGPResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated VendorClassificationGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message VendorClassificationGP{
+    string prp_vendor_clasf_id = 1;
+    string prp_vendor_clasf_desc = 2;
+    int32 inactive = 3;
+    string inactive_desc = 4;
+}
+
+message CreatePurchaseOrderGPRequest{
+    string interid = 1;
+    int32 potype = 2;
+    string ponumber = 3;
+    string docdate = 4;
+    string buyerid = 5;
+    string vendorid = 6;
+    string curncyid = 7;
+    string deprtmnt = 8;
+    string locncode = 9;
+    string taxschid = 10;
+    double subtotal = 11;
+    double trdisamt = 12;
+    double frtamnt = 13;
+    double miscamnt = 14;
+    double taxamnt = 15;
+    string prp_purchaseplan_no = 16;
+    csReference cs_reference = 17;
+    string prp_payment_method = 18;
+    string prp_region = 19;
+    string prp_estimatedarrival_date = 20;
+    string notetext = 21;
+    repeated Podtl detail = 22;
+    message Podtl {
+        int32 ord = 1;
+        string itemnmbr = 2;
+        string uofm = 3;
+        double qtyorder = 4;
+        double qtycance = 5;
+        double unitcost = 6;
+        string notetext = 7;
+    }
+    message csReference {
+
+    }
+    string duedate = 23;
+    string pymtrmid  = 24;
+    int32 pr_status = 25;
+}
+
+message UpdatePurchaseOrderGPRequest{
+    string interid = 1;
+    int32 potype = 2;
+    string ponumber = 3;
+    string docdate = 4;
+    string buyerid = 5;
+    string vendorid = 6;
+    string curncyid = 7;
+    string deprtmnt = 8;
+    string locncode = 9;
+    string taxschid = 10;
+    double subtotal = 11;
+    double trdisamt = 12;
+    double frtamnt = 13;
+    double miscamnt = 14;
+    double taxamnt = 15;
+    string prp_purchaseplan_no = 16;
+    csReference cs_reference = 17;
+    string prp_payment_method = 18;
+    string prp_region = 19;
+    string prp_estimatedarrival_date = 20;
+    string notetext = 21;
+    string pymtrmid = 22;
+    string duedate = 23;
+    repeated Podtl detail = 24;
+    message Podtl {
+        int32 ord = 1;
+        string itemnmbr = 2;
+        string uofm = 3;
+        double qtyorder = 4;
+        double qtycance = 5;
+        double unitcost = 6;
+        string notetext = 7;
+    }
+    message csReference {
+        string prp_cs_no = 1;
+        string prp_vehicle_no = 2;
+        string prp_driver_name = 3;
+        string phonname = 4;
+    }
+}
+
+message CreateConsolidatedShipmentGPRequest {
+	string interid = 1;
+	string prp_cs_no = 2;
+	string prp_driver_name = 3;
+    string pr_vehicle_number = 4;
+    string phonname = 5;
+	repeated PurchaseOrderConsolidatedShipment purchase_order = 6;    
+}
+
+message CreateConsolidatedShipmentGPResponse {
+	int32 code = 1;
+    string message = 2; 
+}
+
+message PurchaseOrderConsolidatedShipment {
+	string ponumber = 1; 
+}
+
+message UpdateConsolidatedShipmentGPRequest {
+	string interid = 1;
+	string prp_cs_no = 2;
+	string prp_driver_name = 3;
+    string pr_vehicle_number = 4;
+    string phonname = 5;
+	repeated PurchaseOrderConsolidatedShipment purchase_order = 6;    
+}
+
+message UpdateConsolidatedShipmentGPResponse {
+	int32 code = 1;
+    string message = 2; 
+}
+
+message CommonGPResponse{
+    int32 code = 1;
+    string message = 2;
+}
+  
+message SalesInvoiceGP {
+    string sopnumbe = 1;
+    int32 soptype = 2;
+    string soptype_desc = 3;
+    string docid = 4;
+    string custnmbr = 5;
+    string custname = 6;
+    string prstadcd = 7;
+    string address = 8;
+    int32 sopstatus = 9;
+    string sopstatus_desc = 10;
+    string locncode = 11;
+    string cstponbr = 12;
+    string curncyid = 13;
+    string docdate = 14;
+    string duedate = 15;
+    double ordocamt = 16;
+    double remaining_amount = 17;
+    repeated CashReceipt cash_receipt = 18;
+    repeated SalesOrder sales_order = 19;
+    string sop_number = 20;
+    repeated Detail details = 21;
+    double orpmtrvd = 22;
+    string comntid = 23;
+    double subtotal = 24;
+    double trdisamt = 25;
+    double frtamnt = 26;
+    double miscamnt = 27;
+    double taxamnt = 28;
+    string orignumb = 29;
+    string cr_number = 30;
+    DocumentAttachment dataAttachment = 31;
+
+    message CashReceipt {
+        string docnumbr = 1;
+        double total_paid = 2;
+        double cshrctype = 3;
+        string payment_method = 4;
+        double ortrxamt = 5;
+        string created_at = 6;
+    }
+      
+    message SalesOrder {
+        string orignumb = 1;
+        string custnmbr = 2;
+        string custname = 3;
+        string gnl_region = 4;
+    }
+      
+    message Detail {
+        string itemnmbr = 1;
+        string itemdesc = 2;
+        string uofm = 3;
+        double quantity = 4;
+        double unitprce = 5;
+        double xtndprce = 6;
+    }
+  }
+
+  
+message GetSalesInvoiceGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string custnumber = 3;
+    string si_number = 4;
+    string custname = 5;
+    string region = 6;
+    string order_channel = 7;
+    string so_code_apps = 8;
+    string wrt_id = 9;
+    string locncode = 10;
+    string ordertype= 11;
+    string salesperson_id = 12;
+    string status = 13;
+    string so_docdate_from = 14;
+    string so_docdate_to = 15;
+    string docdate_from = 16;
+    string docdate_to = 17;
+    string so_number = 18;
+    string order_by = 19;
+    string gnl_cust_type_id = 20;
+    string remaining_amount_flag = 21;
+    string delta_user = 22;
+    string orignumbr = 23;
+}
+
+message GetSalesInvoiceGPListResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated SalesInvoiceGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message GetSalesInvoiceGPDetailRequest{
+    string interid = 1;
+    string id = 2;
+}
+
+message GetSalesInvoiceGPDetailResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated SalesInvoiceGP  data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message GetInTransitTransferGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string orddocid = 3;
+    string ivm_tr_type = 4;
+    string ordrdate = 5;
+    string trnsfloc = 6;
+    string locncode = 7;
+    string request_date = 8;
+    string etadte = 9;
+    int32 status = 10;
+}
+
+message GetInTransitTransferGPDetailRequest{
+    string id = 1;
+}
+
+message InTransitTransferDetailGP {
+    string itemnmbr = 1;
+    string reason_code = 2;
+    string uofm = 3;
+    double trnsfqty = 4;
+    double qtyfulfi = 5;
+    double qtyshppd = 6;
+    string landed_cost_group_id = 7;
+    string trnsfloc = 8;
+    string itlocn = 9;
+    string trnstloc = 10;
+  }
+message InTransitTransferGP {
+    string docnumbr = 1;
+    string orddocid = 2;
+    string ordrdate = 3;
+    string etadte = 4;
+    string etatime = 5;
+    string techid = 6;
+    string offid = 7;
+    repeated TransferLocation trnsfloc = 8;
+    repeated Location itlocn = 9;
+    repeated LocationCode locncode = 10;
+    string shipmthd = 11;
+    string custname = 12;
+    string address1 = 13;
+    string address2 = 14;
+    string address3 = 15;
+    string city = 16;
+    string state = 17;
+    string zipcode = 18;
+    string country = 19;
+    string rfrncdoc = 20;
+    double total_weight = 21;
+    int32 status = 22;
+    string status_desc = 23;
+    repeated TransferType tr_type = 24;
+    repeated TransferDetail details = 25;
+}
+
+message TransferLocation {
+    string locndscr = 1;
+    string gnl_region = 2;
+    string address = 3;
+    string gnl_site_type_id = 4;
+}
+
+message Location {
+    string locndscr = 1;
+    string gnl_region = 2;
+    string address = 3;
+    string gnl_site_type_id = 4;
+}
+
+message LocationCode {
+    string locndscr = 1;
+    string gnl_region = 2;
+    string address = 3;
+    string gnl_site_type_id = 4;
+}
+
+message TransferType {
+    string docnumbr = 1;
+    int32 ivm_tr_type = 2;
+}
+
+message TransferDetail {
+    int32 lnitmseq = 1;
+    string itemnmbr = 2;
+    string reason_code = 3;
+    string uofm = 4;
+    double trnsfqty = 5;
+    double qtyfulfi = 6;
+    double qtyshppd = 7;
+    string landed_cost_group_id = 8;
+    string trnsfloc = 9;
+    string itlocn = 10;
+    string trnstloc = 11;
+    string dscriptn = 12;
+}
+  
+  message TrType {
+    string docnumbr = 1;
+    int32 ivm_tr_type = 2;
+  }
+
+  message GetInTransitTransferGPResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated InTransitTransferGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message GetTransferRequestGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string docnumbr = 3;
+    string ivm_tr_type = 4;
+    string request_date_from = 5;
+    string request_date_to = 6;
+    string ivm_locncode_from = 7;
+    string ivm_locncode_to = 8;
+    string docdate_from = 9;
+    string docdate_to = 10;
+    string ivm_req_eta_from = 11;
+    string ivm_req_eta_to = 12;
+    repeated int32 status = 13;
+    string orderby = 14;
+    string docnumbr_like = 15;
+}
+
+message GetTransferRequestGPDetailRequest{
+    string id = 1;
+}
+
+message TransferRequestDetailGP {
+    string itemnmbr = 1;
+    string itemdesc = 2;
+    string reason_code = 3;
+    string uofm = 4;
+    double ivm_qty_request = 5;
+    double ivm_qty_fulfill = 6;
+    int64 lnitmseq = 7;
+}
+
+message TransferRequestGP {
+    int32 ivm_tr_type = 1;
+    string ivm_tr_type_desc = 2;
+    string docnumbr = 3;
+    string docdate = 4;
+    string request_date = 5;
+    string ivm_req_eta = 6;
+    repeated SiteLocation ivm_locncode_from = 7;
+    repeated SiteLocation ivm_locncode_to = 8;
+    string reason_code = 9;
+    double total_weight = 10;
+    int32 ivm_status = 11;
+    string ivm_status_desc = 12;
+    repeated TransferRequestDetailGP details = 13;
+    repeated InTransitTransfer intrxlist = 14;
+}
+
+message GoodsReceipt {
+    string docnumbr = 1;
+    string orddocid = 2;
+    string poprctnm = 3;
+    string receiptdate = 4;
+    string vendorid = 5;
+    int32 status = 6;
+    string status_desc = 7;
+}
+
+message InTransitTransfer {
+    string docnumbr = 1;
+    string orddocid = 2;
+    string ordrdate = 3;
+    int32 status = 4;
+    string status_desc = 5;
+    repeated GoodsReceipt goods_receipt = 6;
+}
+
+message SiteLocation {
+    string locndscr = 1;
+    string gnl_region = 2;
+    string address = 3;
+    string gnl_site_type_id = 4;
+}
+
+message GetTransferRequestGPResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated TransferRequestGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message CreateSalesOrderGPRequest{
+    string interid = 1;
+    string sopnumbe = 2;
+    string docid = 3;
+    string docdate = 4;
+    string custnmbr = 5;
+    string custname = 6;
+    string prstadcd = 7;
+    string curncyid = 8;
+    double subtotal = 9;
+    double trdisamt = 10;
+    double freight = 11;
+    double miscamnt = 12;
+    double taxamnt = 13;
+    double docamnt = 14;
+    string gnl_request_ship_date = 15;
+    string gnl_region = 16;
+    string gnl_wrt_id = 17;
+    string gnl_archetype_id = 18;
+    string gnl_order_channel = 19;
+    string gnl_so_code_apps = 20;
+    double gnl_totalweight = 21;
+    string userid = 22;
+    repeated DetailItem detailitems = 23;
+    string locncode = 24;
+    string shipmthd = 25;
+    repeated VoucherApply voucher_apply = 27;
+    string pymtrmid = 28;
+    string note = 29;
+    
+message DetailItem {
+    string sopnumbe = 1;
+    string itemnmbr = 2;
+    string itemdesc = 3;
+    string locncode = 4;
+    string uofm = 5;
+    string pricelvl = 6;
+    double quantity = 7;
+    double unitprce = 8;
+    double xtndprce = 9;
+    double gnL_Weight = 10;
+  }
+  
+message VoucherApply {
+    int32 gnl_voucher_type = 1;
+    string gnl_voucher_id = 2;
+    double ordocamt = 3;
+  }
+}
+
+  message CreateSalesOrderGPResponse {
+    int32 code = 1;
+    string message = 2;
+    string sopnumbe = 3;
+  }
+
+  message CashReceipt {
+    string docnumbr = 1;
+    string docdate = 2;
+    string custnmbr = 3;
+    string custname = 4;
+    string curncyid = 5;
+    int32 cshrctyp = 6;
+    string payment_method = 7;
+    int32 dcstatus = 8;
+    double ortrxamt = 9;
+    string creatddt = 10;
+    repeated SalesInvoice sales_invoice = 11;
+    repeated SalesOrder sales_order = 12;
+    double ordocamt = 13;
+
+    message SalesInvoice {
+        string sopnumbe = 1;
+        string docdate = 2;
+        string gnl_region = 3;
+        string locncode = 4;
+      }
+      
+      message SalesOrder {
+        string orignumb = 1;
+        string ordrdate = 2;
+      }
+  }
+ 
+message GetCashReceiptListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string custnmbr = 3;
+    string docnumber = 4;
+    string sopnumbe = 5; //this is filter for si number
+    string gnl_region = 6;
+    string locncode = 7;
+    string status = 8;
+    string so_docdate_from = 9;
+    string so_docdate_to = 10;
+    string docdate_from = 11;
+    string docdate_to = 12;
+    string so_number = 13;
+    string si_docdate_from = 14;
+    string si_docdate_to = 15;
+}
+
+message GetCashReceiptListResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated CashReceipt data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;         
+}
+
+message CustomerClass {
+    string classid = 1;
+    string clasdscr = 2;
+    int32 crlmttyp = 3;
+    string crlmttyp_desc = 4;
+    double crlmtamt = 5;
+}
+
+message GetCustomerClassListRequest {
+    int64 limit = 1;
+    int64 offset = 2;
+    string classid = 3;
+    string clasdscr = 4;
+}
+
+message GetCustomerClassResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated CustomerClass data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;         
+}
+
+message GetCustomerClassDetailRequest {
+    string id = 1;
+}
+
+message SalesPriceLevel {
+    string gnl_region = 1;
+    string gnl_cust_type_id = 2;
+    string prclevel = 3;
+}
+
+message GetSalesPriceLevelListRequest {
+    int64 limit = 1;
+    int64 offset = 2;
+    string gnl_region = 3;
+    string gnl_cust_type_id = 4;
+    string prclevel = 5;
+}
+
+message GetSalesPriceLevelResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated SalesPriceLevel data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;         
+}
+
+message GetSalesPriceLevelDetailRequest {
+    string id = 1;
+}
+
+message ShippingMethod {
+    string shipmthd = 1;
+    string shmthdsc = 2;
+    int32 shiptype = 3;
+    string shiptype_desc = 4;
+}
+
+message GetShippingMethodListRequest {
+    int64 limit = 1;
+    int64 offset = 2;
+    string shiptype = 3;
+}
+
+message GetShippingMethodResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated ShippingMethod data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;         
+}
+
+message GetShippingMethodDetailRequest {
+    string id = 1;
+}
+  
+message CreateTransferRequestGPRequest {
+    string interid = 1;
+    string docnumbr = 2;
+    string docdate = 3;
+    int32 ivm_tr_type = 4;
+    string request_date = 5;
+    string ivm_req_eta = 6;
+    string ivm_locncode_from = 7;
+    string ivm_locncode_to = 8;
+    string reason_Code = 9;
+    repeated Detail detail = 10;
+
+    message Detail {
+        int32 lnitmseq = 1;
+        string itemnmbr = 2;
+        string uofm = 3;
+        double ivm_qty_request = 4;
+        double ivm_qty_fulfill = 5;
+    }
+}
+  
+message CreateTransferRequestGPResponse{
+    int32 code = 1;
+    string message = 2;
+    string docnumbr = 3;
+}
+
+message UpdateInTransitTransferGPResponse{
+    int32 code = 1;
+    string message = 2;
+}
+
+message CommitPurchaseOrderGPRequest {
+    string interid = 1;
+    string docnumber = 2;
+    string docdate = 3;
+}
+
+message PoList {
+    int32 rcptlnnm = 1;
+    string ponumber = 2;
+    string itemnmbr = 3;
+    string itemdesc = 4;
+    string vnditnum = 5;
+    string vnditdsc = 6;
+    string locncode = 7;
+    string uofm = 8;
+    double umqtyinb = 9;
+    double qtyshppd = 10;
+    double unitcost = 11;
+    double extdcost = 12;
+    string commntid = 13;
+    string actlship = 14;
+}
+
+message IntrxList {
+    int32 rcptlnnm = 1;
+    string orddocid = 2;
+    string itemnmbr = 3;
+    string itemdesc = 4;
+    string vnditnum = 5;
+    string vnditdsc = 6;
+    string locncode = 7;
+    string uofm = 8;
+    double qtyorder = 9;
+    double qtytrnsf = 10;
+    double qtyshppd = 11;
+    double unitcost = 12;
+    double extdcost = 13;
+    string commntid = 14;
+    string actlship = 15;
+}
+
+message GoodsReceiptGP {
+    int32 poptype = 1;
+    string poptype_desc = 2;
+    string poprctnm = 3;
+    string vnddocnm = 4;
+    string receiptdate = 5;
+    string actlship = 6;
+    string bchsourc = 7;
+    string bachnumb = 8;
+    string vendorid = 9;
+    string vendname = 10;
+    string curncyid = 11;
+    string prp_region = 12;
+    string deprtmnt = 13;
+    int32 prp_cb_shrinkage = 14;
+    string prp_cb_shrinkage_desc = 15;
+    string prp_actualarrival_time = 16;
+    string prp_receipt_inbound = 17;
+    string pymtrmid = 18;
+    string taxschid = 19;
+    double subtotal = 20;
+    double trdisamt = 21;
+    int32 trdpctpr = 22;
+    double frtamnt = 23;
+    double miscamnt = 24;
+    double taxamnt = 25;
+    string discdate = 26;
+    string duedate = 27;
+    string posteddt = 28;
+    string ptdusrid = 29;
+    string shipmthd = 30;
+    double total_landed_cost_amount = 31;
+    string invoicereceiptdate = 32;
+    double prepaymentamount = 33;
+    string status = 34;
+    string creatddt = 35;
+    string modifdt = 36;
+    repeated PoList polist = 37;
+    repeated IntrxList intrxlist = 38;
+}
+
+message GetGoodsReceiptGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string poprctnm = 3;
+    string doctype = 4;
+}
+
+message GetGoodsReceiptGPDetailRequest{
+    string poprctnm = 1;
+    string doctype = 2;
+}
+
+message GetGoodsReceiptGPResponse{
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated GoodsReceiptGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;         
+}
+
+  
+message UpdateTransferRequestGPRequest {
+    string interid = 1;
+    string docnumbr = 2;
+    string docdate = 3;
+    string request_date = 4;
+    string ivm_req_eta = 5;
+    string reason_Code = 6;
+    repeated Detail detail = 7;
+
+    message Detail {
+        int32 lnitmseq = 1;
+        string itemnmbr = 2;
+        double ivm_qty_request = 3;
+    }
+}
+
+message UpdateInTransitTransferGPRequest {
+    string interid = 1;
+    string orddocid = 2;
+    string ivm_tr_number = 3;
+    string ordrdate = 4;
+    string etadte = 5;
+    string eta = 6;
+    string note = 7;
+    repeated Detail detail = 8;
+
+    message Detail {
+        int32 lnitmseq = 1;
+        string itemnmbr = 2;
+        double qtyfulfi = 3;
+        string reason_code = 4;
+    }
+}
+
+  
+message CommitTransferRequestGPRequest {
+    string interid = 1;
+    string docnumbr = 2;
+    string itlocn = 3;
+    repeated Detail detail = 4;
+    message Detail {
+        int32 lnitmseq = 1;
+        double ivm_qty_fulfill = 2;
+    }
+}
+
+message UpdateCustomerGPRequest {
+    string interid = 1;
+    string custnmbr = 2;
+    string custname = 3;
+    string custclas = 4;
+    string custpriority = 5;
+    string cprcstnm = 6;
+    string stmtname = 7;
+    string shrtname = 8;
+    string upszone = 9;
+    UpdateAddressRequest address = 10;
+    string shipmthd = 11;
+    string taxschid = 12;
+    string prbtadcd = 13;
+    string prstadcd = 14;
+    string staddrcd = 15;
+    string slprsnid = 16;
+    string pymtrmid = 17;
+    string salsterr = 18;
+    string userdef1 = 19;
+    string userdef2 = 20;
+    string declid = 21;
+    string comment1 = 22;
+    string comment2 = 23;
+    int32 custdisc = 24;
+    int32 disgrper = 25;
+    int32 duegrper = 26;
+    string prclevel = 27;
+    string gnl_cust_type_id = 28;
+    string gnl_referrer_code = 29;
+    string gnl_referral_code = 30;
+    int32 gnl_business_type = 31;
+    string gnl_social_sec_num = 32;
+    int32 hold = 33;
+    int32 inactive = 34;
+    string shipcomplete = 35;
+}
+
+message UpdateCustomerGPResponse{
+    int32 code = 1;
+    string message = 2;
+}
+
+message CommitTransferRequestGPResponse{
+    int32 code = 1;
+    string message = 2;
+    InTransit intransit = 4;
+}
+
+message InTransit{
+    string orddocid = 1;
+}
+
+message CreateSalesInvoiceGPRequest {
+  string interid = 1;
+  string orignumb = 2;
+  string sopnumbe = 3;
+  string docid = 4;
+  string docdate = 5;
+  string custnmbr = 6;
+  string custname = 7;
+  string prstadcd = 8;
+  string curncyid = 9;
+  repeated VoucherApply voucher_apply = 10;
+  double subtotal = 11;
+  double trdisamt = 12;
+  double freight = 13;
+  double miscamnt = 14;
+  double taxamnt = 15;
+  double docamnt = 16;
+  AmountReceived amount_received = 17;
+  string gnl_request_ship_date = 18;
+  string gnl_region = 19;
+  string gnl_wrt_id = 20;
+  string gnl_archetype_id = 21;
+  string gnl_order_channel = 22;
+  string gnl_so_code_apps = 23;
+  double gnl_totalweight = 24;
+  string userid = 25;
+  repeated DetailItem detailitems = 26;
+  string shipmthd = 27;
+  string locncode = 28;
+  string pymtrmid = 29;
+  
+
+  message VoucherApply {
+    int32 gnl_voucher_type = 1;
+    string gnl_voucher_id = 2;
+    double ordocamt = 3;
+  }
+  
+  message AmountReceived {
+    double amount = 1;
+    string chekbkid = 2;
+  }
+  
+  message DetailItem {
+    int32 lnitmseq = 1;
+    string itemnmbr = 2;
+    string locncode = 3;
+    string uofm = 4;
+    string pricelvl = 5;
+    double quantity = 6;
+    double unitprce = 7;
+    double xtndprce = 8;
+    int32 gnL_Weight = 9;
+  }
+}
+
+message CreateSalesInvoiceGPResponse{
+    int32 code = 1;
+    string message = 2;
+    string sopnumbe = 3;
+}
+
+message CreateCashReceiptRequest{
+    string interid = 1;
+    string sopnumbe = 2;
+    double amount_received = 3;
+    string chekbkid = 4;
+    string docdate = 5;
+}
+
+message CreateCashReceiptResponse{
+    int32 code = 1;
+    string message = 2;
+    string docnumbr = 3;
+}
+  
+message CreateCashReceiptnonPBDRequest{
+    string interid = 1;
+    string bachnumb = 2;
+    string docnumbr = 3;
+    string custnmbr = 4;
+    string docdate = 5;
+    int32 cshrctyp = 6;
+    string curncyid = 7;
+    string chekbkid = 8;
+    double ortrxamt = 9;
+    string trxdscrn = 10;
+    repeated ApplyTo apply_to = 11;
+
+    message ApplyTo {
+        string sopnumbe = 1;
+        double apply_amount = 2;
+    }   
+}
+
+message CreateCashReceiptnonPBDResponse{
+    int32 code = 1;
+    string message = 2;
+    string paymentnumber = 3;
+}
+
+message CreateGoodsReceiptGPRequest {
+    string interid = 1;
+    string poprctnm = 2;
+    string vnddocnm = 3;
+    string receiptdate = 4;
+    string vendorid = 5;
+    string curncyid = 6;
+    double subtotal = 7;
+    repeated GoodsReceiptDetail goodsReceiptDTL = 8;
+
+    message GoodsReceiptDetail {
+        string poprctnm = 1;
+        string ponumber = 2;
+        string locncode = 3;
+        string uofm = 4;
+        string itemnmbr = 5;
+        int32 qtyshppd = 6;
+        double unitcost = 7;
+        double extdcost = 8;
+    }
+}
+  
+message UpdateGoodsReceiptGPRequest {
+    string interid = 1;
+    string poprctnm = 2;
+    string prp_region = 3;
+    string note = 4;
+    string actlship = 5;
+    string prp_actualarrival_time = 6;
+    repeated Detail details = 7;
+
+    message Detail {
+        int32 rcptlnnm = 1;
+        string ponumber = 2;
+        string locncode = 3;
+        string uofm = 4;
+        string itemnmbr = 5;
+        int32 qtyshppd = 6;
+        double unitcost = 7;
+        double extdcost = 8;
+    }
+}
+
+message CreateSalesPaymentGPRequest {
+    string interid = 1;
+    string sopnumbe = 2;
+    double amount_received = 3;
+    string chekbkid = 4;
+    string docdate = 5;
+}
+
+message CreateSalesPaymentGPnonPBDRequest{
+    string interid = 1;
+    string bachnumb = 2;
+    string docnumbr = 3;
+    string custnmbr = 4;
+    string docdate = 5;
+    int32 cshrctyp = 6;
+    string curncyid = 7;
+    string chekbkid = 8;
+    double ortrxamt = 9;
+    string trxdscrn = 10;
+    repeated ApplyTo apply_to = 11;
+
+    message ApplyTo {
+        string sopnumbe = 1;
+        double apply_amount = 2;
+    }   
+}
+
+message CreateSalesPaymentGPnonPBDResponse{
+    int32 code = 1;
+    string message = 2;
+    string paymentnumber = 3;
+}
+
+  
+message SalesPaymentGP {
+    string docnumbr = 1;
+    string docdate = 2;
+    string custnmbr = 3;
+    string custname = 4;
+    string curncyid = 5;
+    int32 cshrctyp = 6;
+    string payment_method = 7;
+    int32 dcstatus = 8;
+    double ortrxamt = 9;
+    string creatddt = 10;
+    repeated SalesInvoice sales_invoice = 11;
+    repeated SalesOrder sales_order = 12;
+    double ordocamt = 13;
+
+    message SalesInvoice {
+        string sopnumbe = 1;
+        string docdate = 2;
+        string gnl_region = 3;
+        string locncode = 4;
+        double remaining_amount = 5;
+    }
+      
+    message SalesOrder {
+        string orignumb = 1;
+        string ordrdate = 2;
+    }
+}
+
+message GetSalesPaymentGPListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string docnumbr = 3;
+    string docdate_from = 4;
+    string docdate_to = 5;
+    string si_docdate_from = 6;
+    string si_docdate_to = 7;
+    string so_docdate_from = 8;
+    string so_docdate_to = 9;
+    string custnmbr = 10;
+    string sopnumbe= 11;
+    string gnl_region = 12;
+    string locncode = 13;
+    string order_by = 14;
+    string status = 15;
+    string gnl_cust_type_id = 16;
+}
+  
+message GetSalesPaymentGPResponse {
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated SalesPaymentGP data = 5;
+    bool succeeded = 6;
+    repeated string errors = 7;
+    string message = 8;
+}
+
+message GetSalesPaymentGPDetailRequest{
+    string interid = 1;
+    string id = 2;
+}
+
+message VoucherGP {
+    string gnl_voucher_id = 1;
+    int32 gnl_channel = 2;
+    string gnl_channel_desc = 3;
+    int32 gnl_voucher_type = 4;
+    string gnl_voucher_type_desc = 5;
+    string gnl_voucher_name = 6;
+    string gnl_expense_account = 7;
+    string gnl_voucher_code = 8;
+    string gnl_minimum_order = 9;
+    string gnl_discount_amount = 10;
+    int32 gnl_voucher_status = 11;
+    int32 inactive = 12;
+    string inactive_desc = 13;
+    
+    message Restriction {
+      string gnl_region = 1;
+      string gnl_cust_type_id = 2;
+      string gnl_archetype_id = 3;
+      int32 default_cb = 4;
+    }
+    
+    repeated Restriction restriction = 14;
+    
+    message AdvancedProperty {
+      string custnmbr = 1;
+      string gnl_start_period = 2;
+      string gnl_end_period = 3;
+      string gnl_total_quota_count = 4;
+      string gnl_total_quota_count_pe = 5;
+      string gnl_remaining_overall_qu = 6;
+      int32 gnl_mobile_voucher = 7;
+    }
+    
+    repeated AdvancedProperty advanced_properties = 15;
+  }
+
+message GetVoucherGPListRequest {
+    int64 limit = 1;
+    int64 offset = 2;
+    string gnl_voucher_id = 3;
+    string gnl_voucher_code = 4;
+    string gnl_voucher_status = 5;
+    string gnl_start_period = 6;
+    string gnl_end_period = 7;
+}  
+  
+message GetVoucherGPResponse {
+    int32 pageNumber = 1;
+    int32 pageSize = 2;
+    int32 totalPages = 3;
+    int32 totalRecords = 4;
+    repeated VoucherGP data = 5;
+    bool succeeded = 6;
+    string errors = 7;
+    string message = 8;
+}
+
+message CreateVoucherGPRequest {
+    string interid = 1;
+    string gnl_voucher_id = 2;
+    int32 gnl_channel = 3;
+    int32 gnl_voucher_type = 4;
+    string gnl_voucher_name = 5;
+    string gnl_expense_account = 6;
+    string gnl_voucher_code = 7;
+    int32 gnl_minimum_order = 8;
+    int32 gnl_discount_amount = 9;
+    int32 gnl_voucher_status = 10;
+    int32 inactive = 11;
+    message Restriction {
+      string gnl_region = 1;
+      string gnl_cust_type_id = 2;
+      string gnl_archetype_id = 3;
+      int32 default_cb = 4;
+    }
+    Restriction restriction = 12;
+    message AdvancedProperties {
+      string custnmbr = 1;
+      string gnl_start_period = 2;
+      string gnl_end_period = 3;
+      int32 gnl_total_quota_count = 4;
+      int32 gnl_total_quota_count_pe = 5;
+      int32 gnl_remaining_overall_qu = 6;
+      int32 gnl_mobile_voucher = 7;
+    }
+    AdvancedProperties advanced_properties = 13;
+  }
+  
+message CreateVoucherGPResponse {
+    int32 code = 1;
+    string message = 2;    
+}
+
+
+message SalesMovement{
+    string so_number = 1;
+    string docdate = 2;
+    string so_status = 3;
+    repeated Picking picking = 4;
+    repeated Checking checking = 5;
+    repeated DeliveryOrder delivery_order = 6;
+    string si_number = 7;
+    string si_status = 8;
+    repeated CashReceipt cash_receipt = 9;
+    repeated SalesReturn sales_return = 10;
+
+    message Picking {
+        string picking_number = 1;
+        string picking_status = 2;
+      }
+      
+      message Checking {
+        string checking_number = 1;
+        string checking_status = 2;
+      }
+      
+      message DeliveryOrder {
+        string do_number = 1;
+        string do_status = 2;
+      }
+      
+      message CashReceipt {
+        string cr_number = 1;
+        string cr_status = 2;
+      }
+      
+      message SalesReturn {
+        string return_number = 1;
+        string return_status = 2;
+      }
+}
+
+message GetSalesMovementGPRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    string interid = 3;
+    string so_number = 4;
+}
+
+message GetSalesMovementGPResponse{
+    int32 code = 1;
+    string message = 2;    
+    repeated SalesMovement data = 3;
+}
+
+message UpdateFixedVaRequest{
+    string customer_id_gp = 1;
+    string fixed_va_permata = 2;
+    string fixed_va_bca = 3;
+}
+
+message UpdateFixedVaResponse{
+    int32 code = 1;
+    string message = 2;
+}

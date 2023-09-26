@@ -1,0 +1,64 @@
+{
+  "folders": [
+    {
+      "path": "erp-client-grpc"
+    },
+    {
+      "path": "erp-protobuf"
+    },
+    {
+      "path": "edenlabs"
+    },
+    {
+      "path": "erp-account-service"
+    },
+    {
+      "path": "erp-audit-service"
+    },
+    {
+      "path": "erp-configuration-service"
+    },
+    {
+      "path": "erp-inventory-service"
+    },
+    {
+      "path": "erp-bridge-services"
+    },
+    {
+      "path":"erp-purchaser-mobile-service"
+    },
+    {
+      "path":"erp-storage-service"
+    },
+    {
+      "path":"erp-site-service"
+    },
+    {
+      "path":"erp-notification-service"
+    },
+    {
+      "path":"erp-helper-mobile-service"
+    },
+    {
+      "path":"erp-logistic-service"
+    },
+    {
+      "path":"erp-courier-mobile-service"
+    },
+    {
+      "path":"erp-edn-mobile-service"
+    },
+    {
+      "path":"erp-sales-service"
+    },
+    {
+      "path":"erp-crm-service"
+    },
+    {
+      "path":"erp-campaign-service"
+    },
+    {
+      "path":"erp-promotion-service"
+    }
+  ]
+}

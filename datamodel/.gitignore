@@ -1,0 +1,17 @@
+vendor
+api
+.env
+glide.lock
+env
+idea
+idea/
+.idea/
+/.idea/
+.idea/workspace.xml
+.idea
+.DS_Store
+
+gin-bin.exe
+gin-bin.exe~
+.vscode/launch.json
+.vscode/settings.json

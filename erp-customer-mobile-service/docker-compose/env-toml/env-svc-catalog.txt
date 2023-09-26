@@ -1,0 +1,100 @@
+[app]
+host="0.0.0.0"
+port=8005
+name="erp-inventory-service"
+debug=false
+env="development"
+
+[grpc]
+host="0.0.0.0"
+port=5003
+
+[jwt]
+key="Erp#jwt!S3cr3tK3y"
+
+[sentry]
+enabled=true
+dsn="localhost"
+timeout="5s"
+
+[trace]
+enabled=true
+
+  [trace.jaeger]
+  host="jaeger-collector.jaeger"
+  port="14268"
+
+[metric]
+enabled=true
+
+[database]
+enabled=true
+connection="mysql"
+name="inventory"
+max_open_conns=280
+max_idle_conns=20
+conn_lifetime_max="1h"
+
+  [database.write]
+  host="local-laptop"
+  port=3030
+  username="dirga.fifty"
+  password="7V3y5h5thPag"
+
+  [database.read]
+  host="local-laptop"
+  port=3030
+  username="dirga.fifty"
+  password="7V3y5h5thPag"
+
+[redis]
+enabled=true
+host="redis-master.database"
+port=6379
+namespace=1
+username="default"
+password="NuGp4RZN0a"
+conn_lifetime_max="1h"
+dial_timeout="5s"
+write_timeout="5s"
+read_timeout="5s"
+idle_timeout="10s"
+
+[client]
+enabled=true
+
+  [client.audit_service_grpc]
+  enabled=true
+  host="svc-svc-audit-grpc.svc-audit"
+  port=5001
+  timeout="30s"
+  max_concurrent_requests=30
+  error_percent_threshold=20
+  tls=false
+  pem_tls_path=""
+  secret=""
+  realtime=true
+
+  [client.bridge_service_grpc]
+  enabled=true
+  host="svc-svc-bridge-grpc.svc-bridge"
+  port=5001
+  timeout="30s"
+  max_concurrent_requests=30
+  error_percent_threshold=20
+  tls=false
+  pem_tls_path=""
+  secret=""
+  realtime=true
+  
+  [client.configuration_service_grpc]
+  enabled=true
+  host="svc-svc-configuration-grpc.svc-configuration"
+  port=5002
+  timeout="30s"
+  max_concurrent_requests=30
+  error_percent_threshold=20
+  tls=false
+  pem_tls_path=""
+  secret=""
+  realtime=true

@@ -1,0 +1,153 @@
+[app]
+host="0.0.0.0"
+port=8006
+name="erp-campaign-service"
+debug=false
+env="development"
+
+[grpc]
+host="0.0.0.0"
+port=5004
+
+[jwt]
+key="Erp#jwt!S3cr3tK3y"
+
+[sentry]
+enabled=true
+dsn="localhost"
+timeout="5s"
+
+[trace]
+enabled=true
+
+  [trace.jaeger]
+  host="jaeger-collector.jaeger"
+  port="14268"
+
+[metric]
+enabled=true
+
+[database]
+enabled=true
+connection="mysql"
+name="campaign"
+max_open_conns=280
+max_idle_conns=20
+conn_lifetime_max="1h"
+
+  [database.write]
+  host="local-laptop"
+  port=3030
+  username="dirga.fifty"
+  password="7V3y5h5thPag"
+
+  [database.read]
+  host="local-laptop"
+  port=3030
+  username="dirga.fifty"
+  password="7V3y5h5thPag"
+
+[client]
+enabled=true
+
+  [client.audit_service_grpc]
+  enabled=true
+  host="svc-svc-audit-grpc.svc-audit"
+  port=5011
+  timeout="30s"
+  max_concurrent_requests=30
+  error_percent_threshold=20
+  tls=false
+  pem_tls_path=""
+  secret=""
+  realtime=true
+
+  [client.bridge_service_grpc]
+  enabled=true
+  host="svc-svc-bridge-grpc.svc-bridge"
+  port=5001
+  timeout="30s"
+  max_concurrent_requests=30
+  error_percent_threshold=20
+  tls=false
+  pem_tls_path=""
+  secret=""
+  realtime=true
+
+  [client.configuration_service_grpc]
+  enabled=true
+  host="svc-svc-configuration-grpc.svc-configuration"
+  port=5002
+  timeout="30s"
+  max_concurrent_requests=30
+  error_percent_threshold=20
+  tls=false
+  pem_tls_path=""
+  secret=""
+  realtime=true
+
+  [client.catalog_service_grpc]
+  enabled=true
+  host="svc-svc-inventory-grpc.svc-inventory"
+  port=5003
+  timeout="30s"
+  max_concurrent_requests=30
+  error_percent_threshold=20
+  tls=false
+  pem_tls_path=""
+  secret=""
+  realtime=true
+
+  [client.notification_service_grpc]
+  enabled=true
+  host="svc-svc-notification-grpc.svc-notification"
+  port=5010
+  timeout="30s"
+  max_concurrent_requests=30
+  error_percent_threshold=20
+  tls=false
+  pem_tls_path=""
+  secret=""
+  realtime=true
+
+  [client.customer_mobile_service_grpc]
+  enabled=true
+  host="svc-mob-customer-grpc.mob-customer"
+  port=5012
+  timeout="30s"
+  max_concurrent_requests=30
+  error_percent_threshold=20
+  tls=false
+  pem_tls_path=""
+  secret=""
+  realtime=true
+
+  [client.crm_service_grpc]
+  enabled=true
+  host="svc-svc-crm-grpc.svc-crm"
+  port=5008
+  timeout="30s"
+  max_concurrent_requests=30
+  error_percent_threshold=20
+  tls=false
+  pem_tls_path=""
+  secret=""
+  realtime=true
+  
+[s3]
+enabled=true
+endpoint="sgp1.digitaloceanspaces.com"
+bucket_name="image-erp-dev-eden"
+access_key_id="MUJZZLTOJ2HG4UPVI7JK"
+secret_access_key="q/xzO/EKAzt8jbddXeS6CuVfSbPLXKRD4r2NBCFPZDk"
+token=""
+use_ssl=true
+
+[talon_one]
+  host="https://edenfarm.asia-southeast1.talon.one"
+  api_key="bc39f11921f8d4e3731c79fa9f2e47762171ac50e684423fef8014af5dd79029"
+  application_id=80
+  loyalty_id=77
+  email="tech.administrators@edenfarm.id"
+  pass="%P#zW67AZFC42d"
+  token="VZgs2V5xy4bQjXqq3m3cn2TTv3_k42IGIREAoNHvqj8"

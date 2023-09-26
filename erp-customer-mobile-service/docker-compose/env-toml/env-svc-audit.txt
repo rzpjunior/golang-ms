@@ -1,0 +1,51 @@
+[app]
+    host="0.0.0.0"
+    port=8002
+    name="erp-audit-service"
+    debug=false
+    env="development"
+
+    [grpc]
+    host="0.0.0.0"
+    port=5011
+
+    [jwt]
+    key="Erp#jwt!S3cr3tK3y"
+
+    [sentry]
+    enabled=true
+    dsn="localhost"
+    timeout="5s"
+
+    [trace]
+    enabled=true
+
+      [trace.jaeger]
+      host="jaeger-collector.jaeger"
+      port="14268"
+
+    [metric]
+    enabled=true
+
+    [mongodb]
+    enabled=true
+    host="mongodb"
+    port=27017
+    name="audit"
+    username="root"
+    password="secret"
+
+    [client]
+    enabled=true
+
+      [client.account_service_grpc]
+      enabled=true
+      host="svc-svc-account-grpc.svc-account"
+      port=5001
+      timeout="30s"
+      max_concurrent_requests=30
+      error_percent_threshold=20
+      tls=false
+      pem_tls_path=""
+      secret=""
+      realtime=true

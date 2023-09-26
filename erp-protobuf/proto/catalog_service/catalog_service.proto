@@ -1,0 +1,232 @@
+syntax = "proto3";
+
+option go_package = "git.edenfarm.id/project-version3/erp-services/erp-protobuf/gen/proto/catalog_service";
+option objc_class_prefix = "EOP";
+
+package proto.catalog_service;
+
+import "google/protobuf/timestamp.proto";
+
+service CatalogService {
+    rpc GetItemImageList(GetItemImageListRequest) returns (GetItemImageListResponse){}
+    rpc GetItemImageDetail(GetItemImageDetailRequest) returns (GetItemImageDetailResponse){}
+    rpc GetItemCategoryList(GetItemCategoryListRequest) returns(GetItemCategoryListResponse){}
+    rpc GetItemCategoryDetail(GetItemCategoryDetailRequest) returns (GetItemCategoryDetailResponse){}
+    rpc GetItemList(GetItemListRequest) returns (GetItemListResponse){}
+    rpc GetItemDetail(GetItemDetailRequest) returns (GetItemDetailResponse){}
+    rpc GetItemDetailByInternalId(GetItemDetailByInternalIdRequest) returns (GetItemDetailByInternalIdResponse){}
+    rpc GetItemDetailMasterComplexByInternalID(GetItemDetailByInternalIdRequest) returns (GetItemDetailByInternalIdResponse){}
+    rpc GetItemListInternal(GetItemListRequest) returns (GetItemListResponse){}
+    rpc GetItemDetailInternal(GetItemDetailRequest) returns (GetItemDetailResponse) {}
+    rpc SyncMongo(SyncMongoRequest) returns (SyncMongoResponse) {}
+    rpc GetItemListMongo(GetItemListRequest) returns (GetItemListResponse){}
+
+}
+
+message ItemImage{
+    int64 id = 1; 
+    int64 item_id = 2;
+    string image_url = 3;
+    int32 main_image = 4;
+    google.protobuf.Timestamp created_at = 5; 
+}
+
+message ItemCategory{
+    int64 id = 1;
+    string region_id = 2;
+    string name = 3; 
+    int32 status = 4;
+    string image_url = 5;
+    google.protobuf.Timestamp created_at = 6;
+    google.protobuf.Timestamp updated_at = 7;
+    string Code = 8;
+}
+
+message GetItemCategoryListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    string region_id = 6;
+}
+
+message GetItemCategoryListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated ItemCategory data = 3;
+}
+
+message GetItemCategoryDetailRequest{
+    int64 id = 1;
+}
+
+message GetItemCategoryDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    ItemCategory data = 3;
+}
+
+message GetItemImageListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    int64 item_id = 6;
+    int32 main_image = 7;
+}
+
+message GetItemImageListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated ItemImage data = 3;
+}
+
+message GetItemImageDetailRequest{
+    int64 id = 1;
+    string code = 2;
+    int64 item_id = 3;
+    int32 main_image = 4;
+}
+
+message GetItemImageDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    ItemImage data = 3;
+}
+
+message Item{
+    int64 id = 1;
+    string code = 2;
+    string uom_id = 3;
+    string class_id = 4;
+    repeated int64 item_category_id = 5;
+    string description = 6;
+    double unit_weight_conversion = 7;
+    double order_min_qty = 8;
+    double order_max_qty = 9;
+    string item_type = 10;
+    string packability = 11;
+    string capitalize = 12;
+    string note = 13;
+    string exclude_archetype = 14;
+    int32 max_day_delivery_date = 15;
+    bool fragile_goods = 16;
+    string taxable = 17;
+    string order_channel_restriction = 18;
+    int32 status = 19;
+    google.protobuf.Timestamp created_at = 20;
+    google.protobuf.Timestamp updated_at = 21;
+    repeated ItemImage item_image = 22;
+    string item_category_name = 23;
+    string uom_name = 24;
+    string class_name = 25;
+    string item_id_gp = 26;
+    repeated PriceLevel item_price = 27;
+    repeated Site item_site = 28;
+    double price = 29;
+    bool decimal_enabled = 30;
+    repeated PriceTiering price_tiering = 31;
+    repeated string item_category_name_arr = 32;
+
+    message PriceLevel {
+        string region_id = 1;
+        string cust_type_id = 2;
+        string pricelevel = 3;
+        double price = 4;
+    }
+      
+    message Site {
+        string region_id = 1;
+        string site_id = 2;
+        int32 gnl_cb_salability = 3;
+        string gnl_cb_salability_desc = 4;
+        double total_stock = 5;
+    }
+
+    message PriceTiering{
+        string docnumbr = 1;
+        string gnl_region = 2;
+        string effective_date = 3;
+        int32 gnl_min_qty = 4;
+        double gnl_discount_amount = 5;
+        int32 gnl_quota_user = 6;
+    }
+}
+
+message GetItemListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    string uom_id = 6;
+    string class_id = 7;
+    int64 item_category_id = 8;
+    string region_id_gp = 9;
+    string customer_type_id_gp = 10;
+    string location_code = 11;
+    int32 salability = 12;
+    int32 order_channel = 13;
+    string archetype_id_gp = 14;
+    string price_level = 15;
+    string item_id = 16;
+    string statusGP = 17;
+    string salabilityGP = 18;
+    string packability = 19;
+    string fragilegoods = 20;
+}
+
+message GetItemListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated Item data = 3;
+}
+
+message GetItemDetailRequest{
+    string id = 1;
+    string code = 2;
+    string item_id_gp = 3;
+    int32 order_channel = 4;
+    string archetype_id_gp = 5;
+}
+
+message GetItemDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    Item data = 3;
+}
+
+message GetItemDetailByInternalIdRequest{
+    string id = 1;
+    string item_id_gp = 2;
+    string region_id_gp = 3;
+    string customer_type_id_gp = 4;
+    string location_code = 5;
+    int32 salability = 6;
+    int32 order_channel = 7;
+    string archetype_id_gp = 8;
+    string price_level = 9;
+}
+
+message GetItemDetailByInternalIdResponse{
+    int32 code = 1;
+    string message = 2;
+    Item data = 3;
+}
+
+message GetItemDetailMasterComplexByInternalIdResponse{
+    int32 code = 1;
+    string message = 2;
+    Item data = 3;
+}
+
+message SyncMongoRequest{
+    int32 code = 1;
+}
+
+message SyncMongoResponse{
+    int32 code = 1;
+    string message = 2;
+}

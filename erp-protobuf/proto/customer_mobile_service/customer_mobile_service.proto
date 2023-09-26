@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+option go_package = "git.edenfarm.id/project-version3/erp-services/erp-protobuf/gen/proto/customer_mobile_service";
+option objc_class_prefix = "EOP";
+
+package proto.customer_mobile_service;
+
+service CustomerMobileService {
+    rpc GetUserCustomerDetail(GetUserCustomerDetailRequest) returns (GetUserCustomerDetailResponse){}
+    rpc GetUserCustomerFirebaseToken(GetUserCustomerFirebaseTokenRequest) returns (GetUserCustomerFirebaseTokenResponse){}
+}
+
+message UserCustomer {
+    int64 id = 1;
+    int64 customer_id = 2;
+    int64 user_customer_id = 3;
+    string firebase_token = 4;
+}
+
+message GetUserCustomerDetailRequest {
+    int64 customer_id = 1;
+}
+
+message GetUserCustomerDetailResponse {
+    int32 code = 1;
+    string message = 2;
+    UserCustomer data = 3;
+}
+
+message UserCustomerFirebaseToken {
+    int64 customer_id = 1;
+    string firebase_token = 2;
+}
+
+message GetUserCustomerFirebaseTokenRequest {
+    repeated int64 customer_id = 1;
+}
+
+message GetUserCustomerFirebaseTokenResponse {
+    int32 code = 1;
+    string message = 2;
+    repeated UserCustomerFirebaseToken data = 3;
+}

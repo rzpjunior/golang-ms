@@ -1,0 +1,161 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: svc-campaign
+  labels:
+    app: svc-campaign
+  namespace: svc-campaign
+  annotations:
+    configmap.reloader.stakater.com/reload: "env-svc-campaign"  
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: svc-campaign
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: svc-campaign
+    spec:
+      imagePullSecrets:
+      - name: registry
+      containers:
+      - name: svc-campaign-http
+        image: git.edenfarm.id:5050/project-version3/erp-services/erp-campaign-service/master:<VERSION>
+        command: ["/app/service"]
+        args: ["api"]
+        ports:
+          - name: http-port
+            containerPort: 8001
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: 50Mi
+            cpu: 15m
+          limits:
+            memory: 350Mi
+            cpu: 200m
+        volumeMounts:
+        - name: tz-config
+          mountPath: /etc/localtime
+        - name: env-value
+          mountPath: /app/env.toml
+          subPath: env-svc-campaign.toml
+          readOnly: true
+      - name: svc-campaign-grpc
+        image: git.edenfarm.id:5050/project-version3/erp-services/erp-campaign-service/master:<VERSION>
+        command: ["/app/service"]
+        args: ["grpc"]
+        ports:
+          - name: grpc-port
+            containerPort: 5001
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: 50Mi
+            cpu: 15m
+          limits:
+            memory: 350Mi
+            cpu: 200m
+        volumeMounts:
+        - name: tz-config
+          mountPath: /etc/localtime
+        - name: env-value
+          mountPath: /app/env.toml
+          subPath: env-svc-campaign.toml
+          readOnly: true
+      volumes:
+        - name: tz-config
+          hostPath:
+            path: /usr/share/zoneinfo/Asia/Jakarta
+            type: File
+        - name: env-value
+          configMap:
+            name: env-svc-campaign
+      tolerations:
+      - key: instance_type
+        value: service
+        effect: NoSchedule
+        operator: Equal
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: role
+                operator: In
+                values:
+                - devops
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - svc-campaign
+            topologyKey: kubernetes.io/hostname
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-svc-campaign-http
+  namespace: svc-campaign
+  labels:
+    app: svc-campaign-http
+spec:
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: http-port
+  selector:
+    app: svc-campaign
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-svc-campaign-grpc
+  namespace: svc-campaign
+  labels:
+    app: svc-campaign-grpc
+spec:
+  ports:
+  - name: grpc
+    protocol: TCP
+    port: 5001
+    targetPort: grpc-port
+  selector:
+    app: svc-campaign
+---
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: hpa-svc-campaign
+  namespace: svc-campaign
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: svc-campaign
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 75
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 75

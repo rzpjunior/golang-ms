@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coreapi-dev
+  labels:
+    app: coreapi-dev
+  namespace: core-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: coreapi-dev
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 33%
+  template:
+    metadata:
+      labels:
+        app: coreapi-dev
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: image-dev
+        image: git.edenfarm.id:5050/project-version2/api/dev:<VERSION>
+        ports:
+          - containerPort: 8080
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "50Mi"
+            cpu: "500m"
+          limits:
+            memory: "500Mi"
+            cpu: "2000m"
+        volumeMounts:
+        - name: tz-config
+          mountPath: /etc/localtime
+      volumes:
+        - name: tz-config
+          hostPath:
+            path: /usr/share/zoneinfo/Asia/Jakarta
+            type: File
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-coreapi-dev
+  namespace: core-api
+  labels:
+    app: coreapi-dev
+spec:
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+  selector:
+    app: coreapi-dev

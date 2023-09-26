@@ -1,0 +1,550 @@
+syntax = "proto3";
+
+option go_package = "git.edenfarm.id/project-version3/erp-services/erp-protobuf/gen/proto/logistic_service";
+option objc_class_prefix = "EOP";
+
+package proto.logistic_service;
+
+import "google/protobuf/timestamp.proto";
+
+service LogisticService {
+    // Delivery Run Sheet
+    rpc GetDeliveryRunSheetList(GetDeliveryRunSheetListRequest) returns (GetDeliveryRunSheetListResponse){}
+    rpc GetDeliveryRunSheetDetail(GetDeliveryRunSheetDetailRequest) returns (GetDeliveryRunSheetDetailResponse){}
+    rpc CreateDeliveryRunSheet(CreateDeliveryRunSheetRequest) returns (CreateDeliveryRunSheetResponse){}
+    rpc FinishDeliveryRunSheet(FinishDeliveryRunSheetRequest) returns (FinishDeliveryRunSheetResponse){}
+    // Delivery Run Sheet Item
+    rpc GetDeliveryRunSheetItemList(GetDeliveryRunSheetItemListRequest) returns (GetDeliveryRunSheetItemListResponse){}
+    rpc GetDeliveryRunSheetItemDetail(GetDeliveryRunSheetItemDetailRequest) returns (GetDeliveryRunSheetItemDetailResponse){}
+    rpc CreateDeliveryRunSheetItemPickup(CreateDeliveryRunSheetItemRequest) returns (CreateDeliveryRunSheetItemResponse){}
+    rpc CreateDeliveryRunSheetItemDelivery(CreateDeliveryRunSheetItemRequest) returns (CreateDeliveryRunSheetItemResponse){}
+    rpc StartDeliveryRunSheetItem(StartDeliveryRunSheetItemRequest) returns (StartDeliveryRunSheetItemResponse){}
+    rpc PostponeDeliveryRunSheetItem(PostponeDeliveryRunSheetItemRequest) returns (PostponeDeliveryRunSheetItemResponse){}
+    rpc FailPickupDeliveryRunSheetItem(FailPickupDeliveryRunSheetItemRequest) returns (FailPickupDeliveryRunSheetItemResponse){}
+    rpc FailDeliveryDeliveryRunSheetItem(FailDeliveryDeliveryRunSheetItemRequest) returns (FailDeliveryDeliveryRunSheetItemResponse){}
+    rpc SuccessDeliveryRunSheetItem(SuccessDeliveryRunSheetItemRequest) returns (SuccessDeliveryRunSheetItemResponse){}
+    rpc ArrivedDeliveryRunSheetItem(ArrivedDeliveryRunSheetItemRequest) returns (ArrivedDeliveryRunSheetItemResponse){}
+    // Delivery Run Return
+    rpc GetDeliveryRunReturnList(GetDeliveryRunReturnListRequest) returns (GetDeliveryRunReturnListResponse){}
+    rpc GetDeliveryRunReturnDetail(GetDeliveryRunReturnDetailRequest) returns (GetDeliveryRunReturnDetailResponse){}
+    rpc CreateDeliveryRunReturn(CreateDeliveryRunReturnRequest) returns (CreateDeliveryRunReturnResponse){}
+    rpc UpdateDeliveryRunReturn(UpdateDeliveryRunReturnRequest) returns (UpdateDeliveryRunReturnResponse){}
+    rpc DeleteDeliveryRunReturn(DeleteDeliveryRunReturnRequest) returns (DeleteDeliveryRunReturnResponse){}
+    // Delivery Run Return Item 
+    rpc GetDeliveryRunReturnItemList(GetDeliveryRunReturnItemListRequest) returns (GetDeliveryRunReturnItemListResponse){}
+    rpc GetDeliveryRunReturnItemDetail(GetDeliveryRunReturnItemDetailRequest) returns (GetDeliveryRunReturnItemDetailResponse){}
+    rpc CreateDeliveryRunReturnItem(CreateDeliveryRunReturnItemRequest) returns (CreateDeliveryRunReturnItemResponse){}
+    rpc UpdateDeliveryRunReturnItem(UpdateDeliveryRunReturnItemRequest) returns (UpdateDeliveryRunReturnItemResponse){}
+    rpc DeleteDeliveryRunReturnItem(DeleteDeliveryRunReturnItemRequest) returns (DeleteDeliveryRunReturnItemResponse){}
+    // Address Coordinate Log
+    rpc GetAddressCoordinateLogList(GetAddressCoordinateLogListRequest) returns (GetAddressCoordinateLogListResponse){}
+    rpc GetAddressCoordinateLogDetail(GetAddressCoordinateLogDetailRequest) returns (GetAddressCoordinateLogDetailResponse){}
+    rpc CreateAddressCoordinateLog(CreateAddressCoordinateLogRequest) returns (CreateAddressCoordinateLogResponse){}
+    rpc GetMostTrustedAddressCoordinateLog(GetMostTrustedAddressCoordinateLogRequest) returns (GetMostTrustedAddressCoordinateLogResponse){}
+    // Courier Log
+    rpc CreateCourierLog(CreateCourierLogRequest) returns (CreateCourierLogResponse){}
+    rpc GetLastCourierLog(GetLastCourierLogRequest) returns (GetLastCourierLogResponse){}
+    // Merchant Delivery Log
+    rpc CreateMerchantDeliveryLog(CreateMerchantDeliveryLogRequest) returns (CreateMerchantDeliveryLogResponse){}
+    rpc GetFirstMerchantDeliveryLog(GetFirstMerchantDeliveryLogRequest) returns (GetFirstMerchantDeliveryLogResponse){}
+    // Postpone Delivery Log
+    rpc CreatePostponeDeliveryLog(CreatePostponeDeliveryLogRequest) returns (CreatePostponeDeliveryLogResponse){} 
+    // Geocode
+    rpc Geocode(GeocodeAddressRequest) returns (GeocodeAddressResponse) {}    
+}
+
+message DeliveryRunSheet {
+    int64 id = 1;
+    string code = 2;
+    string courier_id = 3;
+    google.protobuf.Timestamp delivery_date = 4;
+    google.protobuf.Timestamp started_at = 5;
+    google.protobuf.Timestamp finished_at = 6;
+    optional double starting_latitude = 7;
+    optional double starting_longitude = 8;
+    optional double finished_latitude = 9;
+    optional double finished_longitude = 10;
+    int32 status = 11;
+}
+
+message DeliveryRunSheetItem {
+    int64 id = 1;
+    int64 delivery_run_sheet_id = 2;
+    string courier_id = 3;
+    string sales_order_id = 4;
+	int32 step_type = 5;
+    optional double latitude = 6;
+    optional double longitude = 7;
+    int32 status = 8;
+    string note = 9;
+    string recipient_name = 10;
+    double money_received = 11;
+    string delivery_evidence_image_url = 12;
+    string transaction_evidence_image_url = 13;
+    google.protobuf.Timestamp arrival_time = 14;
+    int32 unpunctual_reason = 15;
+    int32 unpunctual_detail = 16;
+    string far_delivery_reason = 17;
+    google.protobuf.Timestamp created_at = 18;
+    google.protobuf.Timestamp started_at = 19;
+    google.protobuf.Timestamp finished_at = 20;
+}
+
+message DeliveryRunReturn {
+    int64 id = 1;
+    string code = 2;
+    int64 delivery_run_sheet_item_id = 3;
+    double total_price = 4;
+    double total_charge = 5;
+    google.protobuf.Timestamp created_at = 6;
+}
+
+message DeliveryRunReturnItem {
+    int64 id = 1;
+    int64 delivery_run_return_id = 2;
+    string delivery_order_item_id = 3;
+    double receive_qty = 4;
+    int32 return_reason = 5;
+    int32 return_reason_value = 6;
+    string return_evidence = 7;
+    double subtotal = 8;
+    double deliver_qty = 9;
+}
+
+message CourierLog {
+    int64 id = 1;
+    string courier_id = 2;
+    string sales_order_id = 3;
+    optional double latitude = 4;
+    optional double longitude = 5;
+    google.protobuf.Timestamp created_at = 6;
+}
+
+message AddressCoordinateLog {
+    int64 id = 1;
+    string address_id = 2;
+    string sales_order_id = 3;
+    optional double latitude = 4;
+    optional double longitude = 5;
+    int32 log_channel_id = 6;
+    int32 main_coordinate = 7;
+    google.protobuf.Timestamp created_at = 8;
+    int64 created_by = 9;
+}
+
+message MerchantDeliveryLog {
+    int64 id = 1;
+    int64 delivery_run_sheet_item_id = 2;
+    optional double latitude = 3;
+    optional double longitude = 4;
+    google.protobuf.Timestamp created_at = 5;
+}
+
+message PostponeDeliveryLog {
+    int64 id = 1;
+    int64 delivery_run_sheet_item_id = 2;
+    string postpone_reason = 3;
+    int64 started_at_unix = 4;
+    int64 postponed_at_unix = 5;
+    string postpone_evidence = 6;
+}
+
+message GetDeliveryRunSheetListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    repeated int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    string group_by = 6;
+    repeated string courier_id = 7;
+}
+
+message GetDeliveryRunSheetListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated DeliveryRunSheet data = 3;
+}
+
+message GetDeliveryRunSheetDetailRequest{
+    int64 id = 1;
+    string code = 2;
+}
+
+message GetDeliveryRunSheetDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    DeliveryRunSheet data = 3;
+}
+
+message CreateDeliveryRunSheetRequest{
+    DeliveryRunSheet model = 1;
+}
+
+message CreateDeliveryRunSheetResponse{
+    int32 code = 1;
+    string message = 2;
+    DeliveryRunSheet data = 3;
+}
+
+message FinishDeliveryRunSheetRequest{
+    int64 id = 1;
+    double latitude = 2;
+    double longitude = 3;
+}
+
+message FinishDeliveryRunSheetResponse{
+    int32 code = 1;
+    string message = 2;
+    DeliveryRunSheet data = 3;
+}
+
+message GetDeliveryRunSheetItemListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    repeated int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    string group_by = 6;
+    repeated int32 step_type = 7;
+    repeated int64 delivery_run_sheet_id = 8;
+    repeated string courier_id = 9;
+    repeated string sales_order_id = 10;
+}
+
+message GetDeliveryRunSheetItemListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated DeliveryRunSheetItem data = 3;
+}
+
+message GetDeliveryRunSheetItemDetailRequest{
+    int64 id = 1;
+}
+
+message GetDeliveryRunSheetItemDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    DeliveryRunSheetItem data = 3;
+}
+
+message CreateDeliveryRunSheetItemRequest{
+    DeliveryRunSheetItem model = 1;
+}
+
+message CreateDeliveryRunSheetItemResponse{
+    int32 code = 1;
+    string message = 2;
+    DeliveryRunSheetItem data = 3;
+}
+
+message StartDeliveryRunSheetItemRequest{
+    int64 id = 1;
+    double latitude = 2;
+    double longitude =3;
+}
+
+message StartDeliveryRunSheetItemResponse{
+    int32 code = 1;
+    string message = 2;
+    DeliveryRunSheetItem data = 3;
+}
+
+message PostponeDeliveryRunSheetItemRequest{
+    int64 id = 1;
+    string note = 2;
+}
+
+message PostponeDeliveryRunSheetItemResponse{
+    int32 code = 1;
+    string message = 2;
+    DeliveryRunSheetItem data = 3;
+}
+
+message FailPickupDeliveryRunSheetItemRequest{
+    int64 id = 1;
+    string note = 2;
+}
+
+message FailPickupDeliveryRunSheetItemResponse{
+    int32 code = 1;
+    string message = 2;
+    DeliveryRunSheetItem data = 3;
+}
+
+message FailDeliveryDeliveryRunSheetItemRequest{
+    int64 id = 1;
+    optional double latitude = 2;
+    optional double longitude = 3;
+    string note = 4;
+}
+
+message FailDeliveryDeliveryRunSheetItemResponse{
+    int32 code = 1;
+    string message = 2;
+    DeliveryRunSheetItem data = 3;
+}
+
+message SuccessDeliveryRunSheetItemRequest{
+    int64 id = 1;
+    optional double latitude = 2;
+    optional double longitude = 3;
+    string note = 4;
+    string recipient_name = 5;
+    double money_received = 6;
+    string delivery_evidence_image_url = 7;
+    string transaction_evidence_image_url = 8;
+    int32 unpunctual_reason = 9;
+    int32 unpunctual_detail = 10;
+    string far_delivery_reason = 11;
+}
+
+message SuccessDeliveryRunSheetItemResponse{
+    int32 code = 1;
+    string message = 2;
+    DeliveryRunSheetItem data = 3;
+}
+
+message ArrivedDeliveryRunSheetItemRequest{
+    int64 id = 1;
+}
+
+message ArrivedDeliveryRunSheetItemResponse{
+    int32 code = 1;
+    string message = 2;
+    DeliveryRunSheetItem data = 3;
+}
+
+message GetDeliveryRunReturnListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    repeated int64 delivery_run_sheet_item_id = 6;
+}
+
+message GetDeliveryRunReturnListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated DeliveryRunReturn data = 3;
+}
+
+message GetDeliveryRunReturnDetailRequest{
+    int64 id = 1;
+    string code = 2;
+    int64 delivery_run_sheet_item_id = 3;
+}
+
+message GetDeliveryRunReturnDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    DeliveryRunReturn data = 3;
+}
+
+message CreateDeliveryRunReturnRequest{
+    DeliveryRunReturn model = 1;
+}
+
+message CreateDeliveryRunReturnResponse{
+    int32 code = 1;
+    string message = 2;
+    DeliveryRunReturn data = 3;
+}
+
+message UpdateDeliveryRunReturnRequest{
+    int64 id = 1;
+    double total_price = 2;
+    double total_charge = 3;
+}
+
+message UpdateDeliveryRunReturnResponse{
+    int32 code = 1;
+    string message = 2;
+    DeliveryRunReturn data = 3;
+}
+
+message DeleteDeliveryRunReturnRequest{
+    int64 id = 1;
+}
+
+message DeleteDeliveryRunReturnResponse{
+    int32 code = 1;
+    string message = 2;
+    DeliveryRunReturn data = 3;
+}
+
+message GetDeliveryRunReturnItemListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    repeated int64 delivery_run_return_id = 6;
+    repeated string delivery_order_item_id = 7;
+}
+
+message GetDeliveryRunReturnItemListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated DeliveryRunReturnItem data = 3;
+}
+
+message GetDeliveryRunReturnItemDetailRequest{
+    int64 id = 1;
+    string delivery_order_item_id = 2;
+}
+
+message GetDeliveryRunReturnItemDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    DeliveryRunReturnItem data = 3;
+}
+
+message CreateDeliveryRunReturnItemRequest{
+    DeliveryRunReturnItem model = 1;
+}
+
+message CreateDeliveryRunReturnItemResponse{
+    int32 code = 1;
+    string message = 2;
+    DeliveryRunReturnItem data = 3;
+}
+
+message UpdateDeliveryRunReturnItemRequest{
+    int64 id = 1;
+    double receive_qty = 2;
+    int32 return_reason = 3;
+    string return_evidence = 4;
+    double subtotal = 5;
+}
+
+message UpdateDeliveryRunReturnItemResponse{
+    int32 code = 1;
+    string message = 2;
+    DeliveryRunReturnItem data = 3;
+}
+
+message DeleteDeliveryRunReturnItemRequest{
+    int64 id = 1;
+}
+
+message DeleteDeliveryRunReturnItemResponse{
+    int32 code = 1;
+    string message = 2;
+    DeliveryRunReturnItem data = 3;
+}
+
+message GetAddressCoordinateLogListRequest{
+    int32 limit = 1;
+    int32 offset = 2;
+    int32 status = 3;
+    string search = 4;
+    string order_by = 5;
+    string group_by = 6;
+    repeated string address_id = 7;
+    repeated string sales_order_id = 8;
+}
+
+message GetAddressCoordinateLogListResponse{
+    int32 code = 1;
+    string message = 2;
+    repeated AddressCoordinateLog data = 3;
+}
+
+message GetAddressCoordinateLogDetailRequest{
+    int64 id = 1;
+}
+
+message GetAddressCoordinateLogDetailResponse{
+    int32 code = 1;
+    string message = 2;
+    AddressCoordinateLog data = 3;
+}
+
+message CreateAddressCoordinateLogRequest{
+    AddressCoordinateLog model = 1;
+}
+
+message CreateAddressCoordinateLogResponse{
+    int32 code = 1;
+    string message = 2;
+    AddressCoordinateLog data = 3;
+}
+
+message GetMostTrustedAddressCoordinateLogRequest{
+    string address_id = 1;
+}
+
+message GetMostTrustedAddressCoordinateLogResponse{
+    int32 code = 1;
+    string message = 2;
+    AddressCoordinateLog data = 3;
+}
+
+message CreateCourierLogRequest{
+    CourierLog model = 1;
+}
+
+message CreateCourierLogResponse{
+    int32 code = 1;
+    string message = 2;
+    CourierLog data = 3;
+}
+
+message CreateMerchantDeliveryLogRequest{
+    MerchantDeliveryLog model = 1;
+}
+
+message CreateMerchantDeliveryLogResponse{
+    int32 code = 1;
+    string message = 2;
+    MerchantDeliveryLog data = 3;
+}
+
+message GetFirstMerchantDeliveryLogRequest{
+    int64 delivery_run_sheet_item_id = 1;
+}
+
+message GetFirstMerchantDeliveryLogResponse{
+    int32 code = 1;
+    string message = 2;
+    MerchantDeliveryLog data = 3;
+}
+
+message CreatePostponeDeliveryLogRequest{
+    PostponeDeliveryLog model = 1;
+}
+
+message CreatePostponeDeliveryLogResponse{
+    int32 code = 1;
+    string message = 2;
+    PostponeDeliveryLog data = 3;
+}
+
+message GeocodeAddressRequest{
+    string sales_order_id=1;
+    string address_id = 2;
+    string address_name = 3;
+    string sub_district = 4;
+    string city = 5;
+    string region = 6;
+    string zip =7;
+}
+
+message GeocodeAddressResponse{
+    optional double latitude = 1;
+    optional double longitude = 2;
+}
+
+message GetLastCourierLogRequest{
+    string courier_id = 1;
+}
+
+message GetLastCourierLogResponse{
+    int32 code = 1;
+    string message = 2;
+    double latitude = 3;
+    double longitude = 4;
+    google.protobuf.Timestamp created_at = 5;
+    string courier_id = 6;
+}
