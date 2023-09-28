@@ -1,0 +1,147 @@
+openapi: 3.0.0
+info:
+  title: Account API
+  version: 1.0.0
+paths:
+  /create:
+    post:
+      summary: Create Audit Log 
+      description: Create Audit Log Transaction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: int
+                reference_id:
+                  type: int
+                type:
+                  type: string
+                function:
+                  type: string
+                created_at:
+                  type: timestamp
+                note:
+                  type: string
+              required:
+                - user_id
+                - reference_id
+                - type
+                - function
+                - created_at
+      responses:
+        '200':
+          description: Log Inserted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: int
+                  user_id:
+                    type: int
+                  reference_id:
+                    type: int
+                  type:
+                    type: string
+                  function:
+                    type: string
+                  created_at:
+                    type: timestamp
+                  note:
+                    type: string
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+  /audit_log:
+    get:
+      summary: Get audit log
+      description: Retrieve all audit log information .
+      parameters:
+      responses:
+        '200':
+          description: Audit Log retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: int
+                    user_id:
+                      type: int
+                    reference_id:
+                      type: int
+                    type:
+                      type: string
+                    function:
+                      type: string
+                    created_at:
+                      type: timestamp
+                    note:
+                      type: string
+        '404':
+          description: Audit Log not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+  /audit_log/{id}:
+    get:
+      summary: Get audit log by ID
+      description: Retrieve audit log information by their unique ID.
+      parameters:
+        - name: id
+          in: path
+          description: ID of the audit log to retrieve
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Audit Log retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: int
+                  user_id:
+                    type: int
+                  reference_id:
+                    type: int
+                  type:
+                    type: string
+                  function:
+                    type: string
+                  created_at:
+                    type: timestamp
+                  note:
+                    type: string
+        '404':
+          description: Audit Log not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string

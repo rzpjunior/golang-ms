@@ -1,0 +1,101 @@
+openapi: 3.0.0
+info:
+  title: Settlement API
+  version: 1.0.0
+paths:
+  /invoices:
+    post:
+      summary: Create Payment(Invoice) 
+      description: Create a payment invoice for a customer or user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: int
+                payment_channel:
+                  type: string
+                account_number:
+                  type: string
+                amount:
+                  type: number
+                  format: double # or float
+                created_at:
+                  type: timestamp
+              required:
+                - user_id
+                - payment_channel
+                - account_number
+                - amount
+                - created_at
+      responses:
+        '200':
+          description: Payment succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_id:
+                  type: int
+                payment_channel:
+                  type: string
+                account_number:
+                  type: string
+                amount:
+                  type: number
+                  format: double # or float
+                created_at:
+                  type: timestamp
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+  /invoices/{id}:
+    get:
+      summary: Get Invoice by ID
+      description: Retrieve payment details and status for a spesific invoice and as callback
+      parameters:
+        - name: id
+          in: path
+          description: ID of the invoice to retrieve
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Invoice retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_id:
+                    type: int
+                  payment_channel:
+                    type: string
+                  account_number:
+                    type: string
+                  amount:
+                    type: number
+                    format: double # or float
+                  created_at:
+                    type: timestamp
+        '404':
+          description: Invoice not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
